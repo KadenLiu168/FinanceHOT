@@ -10,7 +10,7 @@ import { runAnalysis } from "@aihot/backend/editorial/analyze";
 const steps: string[] = [];
 const provider = await stub((_hit, request) => {
   const system = String(JSON.parse(request.body).messages[0]?.content ?? "");
-  const step = system.includes("宽召回的AI相关性预筛") ? "prefilter"
+  const step = system.includes("宽召回的金融相关性预筛") ? "prefilter"
     : system.includes("事件注意力评分器") ? "score"
     : system.includes("资料结构化助手") ? "structure" : "writing";
   steps.push(step);
@@ -22,8 +22,8 @@ for (const key of ["DASHSCOPE_API_KEY", "ZHIPU_API_KEY", "DEEPSEEK_API_KEY"]) pr
 after(async () => { await provider.close(); await closeDb(); });
 
 test("an unresolved current identity does not start a separate writing request", async () => {
-  const text = "We released Manus 2.0 on September 28. Today we explain Game Dev's editing workflow.";
-  await assert.rejects(runAnalysis({ id: `identity-${tag()}`, revision: 1, title: "Manus Game Dev", url: "https://example.org/news", author: null,
+  const text = "We reported quarterly earnings on September 28. Today we explain the cash flow statement.";
+  await assert.rejects(runAnalysis({ id: `identity-${tag()}`, revision: 1, title: "Quarterly earnings cash flow", url: "https://example.org/news", author: null,
     publishedAt: new Date("2026-10-02T00:00:00Z"), bodyStatus: "ok", bodyText: text, excerpt: null, media: [], xPost: null,
     source: { name: "Fixture", kind: "rss", tier: "T1", firstParty: true } }));
   assert.ok(steps.includes("structure"));

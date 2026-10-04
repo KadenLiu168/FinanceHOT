@@ -12,6 +12,7 @@ import { closeDb, sql } from "@aihot/backend/db";
 import { stopBoss } from "@aihot/backend/jobs/queue";
 import { collectPosts } from "@aihot/backend/monitor/scan";
 import type { SdTweet } from "@aihot/backend/providers/socialdata";
+import { FEATURES } from "@aihot/industry/features";
 import { buildApp } from "../apps/api/src/app.ts";
 
 const NOW = Date.parse("2026-10-01T12:00:00Z");
@@ -118,14 +119,25 @@ test("reply context reuses stored posts and one paid parent across different rep
   assert.ok(posts.every((p) => p.context[0].originalText === `post ${p.context[0].id}`));
 });
 
-test("full archive keeps its contract and advertises the polling alternative on 200 and 304", async () => {
-  const response = await app.inject({ url: "/api/v1/codex-resets" });
+test("full archive keeps its contract and advertises the polling alternative on 200 and 304 when enabled", async (t) => {
+  t.mock.property(FEATURES, "codexResetMonitor");
+  Reflect.set(FEATURES, "codexResetMonitor", true);
+  const enabled = await buildApp();
+  t.after(() => enabled.close());
+  const response = await enabled.inject({ url: "/api/v1/codex-resets" });
   assert.equal(response.statusCode, 200);
   assert.ok(Array.isArray(response.json().events));
   assert.ok(Array.isArray(response.json().activities));
   assert.ok(String(response.headers.link).startsWith(`<${config.siteUrl}/api/v1/codex-resets/recent>; rel="alternate"`));
-  const unchanged = await app.inject({ url: "/api/v1/codex-resets", headers: { "if-none-match": String(response.headers.etag) } });
+  const unchanged = await enabled.inject({ url: "/api/v1/codex-resets", headers: { "if-none-match": String(response.headers.etag) } });
   assert.equal(unchanged.statusCode, 304);
   assert.equal(unchanged.body, "");
   assert.equal(unchanged.headers.link, response.headers.link);
+});
+
+test("the finance pack disables public monitor archives and polling routes", async () => {
+  assert.equal(FEATURES.codexResetMonitor, false, "the enabled fixture restores the feature");
+  for (const url of ["/api/v1/codex-resets", "/api/v1/codex-resets/recent", "/api/site/codex-reset/version"]) {
+    assert.equal((await app.inject({ url })).statusCode, 404, url);
+  }
 });

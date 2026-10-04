@@ -22,8 +22,8 @@ const provider = await stub((_hit, req) => {
   const content =
     system.includes("宽召回") ? { label: "PASS", reason: "测试" }
     : system.includes("事件注意力评分器") ? { attentionScore: 80 }
-    : system.includes("内容理解编辑") ? { itemType: "product_launch", authorRole: "principal", tags: ["产品更新"], editorialJudgment: "理由", titleZh: "一个模型的标题", summaryZh: "一个模型写的摘要。第二句。" }
-    : system.includes("资料结构化助手") ? { category: "ai-products", tags: ["产品更新"], subjects: [], fact: null }
+    : system.includes("金融内容编辑") ? { itemType: "capital_event", authorRole: "principal", tags: ["资本运作"], editorialJudgment: "理由", titleZh: "一个模型的标题", summaryZh: "一个模型写的摘要。第二句。" }
+    : system.includes("资料结构化助手") ? { category: "capital", tags: ["资本运作"], subjects: [], fact: null }
     : user.includes("title_zh") ? "title_zh: 标题\nsummary_zh: 摘要。"
     : null;
   if (content === null) throw new Error("unexpected request");
@@ -42,7 +42,7 @@ after(async () => {
 
 test("one model runs the prefilter, both scores, the writing and the structure", async () => {
   const { articleId } = await upsertMaterial({
-    sourceId: SOURCE, url: `https://example.com/${T}`, title: `A product launch ${T}`, bodyText: `A company launched a product with pricing and availability. ${T} `.repeat(6),
+    sourceId: SOURCE, url: `https://example.com/${T}`, title: `A buyback announcement ${T}`, bodyText: `A company announced a buyback with funding and timing details. ${T} `.repeat(6),
     bodyStatus: "ok", via: "fetch", publishedAt: new Date(),
   } as never);
   const res = await analyzeArticle(articleId);

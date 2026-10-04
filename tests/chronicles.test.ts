@@ -21,16 +21,16 @@ import type { TopicEvent, TopicMonth } from "@aihot/contracts/site";
 import { CHRONICLES_DIR, companyMilestones, parseChronicle } from "@aihot/backend/publication/chronicles";
 
 const ok = {
-  topic: "openai",
+  topic: "apple",
   through: "2026-08",
   events: [
-    { date: "2015-12", kind: "company", title: "OpenAI 成立" },
-    { date: "2022-11-30", kind: "product", title: "推出 ChatGPT", summary: "对话产品上线，两个月用户破亿", major: true, url: "https://openai.com/index/chatgpt/" },
+    { date: "2015-12", kind: "major_business", title: "苹果重大业务启用" },
+    { date: "2022-11-30", kind: "buyback", title: "宣布回购", summary: "披露回购额度与执行期限", major: true, url: "https://apple.com/newsroom/" },
   ],
 };
 
 test("a curated chronicle that does not follow the format is refused, with the reason", () => {
-  assert.doesNotThrow(() => parseChronicle(ok, "openai"), "a valid file");
+  assert.doesNotThrow(() => parseChronicle(ok, "apple"), "a valid file");
   const event = ok.events[1]!;
   const cases: Array<[unknown, string, string?]> = [
     [{ ...ok, events: [{ ...event, date: "2022-13" }] }, "a month that does not exist"],
@@ -38,35 +38,35 @@ test("a curated chronicle that does not follow the format is refused, with the r
     [{ ...ok, events: [{ ...event, kind: "rumour" }] }, "an unknown kind"],
     [{ ...ok, events: [{ ...event, date: "2026-09-02" }] }, "an event after the month it is curated through"],
     [{ ...ok, events: [{ ...event, story: randomUUID() }] }, "two links"],
-    [{ ...ok, events: [{ ...event, url: "http://openai.com/" }] }, "a plain-http link"],
+    [{ ...ok, events: [{ ...event, url: "http://apple.com/" }] }, "a plain-http link"],
     [{ ...ok, events: [{ ...event, title: "" }] }, "an empty title"],
     [{ ...ok, events: [] }, "no events"],
-    [ok, "a file named after another topic", "anthropic"],
-    [{ ...ok, topic: "agent" }, "a topic that is not a company", "agent"],
+    [ok, "a file named after another topic", "microsoft"],
+    [{ ...ok, topic: "rates" }, "a topic that is not a company", "rates"],
   ];
-  for (const [file, why, slug = "openai"] of cases) assert.throws(() => parseChronicle(file, slug), Error, why);
+  for (const [file, why, slug = "apple"] of cases) assert.throws(() => parseChronicle(file, slug), Error, why);
 });
 
 let n = 0;
 function event(at: string, extra: Partial<TopicEvent> = {}): TopicEvent {
   n += 1;
-  return { id: `a${n}`, title: `自动报道 ${n}，附带细节`, label: `自动 ${n}`, at, kind: "model", href: `/items/a${n}`, ...extra };
+  return { id: `a${n}`, title: `自动报道 ${n}，附带细节`, label: `自动 ${n}`, at, kind: "earnings", href: `/items/a${n}`, ...extra };
 }
 
 test("a company's band is its curated history, then the milestones picked up after it", () => {
   const story = randomUUID();
   const curated = parseChronicle({
-    topic: "openai",
+    topic: "apple",
     through: "2026-08",
     events: [
-      { date: "2024-05-13", kind: "model", title: "发布 GPT-4o", story },
-      { date: "2024", kind: "company", title: "全年动态", item: "cmabc123" },
+      { date: "2024-05-13", kind: "earnings", title: "公布季度财报", story },
+      { date: "2024", kind: "major_business", title: "全年动态", item: "cmabc123" },
       ...ok.events,
     ],
-  }, "openai");
+  }, "apple");
   const august = event("2026-08-20T04:00:00Z");
-  const september = event("2026-09-10T04:00:00Z", { kind: "product" });
-  const october = event("2026-10-01T16:30:00Z", { kind: "company", href: "/story/x" });
+  const september = event("2026-09-10T04:00:00Z", { kind: "buyback" });
+  const october = event("2026-10-01T16:30:00Z", { kind: "major_business", href: "/story/x" });
   const auto: TopicMonth[] = [
     { month: "2026-10", events: [october] },
     { month: "2026-09", events: [september] },
@@ -74,13 +74,13 @@ test("a company's band is its curated history, then the milestones picked up aft
   ];
   const band = companyMilestones(curated, auto);
   assert.deepEqual(band.map((m) => m.date), ["2015-12", "2022-11-30", "2024", "2024-05-13", "2026-09-10", "2026-10-02"], "time order; August is curated, so the picked-up August is left out; 00:30 Beijing is the next day");
-  assert.deepEqual(band.map((m) => m.href), [null, "https://openai.com/index/chatgpt/", "/items/cmabc123", `/story/${story}`, september.href, "/story/x"]);
+  assert.deepEqual(band.map((m) => m.href), [null, "https://apple.com/newsroom/", "/items/cmabc123", `/story/${story}`, september.href, "/story/x"]);
   assert.deepEqual(band.map((m) => m.external), [false, true, false, false, false, false]);
-  assert.deepEqual(band.map((m) => m.kind), ["company", "product", "company", "model", "product", "company"]);
-  assert.deepEqual(band.map((m) => m.title), ["OpenAI 成立", "推出 ChatGPT", "全年动态", "发布 GPT-4o", september.label, october.label], "curated titles as written, picked-up milestones by their labels");
+  assert.deepEqual(band.map((m) => m.kind), ["major_business", "buyback", "major_business", "earnings", "buyback", "major_business"]);
+  assert.deepEqual(band.map((m) => m.title), ["苹果重大业务启用", "宣布回购", "全年动态", "公布季度财报", september.label, october.label], "curated titles as written, picked-up milestones by their labels");
   assert.deepEqual(band.map((m) => m.headline), [null, null, null, null, september.title, october.title], "the report's own headline stays with a picked-up milestone");
   assert.deepEqual(band.map((m) => m.major), [false, true, false, false, false, false], "only the curated history marks defining events");
-  assert.equal(band[1]!.summary, "对话产品上线，两个月用户破亿");
+  assert.equal(band[1]!.summary, "披露回购额度与执行期限");
 });
 
 test("a company without a curated history still has its band: the year the site picked up", () => {

@@ -1,0 +1,291 @@
+{
+  "$comment": "固定上市公司观察名单；A/H/US 各 8 家。交易所前缀是身份的一部分，不根据裸代码推断公司。",
+  "companies": [
+    {
+      "id": "kweichow-moutai",
+      "name": "贵州茅台",
+      "market": "A",
+      "ticker": "SSE:600519",
+      "aliases": [
+        "贵州茅台",
+        "SSE:600519",
+        "茅台",
+        "Kweichow Moutai"
+      ]
+    },
+    {
+      "id": "catl",
+      "name": "宁德时代",
+      "market": "A",
+      "ticker": "SZSE:300750",
+      "aliases": [
+        "宁德时代",
+        "SZSE:300750",
+        "CATL",
+        "Contemporary Amperex Technology"
+      ]
+    },
+    {
+      "id": "cmb",
+      "name": "招商银行",
+      "market": "A",
+      "ticker": "SSE:600036",
+      "aliases": [
+        "招商银行",
+        "SSE:600036",
+        "招行",
+        "China Merchants Bank"
+      ]
+    },
+    {
+      "id": "icbc",
+      "name": "工商银行",
+      "market": "A",
+      "ticker": "SSE:601398",
+      "aliases": [
+        "工商银行",
+        "SSE:601398",
+        "工行",
+        "ICBC",
+        "Industrial and Commercial Bank of China"
+      ]
+    },
+    {
+      "id": "ping-an",
+      "name": "中国平安",
+      "market": "A",
+      "ticker": "SSE:601318",
+      "aliases": [
+        "中国平安",
+        "SSE:601318",
+        "平安保险",
+        "Ping An"
+      ]
+    },
+    {
+      "id": "midea",
+      "name": "美的集团",
+      "market": "A",
+      "ticker": "SZSE:000333",
+      "aliases": [
+        "美的集团",
+        "SZSE:000333",
+        "Midea Group"
+      ]
+    },
+    {
+      "id": "yili",
+      "name": "伊利股份",
+      "market": "A",
+      "ticker": "SSE:600887",
+      "aliases": [
+        "伊利股份",
+        "SSE:600887",
+        "伊利集团",
+        "Inner Mongolia Yili"
+      ]
+    },
+    {
+      "id": "yangtze-power",
+      "name": "长江电力",
+      "market": "A",
+      "ticker": "SSE:600900",
+      "aliases": [
+        "长江电力",
+        "SSE:600900",
+        "China Yangtze Power"
+      ]
+    },
+    {
+      "id": "tencent",
+      "name": "腾讯控股",
+      "market": "H",
+      "ticker": "HKEX:00700",
+      "aliases": [
+        "腾讯控股",
+        "HKEX:00700",
+        "腾讯",
+        "Tencent Holdings",
+        "Tencent"
+      ]
+    },
+    {
+      "id": "alibaba",
+      "name": "阿里巴巴",
+      "market": "H",
+      "ticker": "HKEX:09988",
+      "aliases": [
+        "阿里巴巴",
+        "HKEX:09988",
+        "Alibaba Group",
+        "Alibaba"
+      ]
+    },
+    {
+      "id": "meituan",
+      "name": "美团",
+      "market": "H",
+      "ticker": "HKEX:03690",
+      "aliases": [
+        "美团",
+        "HKEX:03690",
+        "Meituan"
+      ]
+    },
+    {
+      "id": "xiaomi",
+      "name": "小米集团",
+      "market": "H",
+      "ticker": "HKEX:01810",
+      "aliases": [
+        "小米集团",
+        "HKEX:01810",
+        "小米",
+        "Xiaomi"
+      ]
+    },
+    {
+      "id": "hkex",
+      "name": "香港交易所",
+      "market": "H",
+      "ticker": "HKEX:00388",
+      "aliases": [
+        "香港交易所",
+        "HKEX:00388",
+        "港交所",
+        "HKEX",
+        "Hong Kong Exchanges and Clearing"
+      ]
+    },
+    {
+      "id": "aia",
+      "name": "友邦保险",
+      "market": "H",
+      "ticker": "HKEX:01299",
+      "aliases": [
+        "友邦保险",
+        "HKEX:01299",
+        "友邦",
+        "AIA Group"
+      ]
+    },
+    {
+      "id": "cnooc",
+      "name": "中国海洋石油",
+      "market": "H",
+      "ticker": "HKEX:00883",
+      "aliases": [
+        "中国海洋石油",
+        "HKEX:00883",
+        "中海油",
+        "CNOOC Limited"
+      ]
+    },
+    {
+      "id": "smic",
+      "name": "中芯国际",
+      "market": "H",
+      "ticker": "HKEX:00981",
+      "aliases": [
+        "中芯国际",
+        "HKEX:00981",
+        "SMIC",
+        "Semiconductor Manufacturing International"
+      ]
+    },
+    {
+      "id": "apple",
+      "name": "苹果",
+      "market": "US",
+      "ticker": "NASDAQ:AAPL",
+      "aliases": [
+        "苹果",
+        "NASDAQ:AAPL",
+        "Apple",
+        "Apple Inc."
+      ]
+    },
+    {
+      "id": "microsoft",
+      "name": "微软",
+      "market": "US",
+      "ticker": "NASDAQ:MSFT",
+      "aliases": [
+        "微软",
+        "NASDAQ:MSFT",
+        "Microsoft"
+      ]
+    },
+    {
+      "id": "nvidia",
+      "name": "英伟达",
+      "market": "US",
+      "ticker": "NASDAQ:NVDA",
+      "aliases": [
+        "英伟达",
+        "NASDAQ:NVDA",
+        "NVIDIA"
+      ]
+    },
+    {
+      "id": "amazon",
+      "name": "亚马逊",
+      "market": "US",
+      "ticker": "NASDAQ:AMZN",
+      "aliases": [
+        "亚马逊",
+        "NASDAQ:AMZN",
+        "Amazon",
+        "Amazon.com"
+      ]
+    },
+    {
+      "id": "alphabet",
+      "name": "Alphabet",
+      "market": "US",
+      "ticker": "NASDAQ:GOOGL",
+      "aliases": [
+        "Alphabet",
+        "NASDAQ:GOOGL",
+        "谷歌",
+        "Google"
+      ]
+    },
+    {
+      "id": "meta",
+      "name": "Meta",
+      "market": "US",
+      "ticker": "NASDAQ:META",
+      "aliases": [
+        "Meta",
+        "NASDAQ:META",
+        "Meta Platforms",
+        "Facebook"
+      ]
+    },
+    {
+      "id": "jpmorgan",
+      "name": "摩根大通",
+      "market": "US",
+      "ticker": "NYSE:JPM",
+      "aliases": [
+        "摩根大通",
+        "NYSE:JPM",
+        "JPMorgan Chase",
+        "JPMorgan"
+      ]
+    },
+    {
+      "id": "berkshire",
+      "name": "伯克希尔哈撒韦",
+      "market": "US",
+      "ticker": "NYSE:BRK.B",
+      "aliases": [
+        "伯克希尔哈撒韦",
+        "NYSE:BRK.B",
+        "伯克希尔",
+        "Berkshire Hathaway"
+      ]
+    }
+  ]
+}

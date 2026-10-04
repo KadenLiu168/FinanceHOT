@@ -11,6 +11,7 @@ import { itemFeed } from '@aihot/backend/publication/feeds';
 import { issueLead, listReports, reportIndexRows, unavailableIds } from '@aihot/backend/publication/reports';
 import { codexResetPage, codexResetVersion, LIKELY_COMPLETED_AFTER_MS, OUTAGE_VISIBLE_MS } from '@aihot/backend/monitor/read';
 import { siteCodexResetPage } from '@aihot/backend/publication/monitor';
+import { FEATURES } from '@aihot/industry/features';
 import { buildApp } from '../apps/api/src/app.ts';
 
 const T = `readperf${tag()}`;
@@ -152,7 +153,11 @@ test('report directory projection preserves citation order, fallback headlines a
   assert.equal(month.find((e: { key: string }) => e.key === key).title, 'Historical fallback');
 });
 
-test('minimal monitor polling version equals the full page across announcement/expiry/outage transitions', async () => {
+test('minimal monitor polling version equals the full page across announcement/expiry/outage transitions when enabled', async (t) => {
+  t.mock.property(FEATURES, 'codexResetMonitor');
+  Reflect.set(FEATURES, 'codexResetMonitor', true);
+  const enabled = await buildApp();
+  t.after(() => enabled.close());
   const boundary = +now + 3600000;
   const eventId = `${T}-event`;
   await sql`INSERT INTO monitor_events (id, type, status, title, schedule, presentation, created_at, updated_at)
@@ -161,7 +166,7 @@ test('minimal monitor polling version equals the full page across announcement/e
       ${sql.json({ scopeKnown: true, scopeLabel: 'all', kindExplicit: true, timeInferred: false, audienceZh: null, productsZh: null, reportedAt: null })}, ${now}, ${now})`;
   await sql`INSERT INTO monitor_posts (id, author, published_at, text, url, outage)
     VALUES (${`${T}-outage`}, 'test', ${now}, 'outage', 'https://example.org/outage', ${sql.json({ kind: 'outage', recoveredAt: null, resetEventId: null })})`;
-  const dayResponse = await app.inject({ method: 'GET', url: `/api/site/codex-reset/days/${beijingDate(now)}` });
+  const dayResponse = await enabled.inject({ method: 'GET', url: `/api/site/codex-reset/days/${beijingDate(now)}` });
   assert.equal(dayResponse.statusCode, 200);
   assert.equal(dayResponse.headers['cache-control'], 'no-store', 'a previous day snapshot must not outlive the page version in HTTP caches');
   assert.ok(typeof dayResponse.json().version === 'string');

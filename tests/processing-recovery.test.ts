@@ -26,7 +26,7 @@ const provider = await stub(async (_hit, request) => {
     return new Reply(400, { error: "old revision refused" });
   }
   const system = String(body.messages[0]?.content ?? "");
-  const step = system.includes("宽召回的AI相关性预筛") ? "prefilter"
+  const step = system.includes("宽召回的金融相关性预筛") ? "prefilter"
     : system.includes("事件注意力评分器") ? "score"
     : system.includes("资料结构化助手") ? "structure" : "understand";
   calls.push(step);
@@ -36,8 +36,8 @@ const provider = await stub(async (_hit, request) => {
   }
   const content = step === "prefilter" ? { label: original ? "BLOCK" : "PASS", reason: "local fixture" }
     : step === "score" ? { attentionScore: 80 }
-    : step === "structure" ? { category: "ai-models", tags: [], subjects: [], fact: null }
-    : { itemType: "model_release", authorRole: "principal", tags: ["模型发布"], editorialJudgment: "模型能力提升", titleZh: `新判断 ${T}`, summaryZh: "模型发布并提供评测和价格。" };
+    : step === "structure" ? { category: "company", tags: [], subjects: [], fact: null }
+    : { itemType: "earnings", authorRole: "principal", tags: ["财报/业绩"], editorialJudgment: "盈利增长", titleZh: `新判断 ${T}`, summaryZh: "公司公布季度财报并披露收入和利润。" };
   return { choices: [{ message: { content: JSON.stringify(content) } }] };
 });
 for (const name of ["DASHSCOPE_BASE_URL", "ZHIPU_BASE_URL", "DEEPSEEK_BASE_URL"]) process.env[name] = `${provider.url}/v1`;
@@ -53,8 +53,8 @@ afterEach(async () => {
 });
 
 async function article(name: string) {
-  return (await upsertMaterial({ sourceId: SOURCE, url: `https://example.org/${T}/${name}`, title: `AI model ${T} ${name}`,
-    bodyText: `AI lab release ${T} ${name}. ` + "The new model includes benchmark and price details. ".repeat(12),
+  return (await upsertMaterial({ sourceId: SOURCE, url: `https://example.org/${T}/${name}`, title: `Quarterly earnings ${T} ${name}`,
+    bodyText: `Earnings disclosure ${T} ${name}. ` + "The quarterly earnings include revenue and profit details. ".repeat(12),
     bodyStatus: "ok", via: "fetch", backfill: "test fixture", publishedAt: new Date() })).articleId;
 }
 

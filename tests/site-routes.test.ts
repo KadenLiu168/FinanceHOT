@@ -5,6 +5,7 @@ import { randomUUID } from "node:crypto";
 import { after, test } from "node:test";
 import { config } from "@aihot/backend/config";
 import { closeDb, sql } from "@aihot/backend/db";
+import { FEATURES } from "@aihot/industry/features";
 import { buildApp } from "../apps/api/src/app.ts";
 
 process.env.FEISHU_INTERNAL_ENABLED = "false";
@@ -14,7 +15,7 @@ after(async () => {
   await closeDb();
 });
 
-test("current browser feedback and reset polling still work", async () => {
+test("current browser feedback works and financial monitor routes are disabled", async () => {
   const form = new FormData();
   form.set("content", `Current browser feedback ${randomUUID()}`);
   form.set("email", "reader@example.com");
@@ -29,9 +30,10 @@ test("current browser feedback and reset polling still work", async () => {
   assert.deepEqual({ ...saved }, { email: "reader@example.com", note: null });
 
   const version = await app.inject({ method: "GET", url: "/api/site/codex-reset/version" });
-  assert.equal(version.statusCode, 200);
-  assert.equal(version.headers["cache-control"], "public, max-age=0, s-maxage=15");
-  assert.equal(typeof version.json().version, "string");
+  assert.equal(version.statusCode, 404);
+  for (const url of ["/api/site/codex-reset", "/api/site/codex-reset/days/2026-10-01", "/api/v1/codex-resets", "/api/v1/codex-resets/recent", "/api/v1/agent/codex-resets", "/api/og/leaderboard", "/api/og/codex-reset"]) {
+    assert.equal((await app.inject({ url })).statusCode, 404, url);
+  }
 });
 
 test("agents read Markdown answers under /api/v1/agent", async () => {
@@ -39,8 +41,9 @@ test("agents read Markdown answers under /api/v1/agent", async () => {
   const guide = await get("/api/v1/agent");
   assert.equal(guide.statusCode, 200);
   assert.match(String(guide.headers["content-type"]), /^text\/markdown/);
-  for (const path of ["/latest", "/search", "/hot", "/daily", "/codex-resets"]) assert.ok(guide.body.includes(`${config.siteUrl}/api/v1/agent${path}`), path);
-  for (const url of ["/api/v1/agent/latest", "/api/v1/agent/latest?window=7d&mode=all&category=paper&limit=5", "/api/v1/agent/search?q=OpenAI", "/api/v1/agent/hot", "/api/v1/agent/codex-resets"]) {
+  for (const path of ["/latest", "/search", "/hot", "/daily"]) assert.ok(guide.body.includes(`${config.siteUrl}/api/v1/agent${path}`), path);
+  assert.ok(!guide.body.includes(`${config.siteUrl}/api/v1/agent/codex-resets`));
+  for (const url of ["/api/v1/agent/latest", "/api/v1/agent/latest?window=7d&mode=all&category=company&limit=5", "/api/v1/agent/search?q=Apple", "/api/v1/agent/hot"]) {
     const res = await get(url);
     assert.equal(res.statusCode, 200, `${url}: ${res.body}`);
     assert.match(res.body, /## 回答提示/, url);
@@ -50,4 +53,22 @@ test("agents read Markdown answers under /api/v1/agent", async () => {
   // Parameters are checked like v1's; a story or daily nobody was given is a 404, never a guess.
   for (const url of ["/api/v1/agent/latest?days=3", "/api/v1/agent/latest?limit=31", "/api/v1/agent/search?q=x", "/api/v1/agent/daily/2026-02-30"]) assert.equal((await get(url)).statusCode, 400, url);
   for (const url of ["/api/v1/agent/stories/no-such-story", "/api/v1/agent/daily/2099-01-01"]) assert.equal((await get(url)).statusCode, 404, url);
+});
+
+test("the enabled monitor fixture retains the browser polling contract", async (t) => {
+  t.mock.property(FEATURES, "codexResetMonitor");
+  Reflect.set(FEATURES, "codexResetMonitor", true);
+  const enabled = await buildApp();
+  t.after(() => enabled.close());
+  const version = await enabled.inject({ url: "/api/site/codex-reset/version" });
+  assert.equal(version.statusCode, 200);
+  assert.equal(version.headers["cache-control"], "public, max-age=0, s-maxage=15");
+  assert.equal(typeof version.json().version, "string");
+  const guide = await enabled.inject({ url: "/api/v1/agent" });
+  assert.ok(guide.body.includes(`${config.siteUrl}/api/v1/agent/codex-resets`));
+  const markdown = await enabled.inject({ url: "/api/v1/agent/codex-resets" });
+  assert.equal(markdown.statusCode, 200);
+  assert.match(markdown.body, /## 回答提示/);
+  assert.match(String(markdown.headers["cache-control"]), /^public/);
+  assert.equal(markdown.headers["access-control-allow-origin"], "*");
 });
