@@ -24,10 +24,19 @@ function atOffset(y: string | number, mo: string | number, d: string | number, h
  * on every host: a time with its zone, and an ISO date alone (UTC midnight). Anything else it would read
  * in the server's local zone (UTC in Docker), so "2026-09-26 10:00" is read in the source's offset instead.
  */
-export function parseLooseDate(value: string | null | undefined, utcOffset = "+08:00"): Date | null {
+export function parseLooseDate(value: string | null | undefined, utcOffset = "+08:00", format?: string): Date | null {
   if (!value) return null;
   const v = value.trim();
   if (!v) return null;
+  if (format === "dmy" && !/^\d{4}-\d{2}-\d{2}(?:T|$)/.test(v)) {
+    const match = /(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/.exec(v);
+    if (!match) return null;
+    const [, day, month, year, hour = "00", minute = "00", second = "00"] = match;
+    const date = `${year}-${month!.padStart(2, "0")}-${day!.padStart(2, "0")}`;
+    const check = new Date(`${date}T00:00:00Z`);
+    if (!Number.isFinite(check.getTime()) || !check.toISOString().startsWith(date) || Number(hour) > 23 || Number(minute) > 59 || Number(second) > 59) return null;
+    return atOffset(year!, month!, day!, hour, minute, second, utcOffset);
+  }
   if (EXPLICIT_ZONE.test(v) || /^\d{4}-\d{2}-\d{2}$/.test(v)) {
     const direct = Date.parse(v);
     if (Number.isFinite(direct) && /\d{4}/.test(v)) return new Date(direct);
@@ -186,14 +195,20 @@ export function fromHtml(html: string, base: string, source: SourceRow): Candida
     let publishedAt: Date | null = null;
     if (c.publishedAtSelector) {
       const dateEl = el.find(c.publishedAtSelector).first();
-      publishedAt = parseLooseDate(dateEl.attr("datetime") ?? dateEl.attr("title") ?? dateEl.text(), c.publishedAtUtcOffset);
+      publishedAt = parseLooseDate(dateEl.attr("datetime") ?? dateEl.attr("title") ?? dateEl.text(), c.publishedAtUtcOffset, c.publishedAtFormat);
     }
     if (!publishedAt && c.publishedAtRegex) {
       const m = new RegExp(c.publishedAtRegex).exec($.html(el));
-      publishedAt = parseLooseDate(m?.[1], c.publishedAtUtcOffset);
+      publishedAt = parseLooseDate(m?.[1], c.publishedAtUtcOffset, c.publishedAtFormat);
     }
     seen.add(url);
-    out.push({ url, title, publishedAt });
+    const summaryEl = c.summarySelector ? (el.is(c.summarySelector) ? el : el.find(c.summarySelector).first()) : null;
+    const summary = summaryEl ? collapseWhitespace(summaryEl.text()) : null;
+    out.push({ url, title, publishedAt, ...(summary ? {
+      excerpt: summary.slice(0, 2000),
+      bodyText: c.summaryIsBody === true ? summary : null,
+      bodyStatus: c.summaryIsBody === true ? "ok" as const : "pending" as const,
+    } : {}) });
   }
   return out;
 }
@@ -317,6 +332,14 @@ async function fromMimoHome(html: string, base: string, source: SourceRow): Prom
 }
 
 export async function fetchWebList(source: SourceRow): Promise<Candidate[]> {
+  if (source.config.additionalUrls?.length) {
+    const items = new Map<string, Candidate>();
+    for (const url of [source.config.url, ...source.config.additionalUrls]) {
+      const listing = { ...source, config: { ...source.config, url, additionalUrls: undefined } };
+      for (const item of await fetchWebList(listing)) if (!items.has(item.url)) items.set(item.url, item);
+    }
+    return [...items.values()];
+  }
   const { text, viaJina, base } = await fetchListingText(source);
   const mode = source.config.adapter === "mimo_home" ? "mimo_home" : source.config.parseMode ?? (viaJina ? "markdown" : "html");
   let out: Candidate[];

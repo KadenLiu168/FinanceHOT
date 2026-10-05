@@ -3,6 +3,7 @@ import { credential } from "../config.ts";
 import { guardedFetch } from "../lib/http-fetch.ts";
 import { collapseWhitespace, stripTags } from "../lib/text.ts";
 import { FetchError, type Candidate, type SourceRow } from "./types.ts";
+import { parseLooseDate } from "./web-list.ts";
 
 export function getPath(obj: unknown, path: string): unknown {
   if (!path) return obj;
@@ -160,30 +161,43 @@ export async function fetchJsonList(source: SourceRow): Promise<Candidate[]> {
     }
   }
   let items = c.itemsPath ? getPath(data, c.itemsPath) : c.jsonKey ? getPath(data, c.jsonKey) : data;
+  if (c.itemsColumnar === true) {
+    if (!items || typeof items !== "object" || Array.isArray(items)) throw new FetchError("columnar items must be an object of arrays");
+    const columns = Object.entries(items);
+    if (columns.some(([, v]) => !Array.isArray(v))) throw new FetchError("columnar items must contain only arrays");
+    const length = (columns[0]?.[1] as unknown[] | undefined)?.length ?? 0;
+    if (columns.some(([, v]) => (v as unknown[]).length !== length)) throw new FetchError("columnar items have unequal lengths");
+    items = Array.from({ length }, (_, i) => Object.fromEntries(columns.map(([key, values]) => [key, (values as unknown[])[i]])));
+  }
   if (c.itemsObjectValues && items && typeof items === "object" && !Array.isArray(items)) items = Object.values(items);
   if (!Array.isArray(items)) throw new FetchError("items path did not resolve to an array");
 
   const out: Candidate[] = [];
+  let eligible = 0;
   for (const item of items) {
+    if (c.allowValues && !c.allowValues.values.includes(getPath(item, c.allowValues.path))) continue;
     if (c.requireBoolean && getPath(item, c.requireBoolean.path) !== c.requireBoolean.equals) continue;
     if (c.minNumeric && !(Number(getPath(item, c.minNumeric.path)) >= Number(c.minNumeric.min))) continue;
-    const title = firstString(item, c.titlePaths);
+    eligible++;
+    const title = c.titleTemplate ? renderTemplate(c.titleTemplate, item) : firstString(item, c.titlePaths);
     const url = (c.urlTemplate && renderTemplate(c.urlTemplate, item)) || (c.urlTemplateFallback && renderTemplate(c.urlTemplateFallback, item));
     if (!title || !url) continue;
     const externalId = c.externalIdPath ? getPath(item, c.externalIdPath) : null;
-    const summary = firstString(item, c.summaryPaths);
+    const summary = c.summaryTemplate ? renderTemplate(c.summaryTemplate, item) : firstString(item, c.summaryPaths);
     const summaryIsBody = c.summaryIsBody === true && !!summary;
     out.push({
       url,
       title: collapseWhitespace(stripTags(title)),
       author: firstString(item, c.authorPaths),
-      publishedAt: toDate(getPath(item, c.publishedAtPath), c.publishedAtUnit),
+      publishedAt: c.publishedAtUtcOffset && !c.publishedAtUnit
+        ? parseLooseDate(String(getPath(item, c.publishedAtPath) ?? ""), c.publishedAtUtcOffset)
+        : toDate(getPath(item, c.publishedAtPath), c.publishedAtUnit),
       excerpt: summary ? collapseWhitespace(stripTags(summary)).slice(0, 2000) : null,
       bodyText: summaryIsBody ? stripTags(summary!) : null,
       bodyStatus: summaryIsBody ? "ok" : "pending",
       raw: { externalId: externalId ?? null },
     });
   }
-  if (items.length > 0 && out.length === 0 && !c.requireBoolean && !c.minNumeric) throw new FetchError("no items mapped (check title/url paths)");
+  if (items.length > 0 && out.length === 0 && !c.requireBoolean && !c.minNumeric && (!c.allowValues || eligible > 0)) throw new FetchError("no items mapped (check title/url paths)");
   return out;
 }

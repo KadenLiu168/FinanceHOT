@@ -69,9 +69,11 @@
 - `itemSelector` 在整个页面找条目；`linkSelector`、`titleSelector` 在每个条目内取第一个匹配节点，也可以匹配条目自身。选 `.news-list` 只会得到一个容器，通常只取到第一条新闻；只写 `div` 又会混入嵌套容器。要选重复出现的新闻节点。
 - 链接取自 `href`；`/posts/first` 等相对链接按列表 `url` 解析，也可用 `baseUrl` 指定基准地址。标题取节点文字。重复链接会合并，指向列表自身的链接通常会跳过。
 - 日期在条目内查找 `publishedAtSelector`，依次读取 `datetime` 属性、`title` 属性、文字。没有时区的日期时间可用 `publishedAtUtcOffset`（默认 `+08:00`）；自带时区的时间保留原时区语义，纯 `YYYY-MM-DD` 按 UTC 零点读。
+- 日/月/年格式须显式设 `publishedAtFormat: "dmy"`，如 `05/10/2026 17:43` 代表 10 月 5 日；无效日期不猜测。`summarySelector` 在每个条目内（或条目自身）提取摘要，只有 `summaryIsBody: true` 才直接作为后续处理内容，免去详情补齐；元数据来源应在名称中明确未读取正文。
 - `parseMode`：普通网页默认 `html`；`markdown` 按 Markdown 链接读；`docusaurus_changelog` 读更新日志标题。需要 Jina 时，显式把 `url` 写成 `https://r.jina.ai/https://目标站/路径` 并配置 `JINA_API_KEY`，不是抓不到就自动切换。Jina 默认返回 Markdown；要继续使用 CSS 选择器，显式设 `parseMode: "html"`。
 - `detail`：列表缺日期、标题或摘要时抓详情页补齐（`publishedAtSelector`、`titleSelector`、`summarySelector` 等）。
 - `allowUrlPrefixes` / `denyUrlPrefixes`：只收某些路径下的文章。
+- 同一来源有互补的列表（如中英文各自独有的公告）时，可用 `additionalUrls` 追加地址，共用选择器和规则，按文档 URL 去重；任一列表抓取失败时整轮失败，不把不完整结果当成成功。需要按时间合并时设 `sortByPublishedAt: true`。不同 URL 的语言版本沿用后续事实归组与精选去重。
 
 ### json_list
 
@@ -109,8 +111,11 @@
 ```
 
 - 接口本身返回数组时，省略 `itemsPath`。`titlePaths`、`summaryPaths`、`authorPaths` 是候选路径数组，按顺序取第一个非空值，例如 `["title", "name"]`。
+- 列式接口（例如 `{ "form": ["8-K", "4"], "date": ["...", "..."] }`）可设 `itemsColumnar: true`，`itemsPath` 指向这个列对象；各列必须都是等长数组，否则抓取失败，避免把不同记录的字段拼错。`allowValues: { "path": "form", "values": ["8-K", "4"] }` 按字段值精确过滤，再做映射。
+- `titleTemplate` / `summaryTemplate` 用与 `urlTemplate` 相同的字段模板语法组合文本，设置后替代对应候选路径。正文式摘要仍需显式 `summaryIsBody: true`；如果只提供公告元数据，应在模板中说明未读取正文，不能据此扩写未提供的事实。
 - 已有完整网址时用 `{raw:url}`；只有 slug 时可用 `https://example.com/posts/{slug}`。`{字段路径}` 会编码字段值，`{raw:字段路径}` 原样插入。JSON 列表不会自动把相对网址补成绝对网址，模板应产出完整的 HTTP(S) 地址。
 - 日期建议返回带时区的 ISO 字符串；数字时间戳分别设 `publishedAtUnit: "epoch_s"`（秒）或 `"epoch_ms"`（毫秒），`20261001` 这类日期设 `"yyyymmdd"`。
+- 没有时区的 JSON 日期时间可显式设 `publishedAtUtcOffset`（如 `"+08:00"`），不依赖服务器时区；已有时区或时间戳单位的日期保持原语义。
 - 缺少标题或无法生成链接的条目会跳过。非空数组全部映射失败时，会报 `no items mapped (check title/url paths)`；路径不是数组时，会报 `items path did not resolve to an array`。
 
 ### 本地跑通 HTML/JSON 示例

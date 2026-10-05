@@ -427,6 +427,1291 @@
       ],
       "site_fulltext": false,
       "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-kweichow-moutai",
+      "name": "SSE 贵州茅台（SSE:600519，官方公告元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://query.sse.com.cn/security/stock/queryCompanyBulletinNew.do?isPagination=true&pageHelp.pageSize=100&pageHelp.pageNo=1&pageHelp.cacheSize=1&SECURITY_CODE=600519",
+        "headers": {
+          "Referer": "https://www.sse.com.cn/"
+        },
+        "mode": "json_api",
+        "itemsPath": "result",
+        "allowValues": {
+          "path": "0.SECURITY_CODE",
+          "values": [
+            "600519"
+          ]
+        },
+        "titlePaths": [
+          "0.TITLE"
+        ],
+        "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:600519；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
+        "publishedAtPath": "0.SSEDATE",
+        "externalIdPath": "0.ORG_BULLETIN_ID",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "股东大会通知",
+            "股东会的通知",
+            "会议资料",
+            "法律意见书",
+            "公司章程",
+            "议事规则",
+            "管理制度",
+            "H股公告"
+          ],
+          "keepIfMatches": [
+            "业绩",
+            "年度报告",
+            "季度报告",
+            "半年度报告",
+            "分红",
+            "利润分配",
+            "回购",
+            "增持",
+            "减持",
+            "融资",
+            "并购",
+            "收购",
+            "重组",
+            "重大合同",
+            "处罚"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "kweichow-moutai",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-cmb",
+      "name": "SSE 招商银行（SSE:600036，官方公告元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://query.sse.com.cn/security/stock/queryCompanyBulletinNew.do?isPagination=true&pageHelp.pageSize=100&pageHelp.pageNo=1&pageHelp.cacheSize=1&SECURITY_CODE=600036",
+        "headers": {
+          "Referer": "https://www.sse.com.cn/"
+        },
+        "mode": "json_api",
+        "itemsPath": "result",
+        "allowValues": {
+          "path": "0.SECURITY_CODE",
+          "values": [
+            "600036"
+          ]
+        },
+        "titlePaths": [
+          "0.TITLE"
+        ],
+        "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:600036；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
+        "publishedAtPath": "0.SSEDATE",
+        "externalIdPath": "0.ORG_BULLETIN_ID",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "股东大会通知",
+            "股东会的通知",
+            "会议资料",
+            "法律意见书",
+            "公司章程",
+            "议事规则",
+            "管理制度",
+            "H股公告"
+          ],
+          "keepIfMatches": [
+            "业绩",
+            "年度报告",
+            "季度报告",
+            "半年度报告",
+            "分红",
+            "利润分配",
+            "回购",
+            "增持",
+            "减持",
+            "融资",
+            "并购",
+            "收购",
+            "重组",
+            "重大合同",
+            "处罚"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "cmb",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-icbc",
+      "name": "SSE 工商银行（SSE:601398，官方公告元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://query.sse.com.cn/security/stock/queryCompanyBulletinNew.do?isPagination=true&pageHelp.pageSize=100&pageHelp.pageNo=1&pageHelp.cacheSize=1&SECURITY_CODE=601398",
+        "headers": {
+          "Referer": "https://www.sse.com.cn/"
+        },
+        "mode": "json_api",
+        "itemsPath": "result",
+        "allowValues": {
+          "path": "0.SECURITY_CODE",
+          "values": [
+            "601398"
+          ]
+        },
+        "titlePaths": [
+          "0.TITLE"
+        ],
+        "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:601398；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
+        "publishedAtPath": "0.SSEDATE",
+        "externalIdPath": "0.ORG_BULLETIN_ID",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "股东大会通知",
+            "股东会的通知",
+            "会议资料",
+            "法律意见书",
+            "公司章程",
+            "议事规则",
+            "管理制度",
+            "H股公告"
+          ],
+          "keepIfMatches": [
+            "业绩",
+            "年度报告",
+            "季度报告",
+            "半年度报告",
+            "分红",
+            "利润分配",
+            "回购",
+            "增持",
+            "减持",
+            "融资",
+            "并购",
+            "收购",
+            "重组",
+            "重大合同",
+            "处罚"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "icbc",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-ping-an",
+      "name": "SSE 中国平安（SSE:601318，官方公告元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://query.sse.com.cn/security/stock/queryCompanyBulletinNew.do?isPagination=true&pageHelp.pageSize=100&pageHelp.pageNo=1&pageHelp.cacheSize=1&SECURITY_CODE=601318",
+        "headers": {
+          "Referer": "https://www.sse.com.cn/"
+        },
+        "mode": "json_api",
+        "itemsPath": "result",
+        "allowValues": {
+          "path": "0.SECURITY_CODE",
+          "values": [
+            "601318"
+          ]
+        },
+        "titlePaths": [
+          "0.TITLE"
+        ],
+        "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:601318；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
+        "publishedAtPath": "0.SSEDATE",
+        "externalIdPath": "0.ORG_BULLETIN_ID",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "股东大会通知",
+            "股东会的通知",
+            "会议资料",
+            "法律意见书",
+            "公司章程",
+            "议事规则",
+            "管理制度",
+            "H股公告"
+          ],
+          "keepIfMatches": [
+            "业绩",
+            "年度报告",
+            "季度报告",
+            "半年度报告",
+            "分红",
+            "利润分配",
+            "回购",
+            "增持",
+            "减持",
+            "融资",
+            "并购",
+            "收购",
+            "重组",
+            "重大合同",
+            "处罚"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "ping-an",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-yili",
+      "name": "SSE 伊利股份（SSE:600887，官方公告元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://query.sse.com.cn/security/stock/queryCompanyBulletinNew.do?isPagination=true&pageHelp.pageSize=100&pageHelp.pageNo=1&pageHelp.cacheSize=1&SECURITY_CODE=600887",
+        "headers": {
+          "Referer": "https://www.sse.com.cn/"
+        },
+        "mode": "json_api",
+        "itemsPath": "result",
+        "allowValues": {
+          "path": "0.SECURITY_CODE",
+          "values": [
+            "600887"
+          ]
+        },
+        "titlePaths": [
+          "0.TITLE"
+        ],
+        "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:600887；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
+        "publishedAtPath": "0.SSEDATE",
+        "externalIdPath": "0.ORG_BULLETIN_ID",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "股东大会通知",
+            "股东会的通知",
+            "会议资料",
+            "法律意见书",
+            "公司章程",
+            "议事规则",
+            "管理制度",
+            "H股公告"
+          ],
+          "keepIfMatches": [
+            "业绩",
+            "年度报告",
+            "季度报告",
+            "半年度报告",
+            "分红",
+            "利润分配",
+            "回购",
+            "增持",
+            "减持",
+            "融资",
+            "并购",
+            "收购",
+            "重组",
+            "重大合同",
+            "处罚"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "yili",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-yangtze-power",
+      "name": "SSE 长江电力（SSE:600900，官方公告元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://query.sse.com.cn/security/stock/queryCompanyBulletinNew.do?isPagination=true&pageHelp.pageSize=100&pageHelp.pageNo=1&pageHelp.cacheSize=1&SECURITY_CODE=600900",
+        "headers": {
+          "Referer": "https://www.sse.com.cn/"
+        },
+        "mode": "json_api",
+        "itemsPath": "result",
+        "allowValues": {
+          "path": "0.SECURITY_CODE",
+          "values": [
+            "600900"
+          ]
+        },
+        "titlePaths": [
+          "0.TITLE"
+        ],
+        "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:600900；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
+        "publishedAtPath": "0.SSEDATE",
+        "externalIdPath": "0.ORG_BULLETIN_ID",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "股东大会通知",
+            "股东会的通知",
+            "会议资料",
+            "法律意见书",
+            "公司章程",
+            "议事规则",
+            "管理制度",
+            "H股公告"
+          ],
+          "keepIfMatches": [
+            "业绩",
+            "年度报告",
+            "季度报告",
+            "半年度报告",
+            "分红",
+            "利润分配",
+            "回购",
+            "增持",
+            "减持",
+            "融资",
+            "并购",
+            "收购",
+            "重组",
+            "重大合同",
+            "处罚"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "yangtze-power",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-tencent",
+      "name": "HKEXnews 腾讯控股（HKEX:00700，官方发行人公告列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=ZH&market=SEHK&stockId=7609&category=0&searchType=1",
+        "parseMode": "html",
+        "itemSelector": "table.table tbody tr:not(:has(.doc-link a:contains(\"An announcement has just been published\"))):not(:has(.doc-link a:contains(\"發行人剛在本網站英文版面發布\")))",
+        "linkSelector": ".doc-link a",
+        "titleSelector": ".doc-link a",
+        "publishedAtSelector": ".release-time",
+        "publishedAtFormat": "dmy",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": "tr",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews/sehk/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "月報表",
+            "翌日披露報表",
+            "Monthly Return",
+            "Next Day Disclosure Return",
+            "An announcement has just been published",
+            "發行人剛在本網站英文版面發布"
+          ],
+          "keepIfMatches": [
+            "股份購回",
+            "股份回購",
+            "購回股份",
+            "Share Buyback",
+            "Repurchase"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "additionalUrls": [
+          "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=7609&category=0&searchType=1"
+        ],
+        "sortByPublishedAt": true
+      },
+      "tier": "T1",
+      "owner_entity_id": "tencent",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-alibaba",
+      "name": "HKEXnews 阿里巴巴（HKEX:09988，官方发行人公告列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=ZH&market=SEHK&stockId=1000015694&category=0&searchType=1",
+        "parseMode": "html",
+        "itemSelector": "table.table tbody tr:not(:has(.doc-link a:contains(\"An announcement has just been published\"))):not(:has(.doc-link a:contains(\"發行人剛在本網站英文版面發布\")))",
+        "linkSelector": ".doc-link a",
+        "titleSelector": ".doc-link a",
+        "publishedAtSelector": ".release-time",
+        "publishedAtFormat": "dmy",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": "tr",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews/sehk/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "月報表",
+            "翌日披露報表",
+            "Monthly Return",
+            "Next Day Disclosure Return",
+            "An announcement has just been published",
+            "發行人剛在本網站英文版面發布"
+          ],
+          "keepIfMatches": [
+            "股份購回",
+            "股份回購",
+            "購回股份",
+            "Share Buyback",
+            "Repurchase"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "additionalUrls": [
+          "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=1000015694&category=0&searchType=1"
+        ],
+        "sortByPublishedAt": true
+      },
+      "tier": "T1",
+      "owner_entity_id": "alibaba",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-meituan",
+      "name": "HKEXnews 美团（HKEX:03690，官方发行人公告列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=ZH&market=SEHK&stockId=198419&category=0&searchType=1",
+        "parseMode": "html",
+        "itemSelector": "table.table tbody tr:not(:has(.doc-link a:contains(\"An announcement has just been published\"))):not(:has(.doc-link a:contains(\"發行人剛在本網站英文版面發布\")))",
+        "linkSelector": ".doc-link a",
+        "titleSelector": ".doc-link a",
+        "publishedAtSelector": ".release-time",
+        "publishedAtFormat": "dmy",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": "tr",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews/sehk/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "月報表",
+            "翌日披露報表",
+            "Monthly Return",
+            "Next Day Disclosure Return",
+            "An announcement has just been published",
+            "發行人剛在本網站英文版面發布"
+          ],
+          "keepIfMatches": [
+            "股份購回",
+            "股份回購",
+            "購回股份",
+            "Share Buyback",
+            "Repurchase"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "additionalUrls": [
+          "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=198419&category=0&searchType=1"
+        ],
+        "sortByPublishedAt": true
+      },
+      "tier": "T1",
+      "owner_entity_id": "meituan",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-xiaomi",
+      "name": "HKEXnews 小米集团（HKEX:01810，官方发行人公告列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=ZH&market=SEHK&stockId=190371&category=0&searchType=1",
+        "parseMode": "html",
+        "itemSelector": "table.table tbody tr:not(:has(.doc-link a:contains(\"An announcement has just been published\"))):not(:has(.doc-link a:contains(\"發行人剛在本網站英文版面發布\")))",
+        "linkSelector": ".doc-link a",
+        "titleSelector": ".doc-link a",
+        "publishedAtSelector": ".release-time",
+        "publishedAtFormat": "dmy",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": "tr",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews/sehk/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "月報表",
+            "翌日披露報表",
+            "Monthly Return",
+            "Next Day Disclosure Return",
+            "An announcement has just been published",
+            "發行人剛在本網站英文版面發布"
+          ],
+          "keepIfMatches": [
+            "股份購回",
+            "股份回購",
+            "購回股份",
+            "Share Buyback",
+            "Repurchase"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "additionalUrls": [
+          "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=190371&category=0&searchType=1"
+        ],
+        "sortByPublishedAt": true
+      },
+      "tier": "T1",
+      "owner_entity_id": "xiaomi",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-hkex",
+      "name": "HKEXnews 香港交易所（HKEX:00388，官方发行人公告列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=ZH&market=SEHK&stockId=781&category=0&searchType=1",
+        "parseMode": "html",
+        "itemSelector": "table.table tbody tr:not(:has(.doc-link a:contains(\"An announcement has just been published\"))):not(:has(.doc-link a:contains(\"發行人剛在本網站英文版面發布\")))",
+        "linkSelector": ".doc-link a",
+        "titleSelector": ".doc-link a",
+        "publishedAtSelector": ".release-time",
+        "publishedAtFormat": "dmy",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": "tr",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews/sehk/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "月報表",
+            "翌日披露報表",
+            "Monthly Return",
+            "Next Day Disclosure Return",
+            "An announcement has just been published",
+            "發行人剛在本網站英文版面發布"
+          ],
+          "keepIfMatches": [
+            "股份購回",
+            "股份回購",
+            "購回股份",
+            "Share Buyback",
+            "Repurchase"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "additionalUrls": [
+          "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=781&category=0&searchType=1"
+        ],
+        "sortByPublishedAt": true
+      },
+      "tier": "T1",
+      "owner_entity_id": "hkex",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-aia",
+      "name": "HKEXnews 友邦保险（HKEX:01299，官方发行人公告列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=ZH&market=SEHK&stockId=54299&category=0&searchType=1",
+        "parseMode": "html",
+        "itemSelector": "table.table tbody tr:not(:has(.doc-link a:contains(\"An announcement has just been published\"))):not(:has(.doc-link a:contains(\"發行人剛在本網站英文版面發布\")))",
+        "linkSelector": ".doc-link a",
+        "titleSelector": ".doc-link a",
+        "publishedAtSelector": ".release-time",
+        "publishedAtFormat": "dmy",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": "tr",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews/sehk/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "月報表",
+            "翌日披露報表",
+            "Monthly Return",
+            "Next Day Disclosure Return",
+            "An announcement has just been published",
+            "發行人剛在本網站英文版面發布"
+          ],
+          "keepIfMatches": [
+            "股份購回",
+            "股份回購",
+            "購回股份",
+            "Share Buyback",
+            "Repurchase"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "additionalUrls": [
+          "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=54299&category=0&searchType=1"
+        ],
+        "sortByPublishedAt": true
+      },
+      "tier": "T1",
+      "owner_entity_id": "aia",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-cnooc",
+      "name": "HKEXnews 中国海洋石油（HKEX:00883，官方发行人公告列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=ZH&market=SEHK&stockId=2088&category=0&searchType=1",
+        "parseMode": "html",
+        "itemSelector": "table.table tbody tr:not(:has(.doc-link a:contains(\"An announcement has just been published\"))):not(:has(.doc-link a:contains(\"發行人剛在本網站英文版面發布\")))",
+        "linkSelector": ".doc-link a",
+        "titleSelector": ".doc-link a",
+        "publishedAtSelector": ".release-time",
+        "publishedAtFormat": "dmy",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": "tr",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews/sehk/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "月報表",
+            "翌日披露報表",
+            "Monthly Return",
+            "Next Day Disclosure Return",
+            "An announcement has just been published",
+            "發行人剛在本網站英文版面發布"
+          ],
+          "keepIfMatches": [
+            "股份購回",
+            "股份回購",
+            "購回股份",
+            "Share Buyback",
+            "Repurchase"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "additionalUrls": [
+          "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=2088&category=0&searchType=1"
+        ],
+        "sortByPublishedAt": true
+      },
+      "tier": "T1",
+      "owner_entity_id": "cnooc",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-smic",
+      "name": "HKEXnews 中芯国际（HKEX:00981，官方发行人公告列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=ZH&market=SEHK&stockId=7249&category=0&searchType=1",
+        "parseMode": "html",
+        "itemSelector": "table.table tbody tr:not(:has(.doc-link a:contains(\"An announcement has just been published\"))):not(:has(.doc-link a:contains(\"發行人剛在本網站英文版面發布\")))",
+        "linkSelector": ".doc-link a",
+        "titleSelector": ".doc-link a",
+        "publishedAtSelector": ".release-time",
+        "publishedAtFormat": "dmy",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": "tr",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews/sehk/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "月報表",
+            "翌日披露報表",
+            "Monthly Return",
+            "Next Day Disclosure Return",
+            "An announcement has just been published",
+            "發行人剛在本網站英文版面發布"
+          ],
+          "keepIfMatches": [
+            "股份購回",
+            "股份回購",
+            "購回股份",
+            "Share Buyback",
+            "Repurchase"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "additionalUrls": [
+          "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=7249&category=0&searchType=1"
+        ],
+        "sortByPublishedAt": true
+      },
+      "tier": "T1",
+      "owner_entity_id": "smic",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-apple",
+      "name": "SEC EDGAR 苹果（NASDAQ:AAPL，官方提交记录元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+        "mode": "json_api",
+        "itemsPath": "filings.recent",
+        "itemsColumnar": true,
+        "allowValues": {
+          "path": "form",
+          "values": [
+            "10-K",
+            "10-K/A",
+            "10-Q",
+            "10-Q/A",
+            "8-K",
+            "8-K/A",
+            "DEF 14A",
+            "4",
+            "4/A"
+          ]
+        },
+        "titleTemplate": "苹果（NASDAQ:AAPL）：SEC {raw:form} filing",
+        "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：苹果；观察公司证券标识：NASDAQ:AAPL；市场：美股；CIK：0000320193；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://www.sec.gov/Archives/edgar/data/320193/{accessionNumber}.txt",
+        "publishedAtPath": "acceptanceDateTime",
+        "externalIdPath": "accessionNumber",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "apple",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-microsoft",
+      "name": "SEC EDGAR 微软（NASDAQ:MSFT，官方提交记录元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://data.sec.gov/submissions/CIK0000789019.json",
+        "mode": "json_api",
+        "itemsPath": "filings.recent",
+        "itemsColumnar": true,
+        "allowValues": {
+          "path": "form",
+          "values": [
+            "10-K",
+            "10-K/A",
+            "10-Q",
+            "10-Q/A",
+            "8-K",
+            "8-K/A",
+            "DEF 14A",
+            "4",
+            "4/A"
+          ]
+        },
+        "titleTemplate": "微软（NASDAQ:MSFT）：SEC {raw:form} filing",
+        "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：微软；观察公司证券标识：NASDAQ:MSFT；市场：美股；CIK：0000789019；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://www.sec.gov/Archives/edgar/data/789019/{accessionNumber}.txt",
+        "publishedAtPath": "acceptanceDateTime",
+        "externalIdPath": "accessionNumber",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "microsoft",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-nvidia",
+      "name": "SEC EDGAR 英伟达（NASDAQ:NVDA，官方提交记录元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+        "mode": "json_api",
+        "itemsPath": "filings.recent",
+        "itemsColumnar": true,
+        "allowValues": {
+          "path": "form",
+          "values": [
+            "10-K",
+            "10-K/A",
+            "10-Q",
+            "10-Q/A",
+            "8-K",
+            "8-K/A",
+            "DEF 14A",
+            "4",
+            "4/A"
+          ]
+        },
+        "titleTemplate": "英伟达（NASDAQ:NVDA）：SEC {raw:form} filing",
+        "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：英伟达；观察公司证券标识：NASDAQ:NVDA；市场：美股；CIK：0001045810；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1045810/{accessionNumber}.txt",
+        "publishedAtPath": "acceptanceDateTime",
+        "externalIdPath": "accessionNumber",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "nvidia",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-amazon",
+      "name": "SEC EDGAR 亚马逊（NASDAQ:AMZN，官方提交记录元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://data.sec.gov/submissions/CIK0001018724.json",
+        "mode": "json_api",
+        "itemsPath": "filings.recent",
+        "itemsColumnar": true,
+        "allowValues": {
+          "path": "form",
+          "values": [
+            "10-K",
+            "10-K/A",
+            "10-Q",
+            "10-Q/A",
+            "8-K",
+            "8-K/A",
+            "DEF 14A",
+            "4",
+            "4/A"
+          ]
+        },
+        "titleTemplate": "亚马逊（NASDAQ:AMZN）：SEC {raw:form} filing",
+        "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：亚马逊；观察公司证券标识：NASDAQ:AMZN；市场：美股；CIK：0001018724；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1018724/{accessionNumber}.txt",
+        "publishedAtPath": "acceptanceDateTime",
+        "externalIdPath": "accessionNumber",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "amazon",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-alphabet",
+      "name": "SEC EDGAR Alphabet（NASDAQ:GOOGL，官方提交记录元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://data.sec.gov/submissions/CIK0001652044.json",
+        "mode": "json_api",
+        "itemsPath": "filings.recent",
+        "itemsColumnar": true,
+        "allowValues": {
+          "path": "form",
+          "values": [
+            "10-K",
+            "10-K/A",
+            "10-Q",
+            "10-Q/A",
+            "8-K",
+            "8-K/A",
+            "DEF 14A",
+            "4",
+            "4/A"
+          ]
+        },
+        "titleTemplate": "Alphabet（NASDAQ:GOOGL）：SEC {raw:form} filing",
+        "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：Alphabet；观察公司证券标识：NASDAQ:GOOGL；市场：美股；CIK：0001652044；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1652044/{accessionNumber}.txt",
+        "publishedAtPath": "acceptanceDateTime",
+        "externalIdPath": "accessionNumber",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "alphabet",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-meta",
+      "name": "SEC EDGAR Meta（NASDAQ:META，官方提交记录元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://data.sec.gov/submissions/CIK0001326801.json",
+        "mode": "json_api",
+        "itemsPath": "filings.recent",
+        "itemsColumnar": true,
+        "allowValues": {
+          "path": "form",
+          "values": [
+            "10-K",
+            "10-K/A",
+            "10-Q",
+            "10-Q/A",
+            "8-K",
+            "8-K/A",
+            "DEF 14A",
+            "4",
+            "4/A"
+          ]
+        },
+        "titleTemplate": "Meta（NASDAQ:META）：SEC {raw:form} filing",
+        "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：Meta；观察公司证券标识：NASDAQ:META；市场：美股；CIK：0001326801；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1326801/{accessionNumber}.txt",
+        "publishedAtPath": "acceptanceDateTime",
+        "externalIdPath": "accessionNumber",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "meta",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-jpmorgan",
+      "name": "SEC EDGAR 摩根大通（NYSE:JPM，官方提交记录元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://data.sec.gov/submissions/CIK0000019617.json",
+        "mode": "json_api",
+        "itemsPath": "filings.recent",
+        "itemsColumnar": true,
+        "allowValues": {
+          "path": "form",
+          "values": [
+            "10-K",
+            "10-K/A",
+            "10-Q",
+            "10-Q/A",
+            "8-K",
+            "8-K/A",
+            "DEF 14A",
+            "4",
+            "4/A"
+          ]
+        },
+        "titleTemplate": "摩根大通（NYSE:JPM）：SEC {raw:form} filing",
+        "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：摩根大通；观察公司证券标识：NYSE:JPM；市场：美股；CIK：0000019617；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://www.sec.gov/Archives/edgar/data/19617/{accessionNumber}.txt",
+        "publishedAtPath": "acceptanceDateTime",
+        "externalIdPath": "accessionNumber",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "jpmorgan",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-berkshire",
+      "name": "SEC EDGAR 伯克希尔哈撒韦（NYSE:BRK.B，官方提交记录元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://data.sec.gov/submissions/CIK0001067983.json",
+        "mode": "json_api",
+        "itemsPath": "filings.recent",
+        "itemsColumnar": true,
+        "allowValues": {
+          "path": "form",
+          "values": [
+            "10-K",
+            "10-K/A",
+            "10-Q",
+            "10-Q/A",
+            "8-K",
+            "8-K/A",
+            "DEF 14A",
+            "4",
+            "4/A"
+          ]
+        },
+        "titleTemplate": "伯克希尔哈撒韦（NYSE:BRK.B）：SEC {raw:form} filing",
+        "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：伯克希尔哈撒韦；观察公司证券标识：NYSE:BRK.B；市场：美股；CIK：0001067983；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1067983/{accessionNumber}.txt",
+        "publishedAtPath": "acceptanceDateTime",
+        "externalIdPath": "accessionNumber",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "berkshire",
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-disclosure-szse",
+      "name": "SZSE 固定观察名单公司公告（官方元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://www.szse.cn/api/disc/announcement/annList",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "Referer": "https://www.szse.cn/disclosure/listed/notice/index.html"
+        },
+        "bodyJson": {
+          "seDate": [
+            "",
+            ""
+          ],
+          "stock": [
+            "300750",
+            "000333"
+          ],
+          "channelCode": [
+            "listedNotice_disc"
+          ],
+          "pageSize": 50,
+          "pageNum": 1
+        },
+        "itemsPath": "data",
+        "allowValues": {
+          "path": "secCode.0",
+          "values": [
+            "300750",
+            "000333"
+          ]
+        },
+        "titlePaths": [
+          "title"
+        ],
+        "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:secName.0}；证券：SZSE:{raw:secCode.0}；市场：A股；公告标题：{raw:title}；发布时间：{raw:publishTime}。",
+        "summaryIsBody": true,
+        "urlTemplate": "https://disc.static.szse.cn/download{raw:attachPath}",
+        "publishedAtPath": "publishTime",
+        "publishedAtUtcOffset": "+08:00",
+        "externalIdPath": "id",
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "股东大会通知",
+            "股东会的通知",
+            "会议资料",
+            "法律意见书",
+            "公司章程",
+            "议事规则",
+            "管理制度",
+            "H股公告"
+          ],
+          "keepIfMatches": [
+            "业绩",
+            "年度报告",
+            "季度报告",
+            "半年度报告",
+            "分红",
+            "利润分配",
+            "回购",
+            "增持",
+            "减持",
+            "融资",
+            "并购",
+            "收购",
+            "重组",
+            "重大合同",
+            "处罚"
+          ]
+        },
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 15,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
     }
   ]
 }
