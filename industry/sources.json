@@ -188,7 +188,8 @@
       "name": "Bureau of Labor Statistics",
       "kind": "rss",
       "config": {
-        "feedUrl": "https://www.bls.gov/feed/news_release/rss.xml",
+        "feedUrl": "https://www.bls.gov/feed/bls_latest.rss",
+        "summaryIsBody": true,
         "_aihot": {
           "initialBackfillLimit": 8
         }
@@ -210,6 +211,10 @@
       "kind": "rss",
       "config": {
         "feedUrl": "https://apps.bea.gov/rss/rss.xml",
+        "itemUrlPrefixRewrite": {
+          "from": "www.bea.gov/",
+          "to": "https://www.bea.gov/"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
         }
