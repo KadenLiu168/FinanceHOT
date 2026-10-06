@@ -16,6 +16,16 @@ interface Publisher {
   kind: string;
   config: Record<string, unknown>;
   participation_mode?: string;
+  discovered?: boolean;
+}
+
+/** Resolve verified ownership; overlapping scopes remain ambiguous without disclosure evidence. */
+export function materialPublisher(candidates: Publisher[], rawUrl: string): Publisher | null {
+  const owned = candidates.filter((s) => publisherOwnsUrl(s, rawUrl));
+  if (owned.length === 1) return owned[0]!;
+  if (owned.some((s) => !["statutory", "issuer_ir"].includes(String(s.config.disclosureRole)))) return null;
+  const statutory = owned.filter((s) => s.config.disclosureRole === "statutory" && s.discovered);
+  return statutory.length === 1 ? statutory[0]! : null;
 }
 
 function ownershipUrl(raw: string): URL | null {
@@ -59,13 +69,13 @@ export async function reconcileMaterialSource(db: Db, articleId: string, observe
     FROM articles a JOIN sources s ON s.id = a.source_id WHERE a.id = ${articleId} FOR UPDATE OF a`;
   if (!article) return false;
   const candidates = await db<Publisher[]>`
-    SELECT s.id, s.kind, s.config, s.participation_mode FROM sources s
+    SELECT s.id, s.kind, s.config, s.participation_mode,
+      EXISTS (SELECT 1 FROM article_discoveries d WHERE d.article_id = ${articleId} AND d.source_id = s.id) AS discovered FROM sources s
     WHERE s.tier = 'T1' AND (jsonb_typeof(s.config->'publisherUrlPrefixes') = 'array'
       OR (s.kind = 'web_list' AND NOT (s.config ? 'publisherUrlPrefixes')
         AND EXISTS (SELECT 1 FROM article_discoveries d WHERE d.article_id = ${articleId} AND d.source_id = s.id)))`;
-  const owned = candidates.filter((s) => publisherOwnsUrl(s, article.url));
-  if (owned.length !== 1) return false;
-  const publisher = owned[0]!;
+  const publisher = materialPublisher(candidates, article.url);
+  if (!publisher) return false;
   if (publisher.id === article.source_id) return false;
   // Aggregator submitters are not article authors. Keep a name only from the publisher discovery.
   const author = observed?.sourceId === publisher.id ? observed.author?.trim() || null : null;
@@ -75,7 +85,7 @@ export async function reconcileMaterialSource(db: Db, articleId: string, observe
   await db`UPDATE articles SET source_id = ${publisher.id}, author = ${author}, updated_at = now()
     ${needsProcessing ? sql`, processing_state = 'new', processing_queued_at = NULL, ${groupingReset()}` : sql``}
     WHERE id = ${articleId}`;
-  await audit("system", "article.attribution", `article:${articleId}`, "唯一 T1 原发信源与已验证 URL 范围一致（显式配置或已观察官网列表）",
+  await audit("system", "article.attribution", `article:${articleId}`, "T1 原发信源与已验证 URL 范围一致；重叠披露范围使用唯一已观察法定来源",
     { sourceId: article.source_id, author: article.author }, { sourceId: publisher.id, author }, { db });
   // This changes attribution and the public seat, not the judgement or selection threshold.
   await publishArticleTx(db as Parameters<typeof publishArticleTx>[0], articleId);

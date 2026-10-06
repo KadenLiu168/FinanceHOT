@@ -85,6 +85,27 @@ test("source tier and event ownership are separate; mentions of an entity do not
   assert.equal(representativePriority({ ...row, first_party: true } as typeof row), 3, "the first_party flag never elevates a source");
 });
 
+test("statutory canonical is shared by timeline, story, followups and report candidates within each fact", async () => {
+  const statutory = await source("statutory", "T1", "apple");
+  const ir = await source("issuer-ir", "T1", "apple");
+  await sql`UPDATE sources SET config = ${sql.json({ disclosureRole: "statutory" })} WHERE id = ${statutory}`;
+  await sql`UPDATE sources SET config = ${sql.json({ disclosureRole: "issuer_ir" })} WHERE id = ${ir}`;
+  const g = await story();
+  const official = await report(statutory, g, { title: "Statutory quarterly results", hours: 3, score: 65 });
+  await sql`UPDATE publications SET body_mode = 'summary' WHERE article_id = ${official}`;
+  await report(ir, g, { title: "IR quarterly results with full text", hours: 2, score: 95 });
+  const q = { channel: "all" as const, category: null, tag: key, now };
+  const timeline = await loadTimeline(q);
+  assert.equal(timeline.cards.filter((c) => c.key === `f${g.factId}`).length, 1);
+  assert.equal(timeline.cards.find((c) => c.key === `f${g.factId}`)!.item.id, official);
+  assert.equal((await loadStoryDetail(g.storyId, now))!.developments[0]!.representative.id, official);
+  assert.equal((await loadStoryFollowups(g.storyPublicId, now))!.items[0]!.representative.id, official);
+  assert.equal((await candidates(at(100), now)).find((c) => c.factId === g.factPublicId)?.itemId, official);
+  const unique = await story("Apple 发布下一季度指引");
+  const guidance = await report(ir, unique, { title: "IR-only guidance", hours: 1 });
+  assert.equal((await loadStoryDetail(unique.storyId, now))!.developments[0]!.representative.id, guidance, "the role does not merge separate facts");
+});
+
 test("mentions cannot choose a timeline origin, anchor, representative, or a latest-progress link", async () => {
   const organization = await source("organization", "T1_5", "apple", "organization");
   const media = await source("media", "T2");

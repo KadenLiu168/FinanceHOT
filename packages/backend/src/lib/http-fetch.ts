@@ -72,7 +72,8 @@ export async function guardedFetch(input: string, opts: GuardedFetchOptions = {}
   let url = await check(input);
   const maxRedirects = opts.maxRedirects ?? 5;
   const maxBytes = opts.maxBytes ?? 8 * 1024 * 1024;
-  const headers = new Headers({ "user-agent": DEFAULT_UA, "accept-language": "zh-CN,zh;q=0.9,en;q=0.8", ...(opts.headers ?? {}) });
+  const headers = new Headers({ "user-agent": DEFAULT_UA, "accept-language": "zh-CN,zh;q=0.9,en;q=0.8" });
+  for (const [name, value] of Object.entries(opts.headers ?? {})) headers.set(name, value);
   const publicHeaders = new Set(["accept", "accept-language", "accept-encoding", "user-agent", "cache-control", "if-modified-since", "if-none-match", "range", "if-range"]);
   // Unknown custom headers and request bodies may carry credentials: the whole redirect chain keeps the first origin.
   const originBound = opts.redirectPolicy === "same-origin" || opts.body !== undefined || Object.keys(opts.headers ?? {}).some((name) => !publicHeaders.has(name.toLowerCase()));
@@ -142,6 +143,14 @@ function decodeBody(body: Buffer, contentType: string | null): string {
     const head = body.subarray(0, 2048).toString("latin1");
     const meta = /<meta[^>]+charset=["']?([\w-]+)/i.exec(head) ?? /encoding=["']([\w-]+)["']/i.exec(head);
     if (meta) charset = meta[1]!.toLowerCase();
+  }
+  // Some HTML publishers declare "unicode" but send ASCII-compatible UTF-8 bytes.
+  // Genuine UTF-16 markup contains NUL bytes (or a BOM), so its declaration remains effective.
+  const head = body.subarray(0, 2048);
+  if (["unicode", "utf-16", "utf-16le", "utf-16be"].includes(charset)
+    && !head.includes(0) && /<(?:html|head|meta|script|!doctype)\b/i.test(head.toString("latin1"))) {
+    try { return new TextDecoder("utf-8", { fatal: true }).decode(body).replace(/\uFFFD+/g, "\uFFFD"); }
+    catch { /* Invalid UTF-8 still follows the declared encoding. */ }
   }
   let text: string;
   try {

@@ -484,7 +484,11 @@
         },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://static.sse.com.cn/disclosure/listedinfo/announcement"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "kweichow-moutai",
@@ -553,7 +557,11 @@
         },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://static.sse.com.cn/disclosure/listedinfo/announcement"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "cmb",
@@ -622,7 +630,11 @@
         },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://static.sse.com.cn/disclosure/listedinfo/announcement"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "icbc",
@@ -691,7 +703,11 @@
         },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://static.sse.com.cn/disclosure/listedinfo/announcement"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "ping-an",
@@ -760,7 +776,11 @@
         },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://static.sse.com.cn/disclosure/listedinfo/announcement"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "yili",
@@ -829,7 +849,11 @@
         },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://static.sse.com.cn/disclosure/listedinfo/announcement"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "yangtze-power",
@@ -883,7 +907,11 @@
         "additionalUrls": [
           "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=7609&category=0&searchType=1"
         ],
-        "sortByPublishedAt": true
+        "sortByPublishedAt": true,
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "tencent",
@@ -937,7 +965,11 @@
         "additionalUrls": [
           "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=1000015694&category=0&searchType=1"
         ],
-        "sortByPublishedAt": true
+        "sortByPublishedAt": true,
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "alibaba",
@@ -991,7 +1023,11 @@
         "additionalUrls": [
           "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=198419&category=0&searchType=1"
         ],
-        "sortByPublishedAt": true
+        "sortByPublishedAt": true,
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "meituan",
@@ -1045,7 +1081,11 @@
         "additionalUrls": [
           "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=190371&category=0&searchType=1"
         ],
-        "sortByPublishedAt": true
+        "sortByPublishedAt": true,
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "xiaomi",
@@ -1099,7 +1139,11 @@
         "additionalUrls": [
           "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=781&category=0&searchType=1"
         ],
-        "sortByPublishedAt": true
+        "sortByPublishedAt": true,
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "hkex",
@@ -1153,7 +1197,11 @@
         "additionalUrls": [
           "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=54299&category=0&searchType=1"
         ],
-        "sortByPublishedAt": true
+        "sortByPublishedAt": true,
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "aia",
@@ -1207,7 +1255,11 @@
         "additionalUrls": [
           "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=2088&category=0&searchType=1"
         ],
-        "sortByPublishedAt": true
+        "sortByPublishedAt": true,
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "cnooc",
@@ -1261,7 +1313,11 @@
         "additionalUrls": [
           "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=EN&market=SEHK&stockId=7249&category=0&searchType=1"
         ],
-        "sortByPublishedAt": true
+        "sortByPublishedAt": true,
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www1.hkexnews.hk/listedco/listconews"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "smic",
@@ -1305,7 +1361,11 @@
         "externalIdPath": "accessionNumber",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www.sec.gov/Archives/edgar/data/320193"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "apple",
@@ -1349,7 +1409,11 @@
         "externalIdPath": "accessionNumber",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www.sec.gov/Archives/edgar/data/789019"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "microsoft",
@@ -1393,7 +1457,11 @@
         "externalIdPath": "accessionNumber",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www.sec.gov/Archives/edgar/data/1045810"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "nvidia",
@@ -1437,7 +1505,11 @@
         "externalIdPath": "accessionNumber",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www.sec.gov/Archives/edgar/data/1018724"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "amazon",
@@ -1481,7 +1553,11 @@
         "externalIdPath": "accessionNumber",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www.sec.gov/Archives/edgar/data/1652044"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "alphabet",
@@ -1525,7 +1601,11 @@
         "externalIdPath": "accessionNumber",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www.sec.gov/Archives/edgar/data/1326801"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "meta",
@@ -1569,7 +1649,11 @@
         "externalIdPath": "accessionNumber",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www.sec.gov/Archives/edgar/data/19617"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "jpmorgan",
@@ -1613,7 +1697,11 @@
         "externalIdPath": "accessionNumber",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://www.sec.gov/Archives/edgar/data/1067983"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": "berkshire",
@@ -1700,7 +1788,11 @@
         },
         "_aihot": {
           "initialBackfillLimit": 20
-        }
+        },
+        "disclosureRole": "statutory",
+        "publisherUrlPrefixes": [
+          "https://disc.static.szse.cn/download"
+        ]
       },
       "tier": "T1",
       "owner_entity_id": null,
@@ -1710,6 +1802,826 @@
         "中国",
         "官方"
       ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-cnooc",
+      "name": "中国海洋石油 Company IR（官方列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.cnoocltd.com/english/investorrelations/resultspresentations/results/",
+        "itemSelector": "dl.x_yjtjcl",
+        "linkSelector": "dt a",
+        "titleSelector": "dt a",
+        "publishedAtSelector": "dd",
+        "summarySelector": "dl.x_yjtjcl",
+        "allowUrlPrefixes": [
+          "https://www.cnoocltd.com/english/investorrelations/"
+        ],
+        "summaryIsBody": true,
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://www.cnoocltd.com/english/investorrelations/"
+        ]
+      },
+      "tier": "T1",
+      "owner_entity_id": "cnooc",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-meituan",
+      "name": "美团 Company IR（官方列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.meituan.com/en-US/investor/results",
+        "itemSelector": "li:has(a[href^=\"https://media-meituan.todayir.com/\"])",
+        "linkSelector": "a",
+        "titleSelector": "span.i0",
+        "publishedAtSelector": "p.i1",
+        "summarySelector": "span.i0",
+        "allowUrlPrefixes": [
+          "https://media-meituan.todayir.com/"
+        ],
+        "summaryIsBody": true,
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://media-meituan.todayir.com/"
+        ]
+      },
+      "tier": "T1",
+      "owner_entity_id": "meituan",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-ping-an",
+      "name": "中国平安 Company IR（官方列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://group.pingan.com/investor_relations/",
+        "itemSelector": "a.item--pdf[href*=\"IR-Docs\"]",
+        "linkSelector": "a",
+        "titleSelector": "h6",
+        "publishedAtSelector": ".small",
+        "summarySelector": "a.item--pdf",
+        "allowUrlPrefixes": [
+          "https://group.pingan.com/resource/pingan/IR-Docs/"
+        ],
+        "summaryIsBody": true,
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://group.pingan.com/resource/pingan/IR-Docs/"
+        ]
+      },
+      "tier": "T1",
+      "owner_entity_id": "ping-an",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-nvidia",
+      "name": "英伟达 Company IR（官方财报 HTML）",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://nvidianews.nvidia.com/cats/press_release.xml",
+        "allowUrlPrefixes": [
+          "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-"
+        ],
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://nvidianews.nvidia.com/news"
+        ],
+        "fetchPublicContent": true
+      },
+      "tier": "T1",
+      "owner_entity_id": "nvidia",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-kweichow-moutai",
+      "name": "贵州茅台 Company IR（官方列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.moutaichina.com/mtgf/tzzgx/cwbg/index.html",
+        "itemSelector": "li:has(a[aisite-article-file])",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtSelector": "span",
+        "summarySelector": "a",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www.moutaichina.com/mtgf/articleFileDir/"
+        ],
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://www.moutaichina.com/mtgf/articleFileDir/"
+        ]
+      },
+      "tier": "T1",
+      "owner_entity_id": "kweichow-moutai",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-yangtze-power",
+      "name": "长江电力 Company IR（官方列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.cypc.com.cn/cypc/tzzgx43/tjcl/index.html",
+        "itemSelector": ".listCommon li:has(a[href*=\"file=\"])",
+        "linkSelector": ".list_title a",
+        "titleSelector": ".list_title a",
+        "publishedAtRegex": "var rq = '([^']+)'",
+        "summarySelector": ".list_title",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www.cypc.com.cn/uiFramework/js/pdfjs/web/viewer.html?file=",
+          "https://www.cypc.com.cn/cypc/"
+        ],
+        "itemUrlPrefixRewrite": {
+          "from": "https://www.cypc.com.cn/uiFramework/js/pdfjs/web/viewer.html?file=",
+          "to": "https://www.cypc.com.cn"
+        },
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://www.cypc.com.cn/cypc"
+        ]
+      },
+      "tier": "T1",
+      "owner_entity_id": "yangtze-power",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "中国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-tencent",
+      "name": "腾讯控股 Company IR（官方列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.tencent.com/investors/investor-news/",
+        "itemSelector": "article.investor-news-item",
+        "linkSelector": "a",
+        "titleSelector": ".entry-title",
+        "publishedAtSelector": ".entry-meta",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": ".entry-title",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www.tencent.com/wp-content/uploads/",
+          "https://static.www.tencent.com/"
+        ],
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://www.tencent.com/wp-content/uploads/",
+          "https://static.www.tencent.com/"
+        ],
+        "ingestNoiseFilter": {
+          "dropMarkersTitleOnly": [
+            "poll results",
+            "notice of annual general meeting"
+          ]
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "tencent",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "香港",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-microsoft",
+      "name": "微软 Company IR（官方财报 HTML）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.microsoft.com/en-us/investor/default",
+        "itemSelector": ".m-content-placement-item:has(h3)",
+        "linkSelector": "a[href*=\"/investor/earnings/\"]",
+        "titleSelector": "h3",
+        "publishedAtRegex": "([A-Z][a-z]+ \\d{1,2}, \\d{4})",
+        "publishedAtUtcOffset": "+00:00",
+        "allowUrlPrefixes": [
+          "https://www.microsoft.com/en-us/investor/earnings/"
+        ],
+        "detail": {
+          "maxFetches": 8,
+          "summarySelector": "#erHeader"
+        },
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://www.microsoft.com/en-us/investor/earnings"
+        ]
+      },
+      "tier": "T1",
+      "owner_entity_id": "microsoft",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "美国",
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-alibaba",
+      "name": "阿里巴巴 Company IR（官方列表元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.alibabagroup.com/en-US/ir-news-filings",
+        "itemSelector": "a.component-news-list-item[href]",
+        "linkSelector": "a",
+        "titleSelector": ".component-news-info .component-title",
+        "publishedAtSelector": ".component-news-info .date-date",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": ".component-news-info .component-title",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www.alibabagroup.com/en-US/document-"
+        ],
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://www.alibabagroup.com/en-US"
+        ]
+      },
+      "tier": "T1",
+      "owner_entity_id": "alibaba",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-hkex",
+      "name": "香港交易所 Company IR（官方财报新闻元数据，未读取正文）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.hkexgroup.com/Media-Centre/News-Release/HKEX-Group?sc_lang=en",
+        "itemSelector": ".whats_on_tdy_row:has(a[title^=\"HKEX \"][title$=\"Results\"]), .whats_on_tdy_row:has(a[title*=\"Consolidated Financial Statements\"])",
+        "linkSelector": ".whats_on_tdy_text_2 a",
+        "titleSelector": ".whats_on_tdy_text_3",
+        "publishedAtSelector": ".whats_on_tdy_ball",
+        "publishedAtUtcOffset": "+08:00",
+        "summarySelector": ".whats_on_tdy_text_3",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www.hkexgroup.com/-/media/"
+        ],
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherUrlPrefixes": [
+          "https://www.hkexgroup.com/-/media/"
+        ]
+      },
+      "tier": "T1",
+      "owner_entity_id": "hkex",
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "finance-ir-catl",
+      "owner_entity_id": "catl",
+      "name": "宁德时代官方 IR 定期报告",
+      "kind": "json_list",
+      "config": {
+        "url": "https://www.catl.com/ajax/iRSerach?index=1&subtitle=&nodeIds=regularnotice&year=&docType=&text=&pageSize=20",
+        "method": "POST",
+        "mode": "json_api",
+        "itemsPath": "data",
+        "titlePaths": [
+          "title"
+        ],
+        "urlTemplate": "{raw:file}",
+        "publishedAtPath": "publishDate",
+        "summaryTemplate": "宁德时代（SZSE:300750）官方定期报告：{raw:title}",
+        "summaryIsBody": true,
+        "disclosureRole": "issuer_ir",
+        "publisherRole": "organization",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publishedAtUnit": "date_only"
+      }
+    },
+    {
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "finance-ir-yili",
+      "owner_entity_id": "yili",
+      "name": "伊利官方业绩发布",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.yili.com/news/company",
+        "itemSelector": ".item:has(.title:contains(\"中报\")), .item:has(.title:contains(\"财报\")), .item:has(.title:contains(\"前三季度\")), .item:has(.title:contains(\"年报\")), .item:has(.title:contains(\"一季度\"))",
+        "linkSelector": ".title a",
+        "titleSelector": ".title",
+        "publishedAtSelector": ".time",
+        "publishedAtUtcOffset": "+00:00",
+        "summarySelector": ".intro",
+        "summaryIsBody": false,
+        "detail": {
+          "maxFetches": 3,
+          "publishedAtSelector": ".yili-content .params span:first-child",
+          "publishedAtUtcOffset": "+00:00",
+          "publishedAtAuthoritative": true
+        },
+        "disclosureRole": "issuer_ir",
+        "publisherRole": "organization",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "finance-ir-midea",
+      "owner_entity_id": "midea",
+      "name": "美的集团官方财报发布",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.midea.com/global/news",
+        "itemSelector": "a.gws-news-list-contariner-item:has(.gws-news-list-contariner-item-title:contains(\"Results\"))",
+        "linkSelector": "a",
+        "titleSelector": ".gws-news-list-contariner-item-title",
+        "publishedAtSelector": ".gws-news-list-contariner-item-date",
+        "publishedAtUtcOffset": "+00:00",
+        "detail": {
+          "maxFetches": 3,
+          "publishedAtSelector": ".gws-news-basic-date",
+          "publishedAtUtcOffset": "+00:00",
+          "publishedAtAuthoritative": true
+        },
+        "summarySelector": ".gws-news-list-contariner-item-desc",
+        "summaryIsBody": false,
+        "disclosureRole": "issuer_ir",
+        "publisherRole": "organization",
+        "_aihot": {
+          "initialBackfillLimit": 8,
+          "initialBackfillMonths": 36
+        }
+      }
+    },
+    {
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "finance-ir-cmb",
+      "owner_entity_id": "cmb",
+      "name": "招商银行官方 IR 财报与资本事项",
+      "kind": "json_list",
+      "config": {
+        "url": "https://www.cmbchina.com/api/v1/cmbir/pagedBulletinA",
+        "method": "POST",
+        "bodyJson": {
+          "pageIndex": 1,
+          "pageSize": 30
+        },
+        "mode": "json_api",
+        "itemsPath": "body.rows",
+        "ingestNoiseFilter": {
+          "dropMarkers": [
+            "招商银行"
+          ],
+          "keepIfMatches": [
+            "年度报告",
+            "季度报告",
+            "业绩说明",
+            "分红",
+            "股息",
+            "回购",
+            "资本债券发行",
+            "融资",
+            "收购",
+            "合并"
+          ]
+        },
+        "titlePaths": [
+          "title"
+        ],
+        "urlTemplate": "{raw:fileUrl}",
+        "publishedAtPath": "pubdate",
+        "summaryTemplate": "招商银行（SSE:600036）官方IR：{raw:title}",
+        "summaryIsBody": true,
+        "disclosureRole": "issuer_ir",
+        "publisherRole": "organization",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publishedAtUnit": "date_only"
+      }
+    },
+    {
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "finance-ir-icbc",
+      "owner_entity_id": "icbc",
+      "name": "工商银行官方IR财报",
+      "kind": "json_list",
+      "config": {
+        "url": "https://www.icbc-ltd.com/icbcltd/investor%20relations/financial%20information/financial%20reports/",
+        "headers": {
+          "accept": "text/html"
+        },
+        "mode": "html_window_var",
+        "windowVar": "initData",
+        "itemsPath": "list",
+        "titlePaths": [
+          "displayName"
+        ],
+        "urlTemplate": "https:{raw:downloadUrl}",
+        "publishedAtPath": "publishedDate",
+        "publishedAtUnit": "epoch_ms",
+        "summaryTemplate": "工商银行（SSE:601398）官方IR：{raw:displayName}",
+        "summaryIsBody": true,
+        "disclosureRole": "issuer_ir",
+        "publisherRole": "organization",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "kind": "web_list",
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "finance-ir-aia",
+      "name": "AIA Investor Results",
+      "owner_entity_id": "aia",
+      "config": {
+        "url": "https://www.aia.com/en/media-centre/press-releases",
+        "headers": {
+          "user-agent": "Mozilla/5.0"
+        },
+        "itemSelector": ".cmp-promotioncard:has(.cmp-promotioncard__title:contains(\"results\")), .cmp-promotioncard:has(.cmp-promotioncard__title:contains(\"Results\")), .cmp-promotioncard:has(.cmp-promotioncard__title:contains(\"VONB\")), .cmp-promotioncard:has(.cmp-promotioncard__title:contains(\"share buy-back\"))",
+        "linkSelector": "a.cmp-promotioncard__link",
+        "titleSelector": ".cmp-promotioncard__title",
+        "publishedAtSelector": ".cmp-promotioncard__date",
+        "publishedAtUtcOffset": "+00:00",
+        "disclosureRole": "issuer_ir",
+        "publisherRole": "organization",
+        "detail": {
+          "maxFetches": 3,
+          "summarySelector": ".cmp-text"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "kind": "web_list",
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "id": "finance-ir-smic",
+      "name": "SMIC Financial Results",
+      "owner_entity_id": "smic",
+      "config": {
+        "url": "https://www.smics.com/en/site/news",
+        "headers": {
+          "user-agent": "Mozilla/5.0"
+        },
+        "itemSelector": "tbody tr:has(td.title:contains(\"RESULTS\")), tbody tr:has(td.title:contains(\"Results\"))",
+        "linkSelector": "td.title a",
+        "titleSelector": "td.title a",
+        "publishedAtSelector": "td.date p",
+        "publishedAtUtcOffset": "+00:00",
+        "allowUrlPrefixes": [
+          "https://www.smics.com/en/site/news_read/"
+        ],
+        "disclosureRole": "issuer_ir",
+        "publisherRole": "organization",
+        "detail": {
+          "maxFetches": 3,
+          "summarySelector": ".content"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      }
+    },
+    {
+      "id": "finance-ir-xiaomi",
+      "name": "Xiaomi Official IR Results",
+      "owner_entity_id": "xiaomi",
+      "kind": "json_list",
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "config": {
+        "url": "https://asia.tools.euroland.com/tools/Pressreleases/Main/GetNews/?strDateFrom=01%2F01%2F2018&strDateTo=&typeFilter=&orderBy=0&pageIndex=0&pageJummp=50&hasTypeFilter=false&searchPhrase=RESULTS+ANNOUNCEMENT&companyCode=ky-1810&onlyInsiderInfo=false&lang=en-GB&v=&alwaysIncludeInsiders=false&strYears=",
+        "headers": {
+          "user-agent": "Mozilla/5.0"
+        },
+        "itemsPath": "News",
+        "titlePaths": [
+          "title"
+        ],
+        "publishedAtPath": "formatedDate",
+        "publishedAtUtcOffset": "+00:00",
+        "externalIdPath": "ID",
+        "urlTemplate": "https://asia.tools.euroland.com/tools/Pressreleases/GetPressRelease/?ID={ID}&lang=en-GB&companycode=ky-1810",
+        "disclosureRole": "issuer_ir",
+        "publisherRole": "organization",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "summaryTemplate": "小米集团（HKEX:1810）官方业绩公告：{raw:title}",
+        "summaryIsBody": true
+      }
+    },
+    {
+      "id": "finance-ir-apple",
+      "name": "苹果 Company IR（官方财报 HTML）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.apple.com/newsroom/topics/company-news/",
+        "itemSelector": ".tile-item:has(a[href*=\"-quarter-results/\"])",
+        "linkSelector": "a",
+        "titleSelector": ".tile__headline",
+        "publishedAtSelector": ".tile__timestamp",
+        "publishedAtUtcOffset": "+00:00",
+        "allowUrlPrefixes": [
+          "https://www.apple.com/newsroom/"
+        ],
+        "publisherUrlPrefixes": [
+          "https://www.apple.com/newsroom"
+        ],
+        "detail": {
+          "maxFetches": 8,
+          "summarySelector": "meta[name=\"description\"]"
+        },
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherRole": "organization"
+      },
+      "tier": "T1",
+      "owner_entity_id": "apple",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-alphabet",
+      "name": "Alphabet Company IR（官方投资者 RSS）",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://abc.xyz/rss/pressrelease.aspx",
+        "allowUrlPrefixes": [
+          "https://abc.xyz/investor/news/news-details/"
+        ],
+        "publisherUrlPrefixes": [
+          "https://abc.xyz/investor/news/news-details"
+        ],
+        "summaryIsBody": true,
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherRole": "organization"
+      },
+      "tier": "T1",
+      "owner_entity_id": "alphabet",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-amazon",
+      "name": "亚马逊 Company IR（官方财报文件元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://ir.aboutamazon.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&pageSize=100&pageNumber=0&tagList=&includeTags=true&year=-1&excludeSelection=1&pressReleaseDateFilter=3",
+        "itemsPath": "GetPressReleaseListResult",
+        "titlePaths": [
+          "Headline"
+        ],
+        "urlTemplate": "{raw:DocumentPath}",
+        "publishedAtPath": "PressReleaseDate",
+        "publishedAtUnit": "date_only_mdy",
+        "summaryPaths": [
+          "Headline"
+        ],
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://s2.q4cdn.com/299287126/files/doc_earnings/",
+          "https://s2.q4cdn.com/299287126/files/doc_financials/"
+        ],
+        "publisherUrlPrefixes": [
+          "https://s2.q4cdn.com/299287126/files/doc_earnings",
+          "https://s2.q4cdn.com/299287126/files/doc_financials"
+        ],
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherRole": "organization"
+      },
+      "tier": "T1",
+      "owner_entity_id": "amazon",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-meta",
+      "name": "Meta Company IR（官方JSON，日精度元数据）",
+      "kind": "json_list",
+      "config": {
+        "url": "https://investor.atmeta.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&pageSize=100&pageNumber=0&tagList=&includeTags=true&year=-1&excludeSelection=1&pressReleaseDateFilter=3",
+        "itemsPath": "GetPressReleaseListResult",
+        "titlePaths": [
+          "Headline"
+        ],
+        "urlTemplate": "{raw:DocumentPath}",
+        "publishedAtPath": "PressReleaseDate",
+        "publishedAtUnit": "date_only_mdy",
+        "summaryPaths": [
+          "Headline"
+        ],
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://s21.q4cdn.com/399680738/files/doc_news/Meta-Reports-",
+          "https://s21.q4cdn.com/399680738/files/doc_news/Meta-Announces-Quarterly-",
+          "https://s21.q4cdn.com/399680738/files/doc_news/Meta-Announces-Increase-in-Quarterly-",
+          "https://s21.q4cdn.com/399680738/files/doc_news/Meta-to-Announce-",
+          "https://s21.q4cdn.com/399680738/files/doc_news/Meta-Announces-New-Strategic-Venture-",
+          "https://s21.q4cdn.com/399680738/files/doc_news/Meta-Announces-Joint-Venture-",
+          "https://s21.q4cdn.com/399680738/files/doc_news/Meta-to-Participate-"
+        ],
+        "publisherUrlPrefixes": [
+          "https://s21.q4cdn.com/399680738/files/doc_news"
+        ],
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherRole": "organization"
+      },
+      "tier": "T1",
+      "owner_entity_id": "meta",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-jpmorgan",
+      "name": "摩根大通 Company IR（官方投资者RSS）",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://jpmorganchaseco.gcs-web.com/rss/news-releases.xml",
+        "headers": {
+          "user-agent": "Mozilla/5.0"
+        },
+        "allowUrlPrefixes": [
+          "https://jpmorganchaseco.gcs-web.com/news-releases/news-release-details/"
+        ],
+        "publisherUrlPrefixes": [
+          "https://jpmorganchaseco.gcs-web.com/news-releases/news-release-details"
+        ],
+        "summaryIsBody": true,
+        "disclosureRole": "issuer_ir",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "publisherRole": "organization"
+      },
+      "tier": "T1",
+      "owner_entity_id": "jpmorgan",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "finance-ir-berkshire",
+      "name": "Berkshire Hathaway 官方财务公告",
+      "owner_entity_id": "berkshire",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.berkshirehathaway.com/news/2026news.html",
+        "itemSelector": "menu dl:has(dt a)",
+        "linkSelector": "dt a",
+        "titleSelector": "dd",
+        "publishedAtSelector": "dt",
+        "publishedAtUtcOffset": "+00:00",
+        "summarySelector": "dd",
+        "summaryIsBody": true,
+        "allowUrlPrefixes": [
+          "https://www.berkshirehathaway.com/news/"
+        ],
+        "disclosureRole": "issuer_ir",
+        "publisherRole": "organization",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
       "site_fulltext": false,
       "syndicate_fulltext": false
     }

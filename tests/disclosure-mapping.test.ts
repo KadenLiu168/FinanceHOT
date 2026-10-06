@@ -15,6 +15,17 @@ const rows = {
   accepted: ["2026-10-01T20:16:19Z", "2026-10-01T20:17:19Z", "2026-09-30T13:05:00Z", "2026-09-30T13:06:00Z"],
 };
 const server = http.createServer((req, res) => {
+  if (req.url === "/quoted") {
+    res.setHeader("content-type", "text/html");
+    res.end(`<script>var initData=JSON.parse('{"list":[{"title":"Issuer results","url":"https://example.org/report.pdf","date":"2026-09-30 16:01:00"}]}');</script>`);
+    return;
+  }
+  if (req.url === "/dates") {
+    res.setHeader("content-type", "application/json");
+    res.end(JSON.stringify([{ title: "Results", url: "https://example.org/results", date: "07/30/2026 16:01:00" },
+      { title: "Invalid", url: "https://example.org/invalid", date: "02/30/2026 16:01:00" }]));
+    return;
+  }
   if (req.url?.startsWith("/list")) {
     res.setHeader("content-type", "text/html");
     res.end(`<a href="/shared.pdf">Shared announcement</a><a href="/${req.url.endsWith("two") ? "english" : "chinese"}.pdf">Language-specific announcement</a>`);
@@ -41,6 +52,23 @@ const mapping = {
   summaryTemplate: "Official listing metadata; issuer=Issuer; form={raw:form}; submitted={raw:accepted}; document body not fetched.",
   summaryIsBody: true, urlTemplate: "https://example.org/{accession}.txt", publishedAtPath: "accepted", externalIdPath: "accession",
 };
+
+test("quoted JSON.parse data is decoded without executing a page, and unzoned timestamps can retain only the official day", async () => {
+  const settings = { url: base + "/quoted", mode: "html_window_var", windowVar: "initData", itemsPath: "list",
+    titlePaths: ["title"], urlTemplate: "{raw:url}", publishedAtPath: "date", publishedAtUnit: "date_only" };
+  assertSupportedConfig("json_list", settings);
+  const [row] = await fetchJsonList(source(settings));
+  assert.equal(row!.title, "Issuer results");
+  assert.equal(row!.publishedAt?.toISOString(), "2026-09-30T00:00:00.000Z");
+});
+
+test("an explicit US calendar format drops unzoned hours and refuses impossible days", async () => {
+  const rows = await fetchJsonList(source({ url: base + "/dates", titlePaths: ["title"], urlTemplate: "{raw:url}",
+    publishedAtPath: "date", publishedAtUnit: "date_only_mdy" }));
+  assert.equal(rows[0]!.publishedAt?.toISOString(), "2026-07-30T00:00:00.000Z");
+  assert.equal(rows[1]!.publishedAt, null);
+});
+
 
 test("ownership metadata identifies the associated watchlist company without inventing its issuer role", async () => {
   const pack = JSON.parse(readFileSync(`${REPO_ROOT}/industry/sources.json`, "utf8")).sources;

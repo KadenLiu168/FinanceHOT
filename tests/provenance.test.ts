@@ -203,6 +203,36 @@ test("ambiguous registered publishers do not silently choose a source", async ()
   assert.equal((await sql`SELECT source_id FROM articles WHERE id = ${articleId}`)[0]!.source_id, media);
 });
 
+for (const first of ["ir", "statutory"] as const) test(`${first}-first discovery of one disclosure URL retains one material and statutory attribution`, async () => {
+  const scope = `https://${tag()}.example/filings`;
+  const config = { publisherUrlPrefixes: [scope] };
+  const ir = await source("T1", { ...config, disclosureRole: "issuer_ir" });
+  const statutory = await source("T1", { ...config, disclosureRole: "statutory" });
+  const ids = first === "ir" ? [ir, statutory] : [statutory, ir];
+  const material = { url: `${scope}/report.pdf`, title: "Issuer interim results", bodyText: "Official list metadata", via: "fetch" as const };
+  const created = await upsertMaterial({ ...material, sourceId: ids[0]! });
+  const [before] = await sql`SELECT revision, title, body_text, content_hash FROM articles WHERE id = ${created.articleId}`;
+  for (const sourceId of [ids[1]!, ...ids]) {
+    const repeat = await upsertMaterial({ ...material, sourceId });
+    assert.equal(repeat.articleId, created.articleId);
+    assert.equal(repeat.created, false);
+    assert.equal(repeat.revised, false);
+  }
+  const [a] = await sql`SELECT source_id, revision, title, body_text, content_hash FROM articles WHERE id = ${created.articleId}`;
+  assert.equal(a!.source_id, statutory);
+  const { source_id: _, ...preserved } = a!;
+  assert.deepEqual(preserved, { ...before }, "attribution does not rewrite the original material");
+  assert.deepEqual((await sql`SELECT DISTINCT source_id FROM article_discoveries WHERE article_id = ${created.articleId}`).map((d) => d.source_id).sort(), [ir, statutory].sort());
+});
+
+test("changing a disclosure role queues the existing public refresh", async () => {
+  const id = await source("T1", { disclosureRole: "issuer_ir" });
+  const [row] = await sql`SELECT updated_at FROM sources WHERE id = ${id}`;
+  await updateSource(id, { patch: { config: { disclosureRole: "statutory" } }, version: row!.updated_at.toISOString() }, "test");
+  const [setting] = await sql`SELECT value FROM settings WHERE key = ${`republish.source:${id}`}`;
+  assert.equal(setting?.value.status, "queued");
+});
+
 test("a non-T1 flag cannot enter the first-party channel, and source edits derive the flag from tier", async () => {
   const id = await source("T1_5", {}, true);
   const { articleId } = await upsertMaterial({ sourceId: id, url: `https://example.com/${tag()}`, title: "Official social announcement", via: "fetch" });

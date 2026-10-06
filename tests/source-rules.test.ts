@@ -11,6 +11,7 @@ import { stopBoss } from "@aihot/backend/jobs/queue";
 import { extractArticleBody } from "@aihot/backend/content/extract";
 import { collectSource } from "@aihot/backend/sources/collect";
 import { updateSource } from "@aihot/backend/admin/sources";
+import { upsertMaterial } from "@aihot/backend/content/materials";
 
 const T = tag();
 const LONG = `${"A card label that swallowed the summary of the article it links to, ".repeat(2)}${T}`;
@@ -42,6 +43,12 @@ const jina = (base: string, target: string) => {
 };
 const server = http.createServer((req, res) => {
   const path = req.url ?? "";
+  if (path === "/ua-body") {
+    res.setHeader("content-type", "text/html");
+    if (req.headers["user-agent"] !== "Mozilla/5.0" || req.headers.authorization) { res.writeHead(403); res.end(); return; }
+    res.end(html("", `<article><h1>Results</h1><p>${ARTICLE_BODY}</p></article>`));
+    return;
+  }
   pageReads.set(path, (pageReads.get(path) ?? 0) + 1);
   const body = path.startsWith("/http") ? jina(base, path.slice(1)) : Object.hasOwn(pages, path) ? pages[path]!(base) : null;
   res.writeHead(body === null ? 404 : 200, { "content-type": path.endsWith(".xml") ? "application/rss+xml" : "text/html; charset=utf-8" });
@@ -134,4 +141,14 @@ test("detail HTML supplies the ordinary extracted body once, while short pages k
   assert.ok(full!.body_html?.includes(`<p>${ARTICLE_BODY}</p>`), "the saved body keeps the article paragraph");
   assert.equal(await extractArticleBody(full!.id), "skipped");
   assert.equal(pageReads.get(`/p/b-${T}`), 1, "known listings and extraction never download the same confirmed body again");
+});
+
+test("deferred body extraction retains the source's public headers without its listing credential", async () => {
+  const sourceId = `ua-body-${T}`;
+  await sql`INSERT INTO sources (id,name,kind,tier,config) VALUES (${sourceId},'UA body','web_list','T1',
+    ${sql.json({ url: base, headers: { "User-Agent": "Mozilla/5.0", Authorization: "fictional-list-only" } })})`;
+  const { articleId } = await upsertMaterial({ sourceId, url: base + "/ua-body", title: "Results", via: "fetch" });
+  assert.equal(await extractArticleBody(articleId), "ok");
+  const [row] = await sql`SELECT body_text FROM articles WHERE id = ${articleId}`;
+  assert.ok(row!.body_text.includes(ARTICLE_BODY.trim()));
 });

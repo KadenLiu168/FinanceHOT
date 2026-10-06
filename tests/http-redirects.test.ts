@@ -8,6 +8,9 @@ import { config } from "@aihot/backend/config";
 import { guardedFetch } from "@aihot/backend/lib/http-fetch";
 import { fetchJsonList } from "@aihot/backend/sources/json-list";
 import type { SourceRow } from "@aihot/backend/sources/types";
+import { fetchWebList, fetchDetail } from "@aihot/backend/sources/web-list";
+import { fetchRss } from "@aihot/backend/sources/rss";
+import { assertSupportedConfig } from "@aihot/backend/sources/config-keys";
 
 interface Hit { method: string; url: string; headers: http.IncomingHttpHeaders; body: string }
 type Handler = (hit: Hit, res: http.ServerResponse) => void | Promise<void>;
@@ -38,6 +41,37 @@ after(async () => {
 function redirect(path: string, location: string, status = 302) {
   a.routes.set(path, (_hit, res) => { res.writeHead(status, { location }); res.end("redirect"); });
 }
+test("ASCII HTML mislabeled unicode remains readable without misdecoding genuine UTF-16", async () => {
+  const html = '<html><head><meta charset="unicode"></head><body>Official results 财报</body></html>';
+  for (const [name, bytes, type] of [
+    ["wrong-meta", Buffer.from(html), "text/html"],
+    ["wrong-header", Buffer.from(html), "text/html; charset=utf-16le"],
+    ["real-utf16", Buffer.from(html, "utf16le"), "text/html; charset=utf-16le"],
+  ] as const) {
+    a.routes.set(`/charset-${name}`, (_hit, res) => { res.writeHead(200, { "content-type": type }); res.end(bytes); });
+    assert.equal((await guardedFetch(`${a.url}/charset-${name}`)).text(), html, name);
+  }
+});
+test("configured public request headers reach HTML and RSS while detail never inherits credentials", async () => {
+  const headers = { "User-Agent": "Mozilla/5.0", Authorization: "fictional-list-only" };
+  for (const path of ["/ua-list", "/ua-rss", "/ua-detail"]) a.routes.set(path, (hit, res) => {
+    if (hit.headers["user-agent"] !== "Mozilla/5.0") { res.writeHead(403); res.end(); return; }
+    if (path === "/ua-detail") {
+      assert.equal(hit.headers.authorization, undefined);
+      res.end('<html><time datetime="2026-09-01T08:00:00Z">September 1</time></html>');
+    } else if (path === "/ua-rss") {
+      res.setHeader("content-type", "application/rss+xml");
+      res.end(`<rss><channel><item><title>Results</title><link>${a.url}/ua-detail</link></item></channel></rss>`);
+    } else res.end(`<html><a href="${a.url}/ua-detail">Results</a></html>`);
+  });
+  const web: SourceRow = { id: "ua", name: "UA fixture", tier: "T1", first_party: true, interval_minutes: 60, enabled: true, cursor: null, fail_count: 0, kind: "web_list", participation_mode: "editorial", config: { url: a.url + "/ua-list", headers, detail: { publishedAtSelector: "time" } } };
+  assertSupportedConfig(web.kind, web.config);
+  assert.equal((await fetchWebList(web))[0]!.title, "Results");
+  const rss = { ...web, kind: "rss", config: { feedUrl: a.url + "/ua-rss", headers } } as SourceRow;
+  assertSupportedConfig(rss.kind, rss.config);
+  assert.equal((await fetchRss(rss)).candidates[0]!.title, "Results");
+  assert.equal((await fetchDetail(a.url + "/ua-detail", web, { date: true, title: false, summary: false })).publishedAt?.toISOString(), "2026-09-01T08:00:00.000Z");
+});
 for (const headers of [{ Authorization: `Bearer ${key}` }, { aUtHoRiZaTiOn: key }, { Cookie: `session=${key}` }, { "Proxy-Authorization": key }, { "X-Unknown-Credential": key }] as Array<Record<string, string>>) {
   test(`cross-origin replay refuses sensitive header ${Object.keys(headers)[0]}`, async () => {
     redirect("/header", b.url + "/capture", 307);

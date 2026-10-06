@@ -42,6 +42,15 @@ export function renderTemplate(template: string, item: unknown): string | null {
 
 function toDate(v: unknown, unit: string | undefined): Date | null {
   if (v === null || v === undefined || v === "") return null;
+  if (unit === "date_only" || unit === "date_only_mdy") {
+    const value = String(v).trim();
+    const m = unit === "date_only" ? /^(\d{4})-(\d{2})-(\d{2})(?:[ T].*)?$/.exec(value)
+      : /^(\d{2})\/(\d{2})\/(\d{4})(?: .*)?$/.exec(value);
+    if (!m) return null;
+    const day = unit === "date_only" ? `${m[1]}-${m[2]}-${m[3]}` : `${m[3]}-${m[1]}-${m[2]}`;
+    const date = new Date(`${day}T00:00:00Z`);
+    return Number.isFinite(date.getTime()) && date.toISOString().startsWith(day) ? date : null;
+  }
   if (unit === "epoch_ms" || unit === "epoch_s") {
     try {
       const date = new Date(Number(v) * (unit === "epoch_s" ? 1000 : 1));
@@ -81,6 +90,19 @@ function embeddedJson(html: string, source: SourceRow): unknown {
     const m = re.exec(html);
     if (!m) throw new FetchError(`window.${name} not found`);
     const start = m.index + m[0].length;
+    const expression = html.slice(start).trimStart();
+    if (/^JSON\.parse\b/.test(expression)) {
+      const quoted = /^JSON\.parse\(\s*("(?:[^"\\\r\n]|\\.)*"|'(?:[^'\\\r\n]|\\.)*')\s*\)/.exec(expression)?.[1];
+      if (!quoted) throw new FetchError("JSON.parse requires a quoted JSON string");
+      // Decode a string literal, never evaluate a page or its JSON.parse argument.
+      const escapes: Record<string, string> = { "'": "'", '"': '"', "\\": "\\", "/": "/", b: "\b", f: "\f", n: "\n", r: "\r", t: "\t" };
+      const text = quoted.startsWith('"') ? JSON.parse(quoted) : quoted.slice(1, -1).replace(/\\(u[0-9a-f]{4}|x[0-9a-f]{2}|[\s\S])/gi, (_match, escape: string) => {
+        if (/^[ux]/.test(escape) && escape.length > 1) return String.fromCharCode(parseInt(escape.slice(1), 16));
+        if (Object.hasOwn(escapes, escape)) return escapes[escape]!;
+        throw new FetchError("unsupported quoted JSON escape");
+      });
+      return JSON.parse(text);
+    }
     // Balanced-brace scan to find the object literal's end.
     let depth = 0, inStr: string | null = null, esc = false;
     for (let i = start; i < html.length; i++) {

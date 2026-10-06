@@ -6,7 +6,7 @@
 
 `watchlist.json` 是固定 24 家上市公司的观察名单，A/H/US 各 8 家；`taxonomy.ts` 中的同 id 主体包含相同市场、交易所代码与别名。公司主题 24 个，市场主题 6 个（沿用框架 `field` 分组），内容形态 4 个，共 34 个。不因为来源、裸股票代码或顺带提及而猜主体。
 
-`sources.json` 包含 41 个公开来源：原有 18 个机构／媒体源原样保留，另加 23 个官方公司公告查询源，共 39 个 T1、2 个 T2。原有机构源包括中国官方 5 个、美国官方 6 个、香港官方 2 个，另有 ECB、BOJ、BIS。仅使用已有 `rss`、`web_list`、`json_list`，不需要登录、付费采集服务或新依赖。FT 只读取公开订阅摘要和原文链接，不破解付费墙；所有来源的站内全文与全文再分发都关闭。
+`sources.json` 包含 65 个公开来源：原有 18 个机构／媒体源原样保留，23 个官方公司公告查询源及 24 个 Company IR 源，共 63 个 T1、2 个 T2。原有机构源包括中国官方 5 个、美国官方 6 个、香港官方 2 个，另有 ECB、BOJ、BIS。仅使用已有 `rss`、`web_list`、`json_list`，不需要登录、付费采集服务或新依赖。FT 只读取公开订阅摘要和原文链接，不破解付费墙；所有来源的站内全文与全文再分发都关闭。
 
 CSRC 使用官网当前列表请求的 JSON 接口，SZSE 使用官方栏目 `index.json`；HTML 不执行网页脚本。EIA RSS 的相对链接和 BEA RSS 中缺少协议的 `www.bea.gov/` 链接，通过已有 `itemUrlPrefixRewrite` 补成官方绝对链接。列表采集不提供通用分页，也没有专用 PDF 正文解析，不承诺全市场公司公告完整覆盖。新增公告查询覆盖固定的 24 家 watchlist 公司，不用媒体或第三方镜像代替披露源。
 
@@ -58,6 +58,59 @@ SEC 使用官方 `data.sec.gov/submissions/CIK##########.json`，将 `filings.re
 限制：SSE 只给公告日，存储为日期精度，不捏造时分秒；SZSE 无时区时间按 `+08:00`，HKEX 按日/月/年及 `+08:00`。SSE PDF 详情在本次网络返回反爬页，但官方列表元数据及原文链接可用；其他 PDF 也未解析正文。列表没有通用翻页：SSE 每公司读取当前 100 组主公告，SZSE 两公司共享最新 50 条窗口，HKEX 每家公司每种语言读取当前 100 条；SEC 使用当前 submissions 窗口，不回溯额外历史文件。公告源初始间隔为 15 分钟，后续沿用框架调频；突发发布超过窗口可能遗漏，不承诺历史全量或全市场覆盖。首轮仅导入有限存量（SZSE 20 条，其余 8 条），按已有历史归档规则处理；后续轮次处理接口返回的窗口。
 
 配置新增通用能力仅在原 `json_list`／`web_list` 内：列式数组、字段值过滤、文本模板、JSON 日期时区、HTML 日/月/年格式与列表摘要、多列表合并；无交易所专用 collector。具体语法见[信源](../docs/sources.md)。现有部署需运行原 seed 才新增这些源；seed 不覆盖管理员的原配置，也不自动启用全局采集安全阀。
+
+## Company IR（2026-10-06，24/24 接入验收通过）
+
+固定 watchlist 的 A/H/US 各 8 家均配置一个官方 Company IR 来源，与原 23 个 SEC／交易所法定公告来源并存。全部来源为 T1，owner_entity_id 与 watchlist 一一对应；site_fulltext 和 syndicate_fulltext 均为 false。本轮新增 24 个 IR source：RSS 3、web_list 15、json_list 6；全行业共 65 个 source。未增加依赖、公司专用 collector 或付费服务。
+
+使用当前实际 collectSource，在独立测试库逐家采集普通列表窗口两轮，共 344 条材料，官方发布日期全部非空；24 个来源两轮均 status=ok，第二轮 created=0，discovery 数量不增加。每源核对最新 3 条材料的标题、公司身份、官方发布日期与链接，少于 3 条的全部核对。此处是当前窗口和短间隔重复验收，不代表历史完整性、长期运行稳定性或所有原文都可访问。Alphabet 以官方 RSS 原始文本核对，HTML 403 单独记录；不将 RSS 或 PDF metadata 称为完整正文。
+
+普通窗口验收预先设置测试 cursor.initializedAt，以排除首次导入上限造成第二轮合法新增；首次导入边界另由项目回归测试覆盖。生产配置首次回溯默认最多 8 条／12 个月，美的为 36 个月；之后读取当前窗口，不提供通用分页。
+
+| 公司 | 市场 | 官方采集入口 | source id | collector | 正文能力 | 两轮入库／重复新增 | 限制 |
+|---|---|---|---|---|---|---|---|
+| 贵州茅台 | A | [官方入口](https://www.moutaichina.com/mtgf/tzzgx/cwbg/index.html) | finance-ir-kweichow-moutai | web_list | 仅 metadata | 15 / 0 | 官方列表日期，不用 PDF 路径日期；PDF 仅 metadata |
+| 宁德时代 | A | [官方入口](https://www.catl.com/ajax/iRSerach?index=1&subtitle=&nodeIds=regularnotice&year=&docType=&text=&pageSize=20) | finance-ir-catl | json_list | 仅 metadata | 20 / 0 | 官方列表 POST 查询参数接口；日期归一化只保留公布日 |
+| 招商银行 | A | [官方入口](https://www.cmbchina.com/api/v1/cmbir/pagedBulletinA) | finance-ir-cmb | json_list | 仅 metadata | 6 / 0 | 官方公告 JSON，现有噪声过滤保留财报、分红、回购、资本债券等 |
+| 工商银行 | A | [官方入口](https://www.icbc-ltd.com/icbcltd/investor%20relations/financial%20information/financial%20reports/) | finance-ir-icbc | json_list | 仅 metadata | 19 / 0 | HTTPS 静态页 JSON.parse 字符串；列表 Accept:text/html，PDF 默认请求；不降低 TLS |
+| 中国平安 | A | [官方入口](https://group.pingan.com/investor_relations/) | finance-ir-ping-an | web_list | 仅 metadata | 4 / 0 | 当前首页 4 份正式材料；PDF/XLSX 仅 metadata |
+| 美的集团 | A | [官方入口](https://www.midea.com/global/news) | finance-ir-midea | web_list | HTML 可提取 | 1 / 0 | 当前窗口只有 1 条旧财报发布；首次回溯 36 个月，报告期／正文事件日不作发布日期 |
+| 伊利股份 | A | [官方入口](https://www.yili.com/news/company) | finance-ir-yili | web_list | HTML 可提取 | 2 / 0 | 正式业绩新闻窗口 2 条；以详情官方发布日期为准 |
+| 长江电力 | A | [官方入口](https://www.cypc.com.cn/cypc/tzzgx43/tjcl/index.html) | finance-ir-yangtze-power | web_list | 仅 metadata | 10 / 0 | 现有 URL rewrite 去除 PDF viewer 外壳；PDF 仅 metadata |
+| 腾讯控股 | H | [官方入口](https://www.tencent.com/investors/investor-news/) | finance-ir-tencent | web_list | 仅 metadata | 21 / 0 | 24 条原始列表，过滤股东大会投票／通知后 21 条 |
+| 阿里巴巴 | H | [官方入口](https://www.alibabagroup.com/en-US/ir-news-filings) | finance-ir-alibaba | web_list | 仅 metadata | 20 / 0 | 拟议、定价、完成是不同阶段；页面再链接 PDF，当前 metadata |
+| 美团 | H | [官方入口](https://www.meituan.com/en-US/investor/results) | finance-ir-meituan | web_list | 仅 metadata | 33 / 0 | 官网链接 TodayIR PDF；不解析 PDF |
+| 小米集团 | H | [官方入口](https://asia.tools.euroland.com/tools/Pressreleases/Main/GetNews/?strDateFrom=01%2F01%2F2018&strDateTo=&typeFilter=&orderBy=0&pageIndex=0&pageJummp=50&hasTypeFilter=false&searchPhrase=RESULTS+ANNOUNCEMENT&companyCode=ky-1810&onlyInsiderInfo=false&lang=en-GB&v=&alwaysIncludeInsiders=false&strYears=) | finance-ir-xiaomi | json_list | 仅 metadata | 33 / 0 | 官网授权 Euroland 公告 JSON；取公告日，不用会议活动日期；PDF 包装页仅 metadata |
+| 香港交易所 | H | [官方入口](https://www.hkexgroup.com/Media-Centre/News-Release/HKEX-Group?sc_lang=en) | finance-ir-hkex | web_list | 仅 metadata | 4 / 0 | 只采集团自身业绩，不混入交易规则及市场新闻 |
+| 友邦保险 | H | [官方入口](https://www.aia.com/en/media-centre/press-releases) | finance-ir-aia | web_list | HTML 可提取 | 30 / 0 | 正式官方业绩发布；当前窗口，无全量历史 |
+| 中国海洋石油 | H | [官方入口](https://www.cnoocltd.com/english/investorrelations/resultspresentations/results/) | finance-ir-cnooc | web_list | 仅 metadata | 12 / 0 | 正式 Results／Quarterly Review；PDF 仅 metadata |
+| 中芯国际 | H | [官方入口](https://www.smics.com/en/site/news) | finance-ir-smic | web_list | HTML 可提取 | 4 / 0 | 列表／页面日期与个别正文 dateline 年份冲突；保存原文，不改写年份 |
+| 苹果 | US | [官方入口](https://www.apple.com/newsroom/topics/company-news/) | finance-ir-apple | web_list | HTML 核心段落 | 2 / 0 | 当前公司新闻窗口仅 2 份财报；Readability 仅核心段落 |
+| 微软 | US | [官方入口](https://www.microsoft.com/en-us/investor/default) | finance-ir-microsoft | web_list | HTML 可提取 | 1 / 0 | 当前窗口仅 1 份 FY26 Q4；官方日精度，无历史翻页 |
+| 英伟达 | US | [官方入口](https://nvidianews.nvidia.com/cats/press_release.xml) | finance-ir-nvidia | rss | HTML 可提取 | 1 / 0 | 当前 RSS 财报仅 1 条；真实 extractArticleBody 提取 18319 字符 |
+| 亚马逊 | US | [官方入口](https://ir.aboutamazon.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&pageSize=100&pageNumber=0&tagList=&includeTags=true&year=-1&excludeSelection=1&pressReleaseDateFilter=3) | finance-ir-amazon | json_list | 仅 metadata | 22 / 0 | 只保留 API 中可达财报 PDF；2026 Q1、2025 Q4 DocumentPath 为空，当前窗口缺这两份 |
+| Alphabet | US | [官方入口](https://abc.xyz/rss/pressrelease.aspx) | finance-ir-alphabet | rss | RSS 文本／metadata | 10 / 0 | 官方 RSS 200，详情 HTML 当前 403；部分条目只有摘要／标题，无完整正文 |
+| Meta | US | [官方入口](https://investor.atmeta.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&pageSize=100&pageNumber=0&tagList=&includeTags=true&year=-1&excludeSelection=1&pressReleaseDateFilter=3) | finance-ir-meta | json_list | 仅 metadata | 54 / 0 | 正式财报、分红、融资等 PDF；不解析 PDF |
+| 摩根大通 | US | [官方入口](https://jpmorganchaseco.gcs-web.com/rss/news-releases.xml) | finance-ir-jpmorgan | rss | RSS 短描述 | 10 / 0 | 官网链接的 GCS 服务；普通 UA 失败，配置标准 UA；未验证完整正文 |
+| 伯克希尔哈撒韦 | US | [官方入口](https://www.berkshirehathaway.com/news/2026news.html) | finance-ir-berkshire | web_list | 仅 metadata | 10 / 0 | 年度页面；换年需更新 URL；不解析 PDF |
+
+metadata 是官方标题、日期和身份上下文；summaryIsBody=true 只让已配置的官方摘要进入处理，不代表 PDF 已解析。不得根据标题补写收入、利润等数字。Apple 的正文只提取核心段落；HTML 可提取也不表示全文展示许可。NVIDIA、AIA、SMIC 的实际延后 extractArticleBody 路径验证通过，其余 HTML 由采集详情复用正文提取；所有公开输出仍只展示摘要和原文链接。
+
+### 最小通用能力与 canonical
+
+真实来源复现配置无法表达的三类阻塞后，补充泛用能力：Berkshire 的 UTF-8 HTML 错标 charset=unicode，严格 UTF-8 验证后纠正解码，真实 UTF-16 保持原行为；ICBC 的 var initData=JSON.parse('…') 只解码字面字符串并 JSON.parse，不执行 JS；CATL/CMB 与 Q4 的未注明时区时间使用 date_only/date_only_mdy，只保留官方公布日。AIA/SMIC/GCS 对默认请求 UA 拒绝，现有 source headers 扩展到 RSS、HTML 及延后正文路径；详情只转发 User-Agent/Accept/Accept-Language，凭据不跨主机传播。未放宽 SSRF、TLS 或重定向安全检查。
+
+config.disclosureRole 区分 statutory / issuer_ir。原 23 个法定公告源为 statutory，新 24 个 IR 为 issuer_ir。共享代表排序在调用方已有的同一事实候选范围内优先 T1 statutory，再按正文、评分和时间排序。角色本身不负责归组，未标角色保持原行为，非 T1 不因角色提升。
+
+同 URL 沿用 identity_key/article_discoveries 去重，出版者归属继续验证 URL origin/path。重叠披露 scope 只有唯一已观察 statutory 才解决歧义；普通来源重叠或多个已观察 statutory 保持歧义。角色修改使用原后台 republishSource 队列。不同公司、财期和宣布／批准／完成阶段仍按现有事实契约区分。
+
+真实配对验收采用贵州茅台 2026 年半年度报告摘要：官方 IR 与 SSE 返回同公司、同标题、同公布日（2026-08-15），URL 不同。保留真实日期，在单独测试库回放公布日，运行 upsertMaterial → publishArticle → groupArticle；IR 先到、SSE 后到，结果为一个 fact、一个 story、一张 timeline 卡片和一个公开 seat，代表为 SSE。模型端为本地固定关系 stub，验证的是真实归组和公开层的集成契约，不能据此宣称外部模型准确率已验证。原项目回归覆盖跨财期／不同动作等不误归并的契约。
+
+seed 只新增来源，不覆盖已有管理员配置。已有部署需通过原后台更新法定来源角色和 publisherUrlPrefixes，并保留其余配置；本轮没有写业务数据库。无 schema 迁移，开发安全阀保持关闭。
+
+### 本轮项目检查
+
+当前改动通过 typecheck、后端测试 651/651、web build、网页测试 29/29 和隔离站点 smoke 30/30。采集验收未调用模型／Jina，付费回执为 0；归组验收只有本地模型 stub。检查未启动业务 worker、提交、推送或部署。以上为本轮开发与隔离运行验收，部署状态和持续稳定性不在本轮证据范围内。
 
 FinanceHOT threshold 尚未经过金融 gold dataset 校准。`selection.ts` 保留原 baseline：T1=60、T1_5=65、T2=76、understandFloor=50。正式校准需使用者人工标注 100–200 条真实资料，再运行 `scripts/eval-selection.ts`。两个 `*.example.jsonl` 仅演示格式，内容虚构，不是人工 gold，不可用于宣称校准通过。
 
