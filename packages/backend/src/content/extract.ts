@@ -11,13 +11,15 @@ import { getArticle } from "../providers/socialdata.ts";
 import { onlyXArticleLink, xArticleText } from "../sources/x.ts";
 import { sanitizeBody, trimTrailingChrome } from "./sanitize.ts";
 import { contentHash, reviseMaterial } from "./materials.ts";
+import { readOfficialDocument, officialDisclosure, type BodyEvidence } from "./documents.ts";
 import { markdownBody } from "./markdown.ts";
 
 export interface ExtractedBody {
   html: string;
   text: string;
   images: Array<{ kind: "image"; url: string; width: number | null; height: number | null }>;
-  via: "readability" | "jina";
+  via: "readability" | "jina" | "document";
+  evidence?: BodyEvidence;
 }
 
 const MIN_BODY_CHARS = 200;
@@ -46,7 +48,11 @@ export function readable(html: string, url: string): ExtractedBody | null {
   return { html: clean, text, images, via: "readability" };
 }
 
-export async function extractFromUrl(url: string, subject: string, headers?: Record<string, string>): Promise<ExtractedBody | null> {
+export async function extractFromUrl(url: string, subject: string, headers?: Record<string, string>, options: { official?: boolean } = {}): Promise<ExtractedBody | null> {
+  if (options.official) {
+    const { body } = await readOfficialDocument(url, headers);
+    return body ? { ...body, images: [], via: "document" } : null;
+  }
   try {
     const res = await guardedFetch(url, { headers, timeoutMs: 20_000, maxBytes: 6 * 1024 * 1024 });
     const type = res.headers.get("content-type") ?? "";
@@ -88,9 +94,11 @@ export async function extractArticleBody(articleId: string): Promise<"ok" | "unc
   if (a.x_post?.tweetId) return extractXArticle(a.id, a.x_post.tweetId, a.revision);
   const headers = Object.fromEntries(Object.entries(a.config.headers ?? {}).filter(([key]) =>
     ["user-agent", "accept", "accept-language"].includes(key.toLowerCase()))) as Record<string, string>;
-  const got = await extractFromUrl(a.url, `article:${a.id}`, headers);
+  const official = officialDisclosure(a.config);
+  const document = official ? await readOfficialDocument(a.url, headers, { relatedPrefixes: a.config.publisherUrlPrefixes }) : null;
+  const got = document ? (document.body ? { ...document.body, images: [] } : null) : await extractFromUrl(a.url, `article:${a.id}`, headers);
   if (!got) {
-    return markUnconfirmed(articleId, a.revision);
+    return markUnconfirmed(articleId, a.revision, document?.evidence);
   }
   // The body is new content: a new revision, so an analysis of the body-less input counts as stale.
   return sql.begin(async (tx) => {
@@ -98,13 +106,14 @@ export async function extractArticleBody(articleId: string): Promise<"ok" | "unc
       SELECT title, excerpt, content_hash FROM articles
       WHERE id = ${articleId} AND revision = ${a.revision} AND body_status <> 'ok' FOR UPDATE`;
     if (!row) return "skipped";
-    const hash = contentHash({ title: row.title, bodyText: got.text, excerpt: row.excerpt });
+    const hash = contentHash({ title: row.title, bodyText: got.text, excerpt: row.excerpt, bodyEvidence: document?.evidence });
     if (hash === row.content_hash) {
-      await tx`UPDATE articles SET body_status = 'ok', updated_at = now() WHERE id = ${articleId}`;
+      await tx`UPDATE articles SET body_status = 'ok', body_evidence = CASE WHEN ${document ? sql.json(document.evidence as never) : null}::jsonb IS NULL THEN body_evidence ELSE ${document ? sql.json(document.evidence as never) : null}::jsonb END, updated_at = now() WHERE id = ${articleId}`;
       return "ok";
     }
     await reviseMaterial(tx, articleId, {
       set: sql`body_html = ${got.html}, body_text = ${got.text}, body_status = 'ok',
+        body_evidence = ${document ? sql.json(document.evidence as never) : null},
         media = CASE WHEN jsonb_array_length(media) = 0 THEN ${sql.json(got.images as never)}::jsonb ELSE media END`,
       hash, title: row.title, bodyText: got.text,
     });
@@ -112,8 +121,8 @@ export async function extractArticleBody(articleId: string): Promise<"ok" | "unc
   });
 }
 
-async function markUnconfirmed(articleId: string, revision: number): Promise<"unconfirmed" | "skipped"> {
-  const rows = await sql`UPDATE articles SET body_status = 'unconfirmed', updated_at = now()
+async function markUnconfirmed(articleId: string, revision: number, evidence?: BodyEvidence): Promise<"unconfirmed" | "skipped"> {
+  const rows = await sql`UPDATE articles SET body_status = 'unconfirmed', body_evidence = ${evidence ? sql.json(evidence as never) : null}, updated_at = now()
     WHERE id = ${articleId} AND revision = ${revision} AND body_status <> 'ok' RETURNING id`;
   return rows.length ? "unconfirmed" : "skipped";
 }

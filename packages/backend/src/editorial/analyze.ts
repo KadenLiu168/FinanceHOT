@@ -7,6 +7,7 @@
 //   4. writing, once the structure is in: the Chinese title, summary and reason by the content
 //      understanding for selected and near-selected items, by the cheaper title/summary prompts for the rest.
 // Material with only a title or a feed summary has its article page fetched before it is judged.
+import { understandDisclosure, disclosureCopy, metadataCopy, disclosureCompany, type DisclosureFacts } from "./disclosure.ts";
 import { z } from "zod";
 import { CATEGORY_KEYS } from "@aihot/contracts/taxonomy";
 import { CATEGORIES } from "@aihot/industry/taxonomy";
@@ -206,6 +207,7 @@ export interface AnalysisRun {
     receiptIds: number[];
     reused: boolean;
   } | null;
+  disclosure?: DisclosureFacts;
   structure: (ReturnType<typeof normalizeStructure> & { model: string; receiptId: number; reused: boolean }) | null;
 }
 
@@ -407,19 +409,45 @@ async function runSummarize(a: AnalyzeInputArticle, opts: StepOpts): Promise<Non
 /** Runs the steps on the material as it is (or reuses their receipts) without writing business results. */
 export async function runAnalysis(a: AnalyzeInputArticle, opts: StepOpts = {}): Promise<AnalysisRun> {
   checkAnalysisRunning();
-  const prefilter = await runSelectionPrefilter(a, opts);
+  const isDisclosure = a.source.disclosureRole === "statutory" || a.source.disclosureRole === "issuer_ir";
+  let disclosure: DisclosureFacts | undefined;
+  if (isDisclosure) {
+    if (a.bodyText && a.bodyStatus === "ok") disclosure = await understandDisclosure(a, opts.attemptTag);
+    else {
+      // Missing bodies never invite a writing model to infer hidden financial results.
+      const prefilter = await runSelectionPrefilter(a, opts);
+      const structure = await runStructure(a, opts);
+      const company = disclosureCompany(a);
+      structure.subjects = company.entityId ? [company.entityId] : [];
+      const metadataFacts = await understandDisclosure(a, opts.attemptTag);
+      return { disclosure: metadataFacts, prefilter, scores: prefilter.label === "BLOCK" ? null : await runSelectionScores(a, opts), structure: { ...structure, fact: null }, writing: metadataCopy(a) };
+    }
+  }
+  const scoringInput = disclosure ? { ...a, bodyText: disclosure.claims.map(c => c.quote).join("\n\n") || a.bodyText } : a;
+  const prefilter = await runSelectionPrefilter(scoringInput, opts);
   // UNKNOWN is let through (its material is as complete as it will get); BLOCK stops here.
-  if (prefilter.label === "BLOCK") return { prefilter, scores: null, writing: null, structure: null };
+  if (prefilter.label === "BLOCK") return { prefilter, scores: null, writing: null, structure: null, ...(disclosure ? { disclosure } : {}) };
   // The structure step needs nothing from the scores: it runs beside them.
-  const structure = runStructure(a, opts).then((value) => ({ value }), (error: unknown) => ({ error }));
+  const structure = runStructure(scoringInput, opts).then((value) => ({ value }), (error: unknown) => ({ error }));
   try {
-    const scores = await runSelectionScores(a, opts);
+    const scores = await runSelectionScores(scoringInput, opts);
     const sum = scores && !scores.refused && scores.values.length === SCORE_CALLS ? scores.values.reduce((total, v) => total + v, 0) : null;
     const near = sum !== null && (sum >= scores!.threshold * SCORE_CALLS || sum > UNDERSTAND_FLOOR * SCORE_CALLS);
     const s = await structure;
     if ("error" in s) throw s.error;
-    const writing = (near ? await runUnderstand(a, opts) : null) ?? (await runSummarize(a, opts));
-    return { prefilter, scores, writing, structure: s.value };
+    const writing = disclosure ? disclosureCopy(a, disclosure) : (near ? await runUnderstand(a, opts) : null) ?? (await runSummarize(a, opts));
+    if (disclosure) {
+      s.value.subjects = disclosure.company.entityId ? [disclosure.company.entityId] : [];
+      const event = disclosure.claims.find(c => c.kind === "event");
+      s.value.fact = event && disclosure.company.entityId ? {
+        title: event.textZh.slice(0,80), subject: disclosure.company.entityId, action: event.label,
+        object: disclosure.claims.find(c => c.kind === "reporting_period")?.value ?? null,
+        occurredAt: null, evidence: event.quote.slice(0,600),
+        conditions: disclosure.claims.filter(c => (c.kind === "stage" && c.label === event.label) || c.kind === "reporting_period").slice(0,4).map(c => ({ text: c.textZh, quote: c.quote.slice(0,400) })),
+      } : null;
+      s.value.scope = event ? "single" : "unknown";
+    }
+    return { prefilter, scores, writing, structure: s.value, ...(disclosure ? { disclosure } : {}) };
   } finally {
     // A score/writing error or deploy must not let the job finish while a paid structure request
     // still owns a response. It settles and stores its receipt before shutdown can close the DB.
@@ -489,6 +517,7 @@ export async function analyzeArticle(articleId: string, opts: StepOpts = {}): Pr
   const run = await runAnalysis(input, opts);
   const out = normalizeAnalysis(run);
   const receiptIds = [
+    ...(run.disclosure?.receiptIds ?? []),
     run.prefilter.receiptId, ...(run.scores?.receiptIds ?? []), ...(run.writing?.receiptIds ?? []), ...(run.structure ? [run.structure.receiptId] : []),
   ];
   const w = run.writing;
@@ -497,7 +526,7 @@ export async function analyzeArticle(articleId: string, opts: StepOpts = {}): Pr
     scores: out.scores, scoreModel: out.scoreModel, threshold: out.threshold, ...(out.scoreRefused ? { scoreRefused: true } : {}),
     ...(w ? { writer: w.kind, writerModel: w.model, itemType: w.itemType ?? null, authorRole: w.authorRole ?? null } : {}),
     ...(w?.identityGuard?.outcome === "fallback" ? { identityGuard: w.identityGuard } : {}),
-    scope: out.scope, fact: out.fact,
+    scope: out.scope, fact: out.fact, ...(run.disclosure ? { disclosure: run.disclosure } : {}),
   };
   const committed = await sql.begin(async (tx) => {
     const [current] = await tx<{ revision: number }[]>`SELECT revision FROM articles WHERE id = ${articleId} FOR UPDATE`;

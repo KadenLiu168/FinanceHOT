@@ -1,0 +1,1104 @@
+[
+  {
+    "id": "A01",
+    "sourceId": "finance-disclosure-szse",
+    "company": "catl",
+    "market": "A",
+    "title": "宁德时代：关于2026年度第八期绿色科技创新债券发行完成的公告",
+    "publishedAt": "2026-09-28T08:44:08.000Z",
+    "url": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-09-28/a305d573-0daf-4bd0-b836-e6cb506e6a28.PDF",
+    "excerpt": "【官方公告列表元数据，未读取公告正文】发行人：宁德时代；证券：SZSE:300750；市场：A股；公告标题：宁德时代：关于2026年度第八期绿色科技创新债券发行完成的公告；发布时间：2026-09-28 16:44:08。",
+    "earnings": false,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "A01.raw.gz",
+    "rawHash": "44f0555c5b94fc611d6a9dc3c72124bba29875ade56293d83572981a896cb373",
+    "textHash": "d76097b2c1839d781cf3a340dad0ec803436aa4c8dc1d185cd09a9130c6e67e3",
+    "chars": 1333,
+    "gold": [
+      {
+        "label": "issue_amount",
+        "value": "50",
+        "units": [
+          "亿元",
+          "億元"
+        ],
+        "currencies": [
+          "人民币",
+          "人民幣",
+          "CNY",
+          "RMB"
+        ],
+        "summaryRequired": true
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "financing"
+      ],
+      "terms": [
+        "成功发行"
+      ],
+      "stage": "completed"
+    }
+  },
+  {
+    "id": "A02",
+    "sourceId": "finance-disclosure-szse",
+    "company": "catl",
+    "market": "A",
+    "title": "宁德时代：关于2026年度第七期绿色科技创新债券发行完成的公告",
+    "publishedAt": "2026-09-22T10:28:10.000Z",
+    "url": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-09-22/384836eb-8f7e-41fe-839f-c015f44838c6.PDF",
+    "excerpt": "【官方公告列表元数据，未读取公告正文】发行人：宁德时代；证券：SZSE:300750；市场：A股；公告标题：宁德时代：关于2026年度第七期绿色科技创新债券发行完成的公告；发布时间：2026-09-22 18:28:10。",
+    "earnings": false,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "A02.raw.gz",
+    "rawHash": "02ad00d5d132898cd7b16f9e705119dec6d3921a70593b8628a32610ece46fff",
+    "textHash": "2224f17a6a5e37d7dce3f7929434edfb2c713e38fc26a43ace294b5a68a3e14b",
+    "chars": 1759,
+    "gold": [
+      {
+        "label": "issue_amount",
+        "value": "45",
+        "units": [
+          "亿元",
+          "億元"
+        ],
+        "currencies": [
+          "人民币",
+          "人民幣",
+          "CNY",
+          "RMB"
+        ],
+        "summaryRequired": true
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "financing"
+      ],
+      "terms": [
+        "成功发行"
+      ],
+      "stage": "completed"
+    }
+  },
+  {
+    "id": "A03",
+    "sourceId": "finance-disclosure-szse",
+    "company": "catl",
+    "market": "A",
+    "title": "宁德时代：关于接受关联方担保的公告",
+    "publishedAt": "2026-09-30T16:00:00.000Z",
+    "url": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-10-01/5f452374-13d9-46c8-a9eb-bbc6b10b8fdd.PDF",
+    "excerpt": "【官方公告列表元数据，未读取公告正文】发行人：宁德时代；证券：SZSE:300750；市场：A股；公告标题：宁德时代：关于接受关联方担保的公告；发布时间：2026-10-01 00:00:00。",
+    "earnings": false,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "A03.raw.gz",
+    "rawHash": "f78a1bc68440f594918e05e5d4d20ffddddb6702521d7d9dab22e9368fbff108",
+    "textHash": "a6ea1101b3b2ca3f6c698e253ba6cf0cbed79642233f201c575ee4fbc4a65918",
+    "chars": 5190,
+    "gold": [],
+    "coreGold": {
+      "eventLabels": [
+        "financing",
+        "major_business"
+      ],
+      "terms": [
+        "审议通过"
+      ],
+      "stage": "approved"
+    }
+  },
+  {
+    "id": "A04",
+    "sourceId": "finance-disclosure-szse",
+    "company": "catl",
+    "market": "A",
+    "title": "宁德时代：关于向控股子公司提供财务资助的公告",
+    "publishedAt": "2026-09-30T16:00:00.000Z",
+    "url": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-10-01/fee68cf5-84a8-4b73-b06e-64fefdf97466.PDF",
+    "excerpt": "【官方公告列表元数据，未读取公告正文】发行人：宁德时代；证券：SZSE:300750；市场：A股；公告标题：宁德时代：关于向控股子公司提供财务资助的公告；发布时间：2026-10-01 00:00:00。",
+    "earnings": false,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "A04.raw.gz",
+    "rawHash": "ec0782ff2f9329a839bde11106e361ff512e262bc3a04fc5ba4758537cea21ca",
+    "textHash": "a81d3f97f2a75222b50741a6ff68299a8bc42ad2fe8e725a07f2d0e9bffe699d",
+    "chars": 5620,
+    "gold": [],
+    "coreGold": {
+      "eventLabels": [
+        "financing",
+        "major_business"
+      ],
+      "terms": [
+        "审议通过"
+      ],
+      "stage": "approved"
+    }
+  },
+  {
+    "id": "A05",
+    "sourceId": "finance-ir-cmb",
+    "company": "cmb",
+    "market": "A",
+    "title": "2026年半年度报告摘要",
+    "publishedAt": "2026-08-29T00:00:00.000Z",
+    "url": "https://s3gw.cmbimg.com/lb5001-cmbweb-prd-1255000097/cmbir/20260828/e19d1e7e-6ad8-4bef-a5fa-99ee29a042a8.pdf",
+    "excerpt": "招商银行（SSE:600036）官方IR：2026年半年度报告摘要",
+    "earnings": true,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "A05.raw.gz",
+    "rawHash": "0339f62581a365113acf470ef68e1615c85c59d253cb8924cadb8df79c50f7fc",
+    "textHash": "be53ae0d4f7d40f636846f4d6c6a63c4b32d849f7a7038f5c2c4f7a7c7ce9110",
+    "chars": 28904,
+    "gold": [
+      {
+        "label": "revenue",
+        "value": "178,181",
+        "unit": "人民币百万元",
+        "period": "2026年1-6月",
+        "periods": [
+          "2026年1-6月",
+          "2026年上半年",
+          "2026年半年度",
+          "2026年1至6月",
+          "2026年1月至6月"
+        ],
+        "currencies": [
+          "CNY",
+          "RMB",
+          "人民币",
+          "人民幣"
+        ],
+        "units": [
+          "百万元",
+          "百萬元",
+          "人民币百万元",
+          "人民幣百萬元",
+          "million",
+          "millions"
+        ],
+        "comparison": [
+          "同比增长4.83%",
+          "同比增長4.83%",
+          "year-over-year increase 4.83%",
+          "4.83%同比增长",
+          "同比4.83%"
+        ]
+      },
+      {
+        "label": "net_income",
+        "value": "76,445",
+        "unit": "人民币百万元",
+        "period": "2026年1-6月",
+        "periods": [
+          "2026年1-6月",
+          "2026年上半年",
+          "2026年半年度",
+          "2026年1至6月",
+          "2026年1月至6月"
+        ],
+        "currencies": [
+          "CNY",
+          "RMB",
+          "人民币",
+          "人民幣"
+        ],
+        "units": [
+          "百万元",
+          "百萬元",
+          "人民币百万元",
+          "人民幣百萬元",
+          "million",
+          "millions"
+        ]
+      },
+      {
+        "label": "eps",
+        "value": "2.98",
+        "unit": "人民币元",
+        "period": "2026年1-6月",
+        "periods": [
+          "2026年1-6月",
+          "2026年上半年",
+          "2026年半年度",
+          "2026年1至6月",
+          "2026年1月至6月"
+        ],
+        "currencies": [
+          "CNY",
+          "RMB",
+          "人民币",
+          "人民幣"
+        ],
+        "units": [
+          "元/股",
+          "每股人民币元",
+          "每股人民幣元",
+          "人民币元",
+          "人民幣元",
+          "元",
+          "每股"
+        ]
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "A06",
+    "sourceId": "finance-disclosure-szse",
+    "company": "midea",
+    "market": "A",
+    "title": "美的集团：2026年半年度报告摘要",
+    "publishedAt": "2026-08-28T16:00:00.000Z",
+    "url": "https://disc.static.szse.cn/download/disc/disk03/finalpage/2026-08-29/62ab6d1f-df6d-4e9b-99f2-438c13382b90.PDF",
+    "excerpt": "【官方公告列表元数据，未读取公告正文】发行人：美的集团；证券：SZSE:000333；市场：A股；公告标题：美的集团：2026年半年度报告摘要；发布时间：2026-08-29 00:00:00。",
+    "earnings": true,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "A06.raw.gz",
+    "rawHash": "9c4f21cebe9b35824276c41b90647bead0fd7948abc300ec1a2db0a7dfcac6f1",
+    "textHash": "e216d0daa7f4f608f611eec868cb2a7fe5fe3739e82245f0a49126f48a2f17fe",
+    "chars": 7218,
+    "gold": [
+      {
+        "label": "revenue",
+        "value": "260,042,490",
+        "unit": "千元",
+        "period": "2026年上半年",
+        "periods": [
+          "2026年上半年",
+          "2026年半年度",
+          "2026年1-6月",
+          "2026年1至6月",
+          "2026年1月至6月"
+        ],
+        "currencies": [
+          ""
+        ],
+        "units": [
+          "千元"
+        ],
+        "comparison": [
+          "同比增长3.55%",
+          "同比增長3.55%",
+          "year-over-year increase 3.55%",
+          "3.55%同比增长",
+          "同比3.55%",
+          "比上年同期增减3.55%",
+          "本报告期比上年同期增减3.55%"
+        ]
+      },
+      {
+        "label": "net_income",
+        "value": "26,446,037",
+        "unit": "千元",
+        "period": "2026年上半年",
+        "periods": [
+          "2026年上半年",
+          "2026年半年度",
+          "2026年1-6月",
+          "2026年1至6月",
+          "2026年1月至6月"
+        ],
+        "currencies": [
+          ""
+        ],
+        "units": [
+          "千元"
+        ]
+      },
+      {
+        "label": "eps",
+        "value": "3.50",
+        "unit": "元/股",
+        "period": "2026年上半年",
+        "periods": [
+          "2026年上半年",
+          "2026年半年度",
+          "2026年1-6月",
+          "2026年1至6月",
+          "2026年1月至6月"
+        ],
+        "currencies": [
+          ""
+        ],
+        "units": [
+          "元/股"
+        ]
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    },
+    "goldEvidenceNote": "原始摘要主要指标表仅明示千元/元每股，未明示币种，因此currency须未知；摊薄EPS行是3.50，3.52是基本EPS。"
+  },
+  {
+    "id": "H01",
+    "sourceId": "finance-disclosure-tencent",
+    "company": "tencent",
+    "market": "H",
+    "title": "中期報告 2026",
+    "publishedAt": "2026-08-25T08:53:00.000Z",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0825/2026082500557_c.pdf",
+    "excerpt": "發放時間: 25/08/2026 16:53 股份代號: 0070080700 股份簡稱: 騰訊控股騰訊控股－Ｒ 文件: 財務報表/環境、社會及管治資料 - [中期/半年度報告] 中期報告 2026 (5MB)",
+    "earnings": true,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "H01.raw.gz",
+    "rawHash": "6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1",
+    "textHash": "f9fb4e4b7fa5faa8e5fcfd48f1ee8016a4d251c781a8590cebfa4a979813caaa",
+    "chars": 169184,
+    "gold": [],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "H02",
+    "sourceId": "finance-disclosure-tencent",
+    "company": "tencent",
+    "market": "H",
+    "title": "截至二零二六年六月三十日止三個月及六個月業績公佈",
+    "publishedAt": "2026-08-12T08:31:00.000Z",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0812/2026081200297_c.pdf",
+    "excerpt": "發放時間: 12/08/2026 16:31 股份代號: 0070080700 股份簡稱: 騰訊控股騰訊控股－Ｒ 文件: 公告及通告 - [中期業績] 截至二零二六年六月三十日止三個月及六個月業績公佈 (941KB)",
+    "earnings": true,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "H02.raw.gz",
+    "rawHash": "892cfe981b31e2c945b7b11d237ec2d98c97f4253867bb4fd11f6587c8896353",
+    "textHash": "6f5d48b42aa012d5de5015649075f5191d5b3522f3702a6a5ff1234f472c8ed8",
+    "chars": 70318,
+    "gold": [
+      {
+        "label": "revenue",
+        "value": "401,243",
+        "unit": "人民币百万元",
+        "period": "2026年上半年",
+        "periods": [
+          "二零二六年六月三十日止六個月",
+          "截至二零二六年六月三十日止六個月",
+          "二零二六年上半年",
+          "2026年上半年",
+          "2026年1-6月"
+        ],
+        "currencies": [
+          "CNY",
+          "RMB",
+          "人民币",
+          "人民幣"
+        ],
+        "units": [
+          "百万元",
+          "百萬元",
+          "人民币百万元",
+          "人民幣百萬元",
+          "million",
+          "millions"
+        ],
+        "accountingBasis": [
+          "IFRS",
+          "国际财务报告准则",
+          "國際財務報告準則"
+        ],
+        "comparison": [
+          "同比增长10%",
+          "同比增長10%",
+          "year-over-year increase 10%",
+          "10%同比增长",
+          "同比10%",
+          "同比變動 10%",
+          "同比变动 10%"
+        ]
+      },
+      {
+        "label": "net_income",
+        "value": "114,115",
+        "unit": "人民币百万元",
+        "period": "2026年上半年",
+        "periods": [
+          "二零二六年六月三十日止六個月",
+          "截至二零二六年六月三十日止六個月",
+          "二零二六年上半年",
+          "2026年上半年",
+          "2026年1-6月"
+        ],
+        "currencies": [
+          "CNY",
+          "RMB",
+          "人民币",
+          "人民幣"
+        ],
+        "units": [
+          "百万元",
+          "百萬元",
+          "人民币百万元",
+          "人民幣百萬元",
+          "million",
+          "millions"
+        ],
+        "accountingBasis": [
+          "IFRS",
+          "国际财务报告准则",
+          "國際財務報告準則"
+        ]
+      },
+      {
+        "label": "eps",
+        "value": "12.417",
+        "unit": "每股人民币元",
+        "period": "2026年上半年",
+        "periods": [
+          "二零二六年六月三十日止六個月",
+          "截至二零二六年六月三十日止六個月",
+          "二零二六年上半年",
+          "2026年上半年",
+          "2026年1-6月"
+        ],
+        "currencies": [
+          "CNY",
+          "RMB",
+          "人民币",
+          "人民幣"
+        ],
+        "units": [
+          "元/股",
+          "每股人民币元",
+          "每股人民幣元",
+          "人民币元",
+          "人民幣元",
+          "元",
+          "每股"
+        ],
+        "accountingBasis": [
+          "IFRS",
+          "国际财务报告准则",
+          "國際財務報告準則"
+        ]
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "H03",
+    "sourceId": "finance-disclosure-tencent",
+    "company": "tencent",
+    "market": "H",
+    "title": "截至二零二六年三月三十一日止三個月業績公佈",
+    "publishedAt": "2026-05-13T08:31:00.000Z",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0513/2026051300335_c.pdf",
+    "excerpt": "發放時間: 13/05/2026 16:31 股份代號: 0070080700 股份簡稱: 騰訊控股騰訊控股－Ｒ 文件: 公告及通告 - [季度業績] 截至二零二六年三月三十一日止三個月業績公佈 (845KB)",
+    "earnings": true,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "H03.raw.gz",
+    "rawHash": "ef3baa5008e15b2c58203bc48ec1f8feda6ff34e29f70d484ffeedefd16dc310",
+    "textHash": "152633c8d11281e8923e2fb8d1b79169814df2592af289a3ec9332b8f71627f4",
+    "chars": 58748,
+    "gold": [
+      {
+        "label": "revenue",
+        "value": "196,458",
+        "unit": "人民币百万元",
+        "period": "2026年第一季度",
+        "periods": [
+          "截至二零二六年三月三十一日止三個月",
+          "二零二六年三月三十一日止三個月",
+          "二零二六年第一季度",
+          "2026年第一季度",
+          "2026年1-3月"
+        ],
+        "currencies": [
+          "CNY",
+          "RMB",
+          "人民币",
+          "人民幣"
+        ],
+        "units": [
+          "百万元",
+          "百萬元",
+          "人民币百万元",
+          "人民幣百萬元",
+          "million",
+          "millions"
+        ],
+        "accountingBasis": [
+          "IFRS",
+          "国际财务报告准则",
+          "國際財務報告準則"
+        ],
+        "comparison": [
+          "同比增长9%",
+          "同比增長9%",
+          "year-over-year increase 9%",
+          "9%同比增长",
+          "同比9%",
+          "同比變動 9%",
+          "同比变动 9%"
+        ]
+      },
+      {
+        "label": "net_income",
+        "value": "58,093",
+        "unit": "人民币百万元",
+        "period": "2026年第一季度",
+        "periods": [
+          "截至二零二六年三月三十一日止三個月",
+          "二零二六年三月三十一日止三個月",
+          "二零二六年第一季度",
+          "2026年第一季度",
+          "2026年1-3月"
+        ],
+        "currencies": [
+          "CNY",
+          "RMB",
+          "人民币",
+          "人民幣"
+        ],
+        "units": [
+          "百万元",
+          "百萬元",
+          "人民币百万元",
+          "人民幣百萬元",
+          "million",
+          "millions"
+        ],
+        "accountingBasis": [
+          "IFRS",
+          "国际财务报告准则",
+          "國際財務報告準則"
+        ]
+      },
+      {
+        "label": "eps",
+        "value": "6.302",
+        "unit": "每股人民币元",
+        "period": "2026年第一季度",
+        "periods": [
+          "截至二零二六年三月三十一日止三個月",
+          "二零二六年三月三十一日止三個月",
+          "二零二六年第一季度",
+          "2026年第一季度",
+          "2026年1-3月"
+        ],
+        "currencies": [
+          "CNY",
+          "RMB",
+          "人民币",
+          "人民幣"
+        ],
+        "units": [
+          "元/股",
+          "每股人民币元",
+          "每股人民幣元",
+          "人民币元",
+          "人民幣元",
+          "元",
+          "每股"
+        ],
+        "accountingBasis": [
+          "IFRS",
+          "国际财务报告准则",
+          "國際財務報告準則"
+        ]
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "H04",
+    "sourceId": "finance-disclosure-hkex",
+    "company": "hkex",
+    "market": "H",
+    "title": "截至2026年12月31日止年度的中期股息及暫停辦理股份過戶登記手續",
+    "publishedAt": "2026-08-19T04:01:00.000Z",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0819/2026081900216_c.pdf",
+    "excerpt": "發放時間: 19/08/2026 12:01 股份代號: 0038880388 股份簡稱: 香港交易所香港交易所－Ｒ 文件: 公告及通告 - [股息或分派（公告表格）] 截至2026年12月31日止年度的中期股息及暫停辦理股份過戶登記手續 (96KB)",
+    "earnings": false,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "H04.raw.gz",
+    "rawHash": "93f820888f9c224886d54a87118bf6d49ca39590c9975a0c360edd7f0ac80c5a",
+    "textHash": "1744ba0ce6063253e0bea2c557fd61502bd72fd4e2b0d697011aa55b31b9173b",
+    "chars": 1480,
+    "gold": [],
+    "coreGold": {
+      "eventLabels": [
+        "dividend"
+      ],
+      "terms": [
+        "股息"
+      ]
+    }
+  },
+  {
+    "id": "H05",
+    "sourceId": "finance-disclosure-hkex",
+    "company": "hkex",
+    "market": "H",
+    "title": "2026年中期業績、中期股息及暫停辦理股份過戶登記手續",
+    "publishedAt": "2026-08-19T04:00:00.000Z",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0819/2026081900214_c.pdf",
+    "excerpt": "發放時間: 19/08/2026 12:00 股份代號: 0038880388 股份簡稱: 香港交易所香港交易所－Ｒ 文件: 公告及通告 - [中期業績 / 股息或分派 / 暫停辦理過戶登記手續或更改暫停辦理過戶日期] 2026年中期業績、中期股息及暫停辦理股份過戶登記手續 (2MB)",
+    "earnings": true,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "H05.raw.gz",
+    "rawHash": "056208ae213d6d9cf233d4d6f496e518f2ce8bd23abfd87c57531fcc1395ee72",
+    "textHash": "7f1e759506fdea35512dc712a00120b7573998f2099d04d7aab1cdff561d109c",
+    "chars": 91333,
+    "gold": [],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "H06",
+    "sourceId": "finance-disclosure-hkex",
+    "company": "hkex",
+    "market": "H",
+    "title": "截至2026年3月31日止三個月的季度業績",
+    "publishedAt": "2026-04-29T04:04:00.000Z",
+    "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0429/2026042900420_c.pdf",
+    "excerpt": "發放時間: 29/04/2026 12:04 股份代號: 0038880388 股份簡稱: 香港交易所香港交易所－Ｒ 文件: 公告及通告 - [季度業績] 截至2026年3月31日止三個月的季度業績 (1MB)",
+    "earnings": true,
+    "format": "pdf",
+    "mime": "application/pdf",
+    "rawFile": "H06.raw.gz",
+    "rawHash": "0bd0d0d506a62e5c0bf453c34fc9b7164742e4b96b081232bf0cd71182711621",
+    "textHash": "6e9c81220a31529daf36f08817fc2a8b69095a58e5de1b05ddee0f1f914a4a23",
+    "chars": 42654,
+    "gold": [],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "US01",
+    "sourceId": "finance-disclosure-apple",
+    "company": "apple",
+    "market": "US",
+    "title": "苹果（NASDAQ:AAPL）：SEC 8-K/A filing",
+    "publishedAt": "2026-09-02T00:30:35.000Z",
+    "url": "https://www.sec.gov/Archives/edgar/data/320193/0001140361-26-035325.txt",
+    "excerpt": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：苹果；观察公司证券标识：NASDAQ:AAPL；市场：美股；CIK：0000320193；提交表格：8-K/A；提交时间：2026-09-02T00:30:35.000Z；文件：ef20081427_8ka.htm；accession：0001140361-26-035325。",
+    "earnings": false,
+    "format": "sec",
+    "mime": "text/plain",
+    "rawFile": "US01.raw.gz",
+    "rawHash": "f5660c1dc72cb72de6c258f7db4df6c271367aecd4c482acaebadf38f907add3",
+    "textHash": "d980ee36b098d2c1ee56a1ec913fcd553fd66600a588edc0458f60f70d1aafa1",
+    "chars": 5476,
+    "gold": [],
+    "coreGold": {
+      "eventLabels": [
+        "management",
+        "major_business",
+        "financing",
+        "dividend",
+        "regulatory",
+        "merger",
+        "buyback"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "US02",
+    "sourceId": "finance-disclosure-apple",
+    "company": "apple",
+    "market": "US",
+    "title": "苹果（NASDAQ:AAPL）：SEC 10-Q filing",
+    "publishedAt": "2026-07-31T14:01:02.000Z",
+    "url": "https://www.sec.gov/Archives/edgar/data/320193/0000320193-26-000020.txt",
+    "excerpt": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：苹果；观察公司证券标识：NASDAQ:AAPL；市场：美股；CIK：0000320193；提交表格：10-Q；提交时间：2026-07-31T14:01:02.000Z；文件：aapl-20260627.htm；accession：0000320193-26-000020。",
+    "earnings": true,
+    "format": "sec",
+    "mime": "text/plain",
+    "rawFile": "US02.raw.gz",
+    "rawHash": "c7d570d86d5de92899b314776ba1437da6a706d24d0efc2ca014657d2efbaaa7",
+    "textHash": "f923e1d1a72773edc63f391c635d90183e76f5bbc6f924098ae785baf581e4dd",
+    "chars": 92845,
+    "gold": [
+      {
+        "label": "revenue",
+        "value": "109,417",
+        "unit": "USD millions",
+        "period": "three months ended June 27, 2026",
+        "periods": [
+          "three months ended June 27, 2026",
+          "Three months ended June 27, 2026",
+          "截至2026年6月27日止三个月",
+          "2026年第三财季",
+          "June 27, 2026 (three months)",
+          "截至2026年6月27日的三个月"
+        ],
+        "currencies": [
+          "USD",
+          "US$",
+          "$",
+          "美元"
+        ],
+        "units": [
+          "million",
+          "millions",
+          "百万",
+          "百萬",
+          "USD millions",
+          "百万美元"
+        ]
+      },
+      {
+        "label": "net_income",
+        "value": "29,789",
+        "unit": "USD millions",
+        "period": "three months ended June 27, 2026",
+        "periods": [
+          "three months ended June 27, 2026",
+          "Three months ended June 27, 2026",
+          "截至2026年6月27日止三个月",
+          "2026年第三财季",
+          "June 27, 2026 (three months)",
+          "截至2026年6月27日的三个月"
+        ],
+        "currencies": [
+          "USD",
+          "US$",
+          "$",
+          "美元"
+        ],
+        "units": [
+          "million",
+          "millions",
+          "百万",
+          "百萬",
+          "USD millions",
+          "百万美元"
+        ]
+      },
+      {
+        "label": "eps",
+        "value": "2.02",
+        "unit": "USD per share",
+        "period": "three months ended June 27, 2026",
+        "periods": [
+          "three months ended June 27, 2026",
+          "Three months ended June 27, 2026",
+          "截至2026年6月27日止三个月",
+          "2026年第三财季",
+          "June 27, 2026 (three months)",
+          "截至2026年6月27日的三个月"
+        ],
+        "currencies": [
+          "USD",
+          "US$",
+          "$",
+          "美元"
+        ],
+        "units": [
+          "per share",
+          "USD per share",
+          "每股美元",
+          "每股",
+          "dollars per share"
+        ]
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "US03",
+    "sourceId": "finance-disclosure-apple",
+    "company": "apple",
+    "market": "US",
+    "title": "苹果（NASDAQ:AAPL）：SEC 8-K filing",
+    "publishedAt": "2026-07-31T00:30:28.000Z",
+    "url": "https://www.sec.gov/Archives/edgar/data/320193/0000320193-26-000018.txt",
+    "excerpt": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：苹果；观察公司证券标识：NASDAQ:AAPL；市场：美股；CIK：0000320193；提交表格：8-K；提交时间：2026-07-31T00:30:28.000Z；文件：aapl-20260730.htm；accession：0000320193-26-000018。",
+    "earnings": true,
+    "format": "sec",
+    "mime": "text/plain",
+    "rawFile": "US03.raw.gz",
+    "rawHash": "f58ce9b0c5138f6212bbff7b08520279d3c987f9ead0c119670e4bb85741dd7e",
+    "textHash": "b89571f47e6518aed8a2e6ed8257bda08f73cfb271d48c9cd8842a738b69bcca",
+    "chars": 16647,
+    "gold": [
+      {
+        "label": "dividend",
+        "value": "0.27",
+        "periods": [
+          "August 13, 2026",
+          "2026年8月13日",
+          "third quarter of fiscal 2026",
+          "fiscal 2026 third quarter",
+          "2026年第三财季"
+        ],
+        "units": [
+          "per share",
+          "每股",
+          "USD per share"
+        ],
+        "currencies": [
+          "USD",
+          "US$",
+          "$",
+          "美元"
+        ],
+        "summaryRequired": true
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "US04",
+    "sourceId": "finance-disclosure-apple",
+    "company": "apple",
+    "market": "US",
+    "title": "苹果（NASDAQ:AAPL）：SEC 10-Q filing",
+    "publishedAt": "2026-05-01T14:01:00.000Z",
+    "url": "https://www.sec.gov/Archives/edgar/data/320193/0000320193-26-000013.txt",
+    "excerpt": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：苹果；观察公司证券标识：NASDAQ:AAPL；市场：美股；CIK：0000320193；提交表格：10-Q；提交时间：2026-05-01T14:01:00.000Z；文件：aapl-20260328.htm；accession：0000320193-26-000013。",
+    "earnings": true,
+    "format": "sec",
+    "mime": "text/plain",
+    "rawFile": "US04.raw.gz",
+    "rawHash": "0b3e4c4d187cd10598e99da2eec9ede54bbbe75dfc8a59a2c9dd4f46455a9912",
+    "textHash": "df30571d4bdcb086e5d8438f1ceaa9869cd66f5ad4ce975ab3f932ad7f1ca0e5",
+    "chars": 94665,
+    "gold": [
+      {
+        "label": "revenue",
+        "value": "111,184",
+        "unit": "USD millions",
+        "period": "three months ended March 28, 2026",
+        "periods": [
+          "three months ended March 28, 2026",
+          "Three months ended March 28, 2026",
+          "截至2026年3月28日止三个月",
+          "2026年第二财季",
+          "March 28, 2026 (three months)",
+          "截至2026年3月28日的三个月"
+        ],
+        "currencies": [
+          "USD",
+          "US$",
+          "$",
+          "美元"
+        ],
+        "units": [
+          "million",
+          "millions",
+          "百万",
+          "百萬",
+          "USD millions",
+          "百万美元"
+        ]
+      },
+      {
+        "label": "net_income",
+        "value": "29,578",
+        "unit": "USD millions",
+        "period": "three months ended March 28, 2026",
+        "periods": [
+          "three months ended March 28, 2026",
+          "Three months ended March 28, 2026",
+          "截至2026年3月28日止三个月",
+          "2026年第二财季",
+          "March 28, 2026 (three months)",
+          "截至2026年3月28日的三个月"
+        ],
+        "currencies": [
+          "USD",
+          "US$",
+          "$",
+          "美元"
+        ],
+        "units": [
+          "million",
+          "millions",
+          "百万",
+          "百萬",
+          "USD millions",
+          "百万美元"
+        ]
+      },
+      {
+        "label": "eps",
+        "value": "2.01",
+        "unit": "USD per share",
+        "period": "three months ended March 28, 2026",
+        "periods": [
+          "three months ended March 28, 2026",
+          "Three months ended March 28, 2026",
+          "截至2026年3月28日止三个月",
+          "2026年第二财季",
+          "March 28, 2026 (three months)",
+          "截至2026年3月28日的三个月"
+        ],
+        "currencies": [
+          "USD",
+          "US$",
+          "$",
+          "美元"
+        ],
+        "units": [
+          "per share",
+          "USD per share",
+          "每股美元",
+          "每股",
+          "dollars per share"
+        ]
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "US05",
+    "sourceId": "finance-disclosure-apple",
+    "company": "apple",
+    "market": "US",
+    "title": "苹果（NASDAQ:AAPL）：SEC 8-K filing",
+    "publishedAt": "2026-05-01T00:30:41.000Z",
+    "url": "https://www.sec.gov/Archives/edgar/data/320193/0000320193-26-000011.txt",
+    "excerpt": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：苹果；观察公司证券标识：NASDAQ:AAPL；市场：美股；CIK：0000320193；提交表格：8-K；提交时间：2026-05-01T00:30:41.000Z；文件：aapl-20260430.htm；accession：0000320193-26-000011。",
+    "earnings": true,
+    "format": "sec",
+    "mime": "text/plain",
+    "rawFile": "US05.raw.gz",
+    "rawHash": "c6a8b78864b57200dc6a6e013e03bde36be90461f781bf95f99dd4aa3031f945",
+    "textHash": "29775c8fb69acf15ed8fffc5ac236d8b7887a0572841d1449bd36e51a8fc4d36",
+    "chars": 16969,
+    "gold": [
+      {
+        "label": "dividend",
+        "value": "0.27",
+        "periods": [
+          "May 14, 2026",
+          "2026年5月14日",
+          "second quarter of fiscal 2026",
+          "fiscal 2026 second quarter",
+          "2026年第二财季"
+        ],
+        "units": [
+          "per share",
+          "每股",
+          "USD per share"
+        ],
+        "currencies": [
+          "USD",
+          "US$",
+          "$",
+          "美元"
+        ],
+        "comparison": [
+          "increase of 4 percent",
+          "提高4%",
+          "增加4%",
+          "上调4%",
+          "4 percent increase",
+          "增长4%",
+          "增長4%"
+        ],
+        "summaryRequired": true
+      },
+      {
+        "label": "buyback",
+        "value": "100",
+        "units": [
+          "billion",
+          "十亿",
+          "十億",
+          "USD billion"
+        ],
+        "currencies": [
+          "USD",
+          "US$",
+          "$",
+          "美元"
+        ],
+        "summaryRequired": true,
+        "stage": "approved"
+      }
+    ],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    }
+  },
+  {
+    "id": "US06",
+    "sourceId": "finance-disclosure-apple",
+    "company": "apple",
+    "market": "US",
+    "title": "Apple 2025 SEC 10-K",
+    "publishedAt": "2025-10-31T14:01:26.000Z",
+    "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+    "excerpt": "SEC Apple issuer CIK 0000320193; 10-K filing, 2025-10-31",
+    "earnings": true,
+    "format": "html",
+    "mime": "text/html",
+    "rawFile": "US06.raw.gz",
+    "rawHash": "33c76a0a0a6db3daccf146bab267eaa54c2095b5d6600cdd30c30e0e576382ba",
+    "textHash": "14a29561c208b0e067c936b207ff23826089f4a50eb020341a65023233b7ad52",
+    "chars": 219880,
+    "gold": [],
+    "coreGold": {
+      "eventLabels": [
+        "earnings"
+      ],
+      "terms": []
+    },
+    "rawRefreshNote": "2026-10-07官方HTML字节刷新，textHash保持不变；旧rawHash=ab5efa246eb89e5c7604415c95cba73d6b6e4a838323e07f7facb7fbe1745b03"
+  }
+]

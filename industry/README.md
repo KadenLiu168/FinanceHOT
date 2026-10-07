@@ -119,3 +119,5 @@ FinanceHOT threshold 尚未经过金融 gold dataset 校准。`selection.ts` 保
 首次启动运行已有 migrate/seed；seed 只新增源，不覆盖或删除既存记录。已有默认行业部署必须先盘点其后台信源与历史内容；本行业包转换不会自动清除用户已有数据。安全阀开发时保持关闭。运行环境与验证方式见 [部署](../docs/deploy.md)、[信源](../docs/sources.md)、[精选校准](../docs/selection.md)。
 
 `brand/` 使用 FinanceHOT 独立图标与金融日报报头。`pages/terms.md`、`pages/privacy.md` 仍是模板，上线前需使用者确认运营主体、生效日、用途、联系方式与隐私处理。
+
+v0.2 官方列表 metadata 保留为摘要，由既有队列直接读取正文；通用PDF/SEC解析和证据理解的配置及验收边界见 [docs/disclosure-understanding.md](../docs/disclosure-understanding.md)。来源仍为65个、watchlist仍为24家，公开全文许可未扩大。真实模型端到端验收必须另外通过，不能由下载或离线假模型结果推出。

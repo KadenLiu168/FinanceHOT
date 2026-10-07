@@ -1,7 +1,8 @@
 // The single entrance for new material from every channel (collectors, external reports, imports).
 // It owns identity, revisions and the timeline rule, so no entrance can bypass them.
+import type { BodyEvidence } from "./documents.ts";
 import { sql, type Db, type Tx } from "../db.ts";
-import { newArticleId, sha256 } from "../lib/ids.ts";
+import { newArticleId, sha256, stableJson } from "../lib/ids.ts";
 import { identityKeyForUrl } from "../lib/url.ts";
 import { collapseWhitespace } from "../lib/text.ts";
 import { publishArticleTx } from "../publication/publish.ts";
@@ -97,8 +98,13 @@ export function isHistorical(a: { backfill: boolean; published_at: Date | null; 
 }
 
 /** Identity of stored content: the revision changes exactly when this does. */
-export function contentHash(c: { title: string; bodyText?: string | null; excerpt?: string | null }): string {
-  return sha256([collapseWhitespace(c.title), collapseWhitespace(c.bodyText ?? ""), collapseWhitespace(c.excerpt ?? "")].join("\u0001"));
+export function contentHash(c: { title: string; bodyText?: string | null; excerpt?: string | null; bodyEvidence?: BodyEvidence | null }): string {
+  const fields = [collapseWhitespace(c.title), collapseWhitespace(c.bodyText ?? ""), collapseWhitespace(c.excerpt ?? "")];
+  if (c.bodyEvidence) {
+    const { fetchedAt, relatedFailures, ...identity } = c.bodyEvidence;
+    fields.push(stableJson(identity));
+  }
+  return sha256(fields.join("\u0001"));
 }
 
 const LOST = "\uFFFD";
@@ -164,8 +170,8 @@ async function upsertIn(db: Db, m: MaterialInput): Promise<MaterialResult> {
     return { articleId: newId, created: true, revised: false, backfill: t.backfill };
   }
 
-  const [existing] = await db<{ id: string; source_id: string; revision: number; content_hash: string | null; backfill: boolean; title: string; body_text: string | null; excerpt: string | null; participation_mode: string }[]>`
-    SELECT a.id, a.source_id, a.revision, a.content_hash, a.backfill, a.title, a.body_text, a.excerpt, s.participation_mode
+  const [existing] = await db<{ id: string; source_id: string; revision: number; content_hash: string | null; backfill: boolean; title: string; body_text: string | null; body_evidence: BodyEvidence | null; excerpt: string | null; participation_mode: string }[]>`
+    SELECT a.id, a.source_id, a.revision, a.content_hash, a.backfill, a.title, a.body_text, a.body_evidence, a.excerpt, s.participation_mode
     FROM articles a JOIN sources s ON s.id = a.source_id WHERE a.identity_key = ${identityKey} FOR UPDATE OF a`;
   await db`INSERT INTO article_discoveries (article_id, source_id, via, discovered_at)
            VALUES (${existing!.id}, ${m.sourceId}, ${m.via}, ${discoveredAt}) ON CONFLICT DO NOTHING`;
@@ -190,7 +196,8 @@ async function upsertIn(db: Db, m: MaterialInput): Promise<MaterialResult> {
   // What the row will hold after this report: a listing without body keeps the stored (extracted) body.
   const bodyText = m.bodyText ?? existing!.body_text;
   const excerpt = m.excerpt ?? existing!.excerpt;
-  const next = contentHash({ title, bodyText, excerpt });
+  const nextEvidence = m.bodyText == null || m.bodyText === existing!.body_text ? existing!.body_evidence : null;
+  const next = contentHash({ title, bodyText, excerpt, bodyEvidence: nextEvidence });
   if (existing!.content_hash === next) return unchanged;
   if (existing!.content_hash === null) {
     // Imported history carries no hash of this form (its collectors normalised differently): the
@@ -215,6 +222,7 @@ async function upsertIn(db: Db, m: MaterialInput): Promise<MaterialResult> {
   await reviseMaterial(db, existing!.id, {
     set: sql`title = ${title}, author = coalesce(${m.author ?? null}, author), language = coalesce(${m.language ?? null}, language),
       source_updated_at = ${m.sourceUpdatedAt ?? null}, excerpt = coalesce(${m.excerpt ?? null}, excerpt),
+      body_evidence = CASE WHEN ${m.bodyText ?? null}::text IS NULL OR ${m.bodyText ?? null}::text = body_text THEN body_evidence ELSE NULL END,
       body_text = coalesce(${m.bodyText ?? null}, body_text), body_html = coalesce(${m.bodyHtml ?? null}, body_html),
       body_status = CASE WHEN ${m.bodyText ?? null}::text IS NULL THEN body_status ELSE ${m.bodyStatus ?? "ok"} END,
       media = CASE WHEN ${media}::jsonb IS NULL THEN media ELSE ${media}::jsonb END,
@@ -232,12 +240,12 @@ async function upsertIn(db: Db, m: MaterialInput): Promise<MaterialResult> {
 export async function reviseMaterial(db: Db, articleId: string, revision: { set: ReturnType<typeof sql>; hash: string; title: string; bodyText: string | null }): Promise<void> {
   const [row] = await db<{ revision: number }[]>`
     UPDATE articles SET ${revision.set}, revision = revision + 1, content_hash = ${revision.hash}, ${groupingReset()},
-      processing_state = 'new', processing_attempts = 0, processing_retry_at = NULL, processing_error = NULL, processing_queued_at = NULL,
+      disclosure_progress = NULL, processing_state = 'new', processing_attempts = 0, processing_retry_at = NULL, processing_error = NULL, processing_queued_at = NULL,
       updated_at = now()
     WHERE id = ${articleId}
     RETURNING revision`;
-  await db`INSERT INTO article_revisions (article_id, revision, content_hash, title, body_text)
-           VALUES (${articleId}, ${row!.revision}, ${revision.hash}, ${revision.title}, ${revision.bodyText})`;
+  await db`INSERT INTO article_revisions (article_id, revision, content_hash, title, body_text, body_evidence)
+           SELECT id, revision, content_hash, title, body_text, body_evidence FROM articles WHERE id = ${articleId}`;
   // Only withdraw an existing projection; the first publication still belongs to completed analysis.
   if ((await db`SELECT 1 FROM publications WHERE article_id = ${articleId}`).length) {
     await publishArticleTx(db as Tx, articleId);

@@ -48,7 +48,7 @@ LLM_VISION=false
 
 只替换默认模型时，已有后台或环境变量的模型选择仍然优先。如需所有步骤使用 Go，清除 `PREFILTER_MODEL`、`SCORE_MODEL`、`UNDERSTAND_MODEL`、`SUMMARIZE_MODEL`、`STRUCTURE_MODEL`、`GROUP_MODEL`、`GROUP_REVIEW_MODEL`、`DIGEST_MODEL`、`REPORT_MODEL`、`TRANSLATE_MODEL`、`MONITOR_MODEL` 的环境变量覆盖；在后台“模型与评测”将对应能力选择为 `default`。保留切换审计和既有内容，不直接删除 settings。
 
-请求发送真实的 `FinanceHOT/1.0` 客户端标识和任务级 `x-opencode-session`。同一文章 revision 的分析与翻译分段共用会话；归组初判和复核也共用任务会话。重启不会随机改变 ID，不同站点与任务隔离。Go 调用继续使用后台的 `llm` 预算熔断；这里的预算是请求次数限制，不代表套餐剩余 token 或余额。模型阀门关闭时不发送请求。
+请求发送真实的 `FinanceHOT/1.0` 客户端标识和任务级 `x-opencode-session`。同一文章 revision 的分析、公告分段与复核、翻译分段共用会话；归组初判和复核也共用任务会话。重启不会随机改变 ID，不同站点与任务隔离。Go 调用继续使用后台的 `llm` 预算熔断；这里的预算是请求次数限制，不代表套餐剩余 token 或余额。模型阀门关闭时不发送请求。
 
 上线前先部署代码并保持 `MODEL_CALLS_ENABLED=false`。真实验证需独立的空白测试库（名字以 `_test` 或 `_ci` 结尾，账号有建库权限），不要使用生产数据库。下面命令使用 `.env` 中的 Go 凭据，环境变量显式覆盖数据库及安全阀；验证会产生两次付费请求并保存测试回执，不启动 worker、采集或内容发布：
 
@@ -199,3 +199,9 @@ cd apps/web && NODE_ENV=production node --env-file=../../.env server.ts   # 网�
 三个进程要一直运行，生产环境用 systemd 或 pm2 守护。停止 worker 时至少给它 210 秒（systemd 的 `TimeoutStopSec`、pm2 的 `kill_timeout`），让进行中的付费调用收尾；被提前杀掉的调用结果不明，要等至少半小时自动放行后才会重试。
 
 开发时用带热更新的方式：`npm run dev:api`、`npm run dev:worker`、`npm run dev:web`。开发时想免登录进后台，在 `.env` 里设 `DEV_AUTH_ROLE=admin`（生产环境会拒绝启动）。
+
+### 更新官方公告正文能力
+
+官方披露PDF解析需要Poppler。Docker镜像已增加 `poppler-utils`，源码更新后按本文既有流程重建；非Docker部署须保证worker PATH中有 `pdftotext`。macOS：`brew install poppler`；Debian：`apt-get install poppler-utils`。
+
+迁移0053仅追加正文/修订证据及理解进度字段，不删除用户数据。seed不会覆盖已经保存的管理员信源配置；官方列表metadata的 `summaryIsBody` / `fetchPublicContent` 需按[正文能力说明](disclosure-understanding.md)逐项更新。历史公告不自动重新处理，未读正文不能标为全文成功。真实验收使用独立测试库，不启用运营worker或推送。

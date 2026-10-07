@@ -4,6 +4,7 @@ import { sql } from "../db.ts";
 import { collapseWhitespace, truncate } from "../lib/text.ts";
 import { produceImage } from "../media/images.ts";
 import type { ContentPart } from "../providers/llm.ts";
+import type { BodyEvidence } from "../content/documents.ts";
 import { MAX_BODY_CHARS } from "./writing.ts";
 
 export interface AnalyzeInputArticle {
@@ -16,6 +17,7 @@ export interface AnalyzeInputArticle {
   /** When the site first saw it (the score input's time when the source gives none). */
   discoveredAt?: Date | null;
   bodyText: string | null;
+  bodyEvidence?: BodyEvidence | null;
   excerpt: string | null;
   /** pending: no body fetched yet; ok; unconfirmed: fetching failed; none. */
   bodyStatus?: string;
@@ -23,6 +25,8 @@ export interface AnalyzeInputArticle {
   media: Array<Record<string, any>>;
   source: {
     name: string;
+    disclosureRole?: string;
+    publicationDatePrecision?: "day" | "datetime" | "unknown";
     kind: string;
     tier: string;
     firstParty: boolean;
@@ -48,22 +52,24 @@ export function withXArticle(xPost: Record<string, any> | null, article: { title
 export async function loadAnalyzeInput(articleId: string): Promise<AnalyzeInputArticle | null> {
   const [row] = await sql<{
     id: string; revision: number; title: string; url: string; author: string | null; published_at: Date | null; discovered_at: Date;
-    body_text: string | null; excerpt: string | null; body_status: string; x_post: Record<string, any> | null; x_article: { title?: string; text?: string } | null;
+    body_text: string | null; body_evidence: BodyEvidence | null; excerpt: string | null; body_status: string; x_post: Record<string, any> | null; x_article: { title?: string; text?: string } | null;
     media: Array<Record<string, any>>; source_name: string; source_kind: string; tier: string; first_party: boolean; source_tags: string[]; owner_entity_id: string | null;
     config: Record<string, any>; translation_zh: string | null;
   }[]>`
-    SELECT a.id, a.revision, a.title, a.url, a.author, a.published_at, a.discovered_at, a.body_text, a.excerpt, a.body_status, a.x_post, a.x_article, a.media,
+    SELECT a.id, a.revision, a.title, a.url, a.author, a.published_at, a.discovered_at, a.body_text, a.body_evidence, a.excerpt, a.body_status, a.x_post, a.x_article, a.media,
            s.name AS source_name, s.kind AS source_kind, s.tier, s.first_party, s.tags AS source_tags, s.owner_entity_id, s.config,
            tr.body_text AS translation_zh
     FROM articles a JOIN sources s ON s.id = a.source_id
     LEFT JOIN translations tr ON tr.article_id = a.id AND tr.lang = 'zh' AND tr.revision >= a.revision
     WHERE a.id = ${articleId}`;
   if (!row) return null;
+  if (row.config?.disclosureRole && !row.body_evidence && row.body_text && (/未读取|未讀取|官方公告列表元数据|SEC 官方提交记录元数据/.test(row.body_text) || (row.source_kind !== "rss" && row.body_text.length <= 2000 && row.body_text.trim() === row.excerpt?.trim()))) { row.body_text = null; row.body_status = "none"; }
   return {
     id: row.id, revision: row.revision, title: row.title, url: row.url, author: row.author, publishedAt: row.published_at, discoveredAt: row.discovered_at,
-    bodyText: row.body_text, excerpt: row.excerpt, bodyStatus: row.body_status, xPost: withXArticle(row.x_post, row.x_article), media: row.media,
+    bodyText: row.body_text, bodyEvidence: row.body_evidence, excerpt: row.excerpt, bodyStatus: row.body_status, xPost: withXArticle(row.x_post, row.x_article), media: row.media,
     source: {
-      name: row.source_name, kind: row.source_kind, tier: row.tier, firstParty: row.tier === "T1", tags: row.source_tags, ownerEntityId: row.owner_entity_id,
+      name: row.source_name, disclosureRole: row.config?.disclosureRole,
+      publicationDatePrecision: ["date_only", "date_only_mdy", "yyyymmdd"].includes(row.config?.publishedAtUnit) || row.config?.publishedAtPath === "0.SSEDATE" ? "day" : ["acceptanceDateTime", "publishTime"].includes(row.config?.publishedAtPath) || row.config?.publishedAtUnit === "epoch_ms" || row.config?.publishedAtFormat === "dmy" ? "datetime" : "unknown", kind: row.source_kind, tier: row.tier, firstParty: row.tier === "T1", tags: row.source_tags, ownerEntityId: row.owner_entity_id,
       fetchesBody: row.config?.fetchPublicContent === true || !!row.config?.detail || row.source_kind === "web_list",
     },
     translationZh: row.translation_zh,

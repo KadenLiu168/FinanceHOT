@@ -1,4 +1,4 @@
-// Official issuer metadata reaches the ordinary queue without body fallback or incidental issuers.
+// Official issuer metadata keeps identity and deduplication, then queues direct document extraction.
 import "./setup.ts";
 import assert from "node:assert/strict";
 import http from "node:http";
@@ -41,15 +41,15 @@ test("watchlist filtering, new notices and duplicate suppression run through col
   assert.equal(second.revised, 0);
   revision = 1;
   assert.equal((await collectSource(id)).created, 1);
-  const rows = await sql`SELECT id,title,body_text,body_status,published_at FROM articles WHERE source_id=${id} ORDER BY title`;
+  const rows = await sql`SELECT id,title,excerpt,body_text,body_status,published_at FROM articles WHERE source_id=${id} ORDER BY title`;
   assert.equal(rows.length, 3);
-  assert.ok(rows.every(r => r.body_status === "ok" && r.body_text.includes("未读取公告正文")));
+  assert.ok(rows.every(r => r.body_status === "pending" && !r.body_text && r.excerpt.includes("未读取公告正文")));
   assert.ok(rows.every(r => r.published_at.toISOString() === "2026-09-30T16:00:00.000Z"));
   const contract = rows.find(r => r.title.startsWith("美的集团"))!;
-  assert.match(contract.body_text, /发行人：美的集团；证券：SZSE:000333/);
+  assert.match(contract.excerpt, /发行人：美的集团；证券：SZSE:000333/);
   const jobs = await sql`SELECT name,data FROM pgboss.job WHERE data->>'articleId' = ANY(${rows.map(r => r.id)}::text[])`;
   assert.equal(jobs.length, 3);
-  assert.ok(jobs.every(j => j.name === "content.analyze"), "metadata does not enqueue a PDF/Jina extraction");
+  assert.ok(jobs.every(j => j.name === "content.extract-body"), "metadata queues the free official document extraction");
 });
 
 test("seed includes all official sources and preserves an existing administrator configuration", async () => {

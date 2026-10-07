@@ -449,7 +449,7 @@
           "0.TITLE"
         ],
         "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:600519；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
         "publishedAtPath": "0.SSEDATE",
         "externalIdPath": "0.ORG_BULLETIN_ID",
@@ -488,7 +488,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://static.sse.com.cn/disclosure/listedinfo/announcement"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "kweichow-moutai",
@@ -522,7 +523,7 @@
           "0.TITLE"
         ],
         "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:600036；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
         "publishedAtPath": "0.SSEDATE",
         "externalIdPath": "0.ORG_BULLETIN_ID",
@@ -561,7 +562,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://static.sse.com.cn/disclosure/listedinfo/announcement"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "cmb",
@@ -595,7 +597,7 @@
           "0.TITLE"
         ],
         "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:601398；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
         "publishedAtPath": "0.SSEDATE",
         "externalIdPath": "0.ORG_BULLETIN_ID",
@@ -634,7 +636,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://static.sse.com.cn/disclosure/listedinfo/announcement"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "icbc",
@@ -668,7 +671,7 @@
           "0.TITLE"
         ],
         "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:601318；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
         "publishedAtPath": "0.SSEDATE",
         "externalIdPath": "0.ORG_BULLETIN_ID",
@@ -707,7 +710,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://static.sse.com.cn/disclosure/listedinfo/announcement"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "ping-an",
@@ -741,7 +745,7 @@
           "0.TITLE"
         ],
         "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:600887；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
         "publishedAtPath": "0.SSEDATE",
         "externalIdPath": "0.ORG_BULLETIN_ID",
@@ -780,7 +784,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://static.sse.com.cn/disclosure/listedinfo/announcement"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "yili",
@@ -814,7 +819,7 @@
           "0.TITLE"
         ],
         "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:0.SECURITY_NAME}；证券：SSE:600900；市场：A股；公告标题：{raw:0.TITLE}；公告类别：{raw:0.BULLETIN_TYPE_DESC}；公告日期：{raw:0.SSEDATE}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://static.sse.com.cn{raw:0.URL}",
         "publishedAtPath": "0.SSEDATE",
         "externalIdPath": "0.ORG_BULLETIN_ID",
@@ -853,7 +858,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://static.sse.com.cn/disclosure/listedinfo/announcement"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "yangtze-power",
@@ -880,7 +886,7 @@
         "publishedAtFormat": "dmy",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": "tr",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews/sehk/"
         ],
@@ -911,7 +917,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "tencent",
@@ -938,7 +945,7 @@
         "publishedAtFormat": "dmy",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": "tr",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews/sehk/"
         ],
@@ -969,7 +976,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "alibaba",
@@ -996,7 +1004,7 @@
         "publishedAtFormat": "dmy",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": "tr",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews/sehk/"
         ],
@@ -1027,7 +1035,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "meituan",
@@ -1054,7 +1063,7 @@
         "publishedAtFormat": "dmy",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": "tr",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews/sehk/"
         ],
@@ -1085,7 +1094,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "xiaomi",
@@ -1112,7 +1122,7 @@
         "publishedAtFormat": "dmy",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": "tr",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews/sehk/"
         ],
@@ -1143,7 +1153,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "hkex",
@@ -1170,7 +1181,7 @@
         "publishedAtFormat": "dmy",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": "tr",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews/sehk/"
         ],
@@ -1201,7 +1212,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "aia",
@@ -1228,7 +1240,7 @@
         "publishedAtFormat": "dmy",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": "tr",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews/sehk/"
         ],
@@ -1259,7 +1271,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "cnooc",
@@ -1286,7 +1299,7 @@
         "publishedAtFormat": "dmy",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": "tr",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews/sehk/"
         ],
@@ -1317,7 +1330,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www1.hkexnews.hk/listedco/listconews"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "smic",
@@ -1355,7 +1369,7 @@
         },
         "titleTemplate": "苹果（NASDAQ:AAPL）：SEC {raw:form} filing",
         "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：苹果；观察公司证券标识：NASDAQ:AAPL；市场：美股；CIK：0000320193；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://www.sec.gov/Archives/edgar/data/320193/{accessionNumber}.txt",
         "publishedAtPath": "acceptanceDateTime",
         "externalIdPath": "accessionNumber",
@@ -1365,7 +1379,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www.sec.gov/Archives/edgar/data/320193"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "apple",
@@ -1403,7 +1418,7 @@
         },
         "titleTemplate": "微软（NASDAQ:MSFT）：SEC {raw:form} filing",
         "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：微软；观察公司证券标识：NASDAQ:MSFT；市场：美股；CIK：0000789019；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://www.sec.gov/Archives/edgar/data/789019/{accessionNumber}.txt",
         "publishedAtPath": "acceptanceDateTime",
         "externalIdPath": "accessionNumber",
@@ -1413,7 +1428,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www.sec.gov/Archives/edgar/data/789019"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "microsoft",
@@ -1451,7 +1467,7 @@
         },
         "titleTemplate": "英伟达（NASDAQ:NVDA）：SEC {raw:form} filing",
         "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：英伟达；观察公司证券标识：NASDAQ:NVDA；市场：美股；CIK：0001045810；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1045810/{accessionNumber}.txt",
         "publishedAtPath": "acceptanceDateTime",
         "externalIdPath": "accessionNumber",
@@ -1461,7 +1477,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www.sec.gov/Archives/edgar/data/1045810"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "nvidia",
@@ -1499,7 +1516,7 @@
         },
         "titleTemplate": "亚马逊（NASDAQ:AMZN）：SEC {raw:form} filing",
         "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：亚马逊；观察公司证券标识：NASDAQ:AMZN；市场：美股；CIK：0001018724；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1018724/{accessionNumber}.txt",
         "publishedAtPath": "acceptanceDateTime",
         "externalIdPath": "accessionNumber",
@@ -1509,7 +1526,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www.sec.gov/Archives/edgar/data/1018724"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "amazon",
@@ -1547,7 +1565,7 @@
         },
         "titleTemplate": "Alphabet（NASDAQ:GOOGL）：SEC {raw:form} filing",
         "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：Alphabet；观察公司证券标识：NASDAQ:GOOGL；市场：美股；CIK：0001652044；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1652044/{accessionNumber}.txt",
         "publishedAtPath": "acceptanceDateTime",
         "externalIdPath": "accessionNumber",
@@ -1557,7 +1575,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www.sec.gov/Archives/edgar/data/1652044"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "alphabet",
@@ -1595,7 +1614,7 @@
         },
         "titleTemplate": "Meta（NASDAQ:META）：SEC {raw:form} filing",
         "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：Meta；观察公司证券标识：NASDAQ:META；市场：美股；CIK：0001326801；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1326801/{accessionNumber}.txt",
         "publishedAtPath": "acceptanceDateTime",
         "externalIdPath": "accessionNumber",
@@ -1605,7 +1624,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www.sec.gov/Archives/edgar/data/1326801"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "meta",
@@ -1643,7 +1663,7 @@
         },
         "titleTemplate": "摩根大通（NYSE:JPM）：SEC {raw:form} filing",
         "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：摩根大通；观察公司证券标识：NYSE:JPM；市场：美股；CIK：0000019617；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://www.sec.gov/Archives/edgar/data/19617/{accessionNumber}.txt",
         "publishedAtPath": "acceptanceDateTime",
         "externalIdPath": "accessionNumber",
@@ -1653,7 +1673,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www.sec.gov/Archives/edgar/data/19617"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "jpmorgan",
@@ -1691,7 +1712,7 @@
         },
         "titleTemplate": "伯克希尔哈撒韦（NYSE:BRK.B）：SEC {raw:form} filing",
         "summaryTemplate": "【SEC 官方提交记录元数据，未读取 filing 正文，Form 4 的发行人／申报持有人角色未核验】官方关联查询公司：伯克希尔哈撒韦；观察公司证券标识：NYSE:BRK.B；市场：美股；CIK：0001067983；提交表格：{raw:form}；提交时间：{raw:acceptanceDateTime}；文件：{raw:primaryDocument}；accession：{raw:accessionNumber}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://www.sec.gov/Archives/edgar/data/1067983/{accessionNumber}.txt",
         "publishedAtPath": "acceptanceDateTime",
         "externalIdPath": "accessionNumber",
@@ -1701,7 +1722,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://www.sec.gov/Archives/edgar/data/1067983"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "berkshire",
@@ -1752,7 +1774,7 @@
           "title"
         ],
         "summaryTemplate": "【官方公告列表元数据，未读取公告正文】发行人：{raw:secName.0}；证券：SZSE:{raw:secCode.0}；市场：A股；公告标题：{raw:title}；发布时间：{raw:publishTime}。",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "urlTemplate": "https://disc.static.szse.cn/download{raw:attachPath}",
         "publishedAtPath": "publishTime",
         "publishedAtUtcOffset": "+08:00",
@@ -1792,7 +1814,8 @@
         "disclosureRole": "statutory",
         "publisherUrlPrefixes": [
           "https://disc.static.szse.cn/download"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": null,
@@ -1819,14 +1842,15 @@
         "allowUrlPrefixes": [
           "https://www.cnoocltd.com/english/investorrelations/"
         ],
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "disclosureRole": "issuer_ir",
         "_aihot": {
           "initialBackfillLimit": 8
         },
         "publisherUrlPrefixes": [
           "https://www.cnoocltd.com/english/investorrelations/"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "cnooc",
@@ -1853,14 +1877,15 @@
         "allowUrlPrefixes": [
           "https://media-meituan.todayir.com/"
         ],
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "disclosureRole": "issuer_ir",
         "_aihot": {
           "initialBackfillLimit": 8
         },
         "publisherUrlPrefixes": [
           "https://media-meituan.todayir.com/"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "meituan",
@@ -1887,14 +1912,15 @@
         "allowUrlPrefixes": [
           "https://group.pingan.com/resource/pingan/IR-Docs/"
         ],
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "disclosureRole": "issuer_ir",
         "_aihot": {
           "initialBackfillLimit": 8
         },
         "publisherUrlPrefixes": [
           "https://group.pingan.com/resource/pingan/IR-Docs/"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "ping-an",
@@ -1947,7 +1973,7 @@
         "titleSelector": "a",
         "publishedAtSelector": "span",
         "summarySelector": "a",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www.moutaichina.com/mtgf/articleFileDir/"
         ],
@@ -1957,7 +1983,8 @@
         },
         "publisherUrlPrefixes": [
           "https://www.moutaichina.com/mtgf/articleFileDir/"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "kweichow-moutai",
@@ -1981,7 +2008,7 @@
         "titleSelector": ".list_title a",
         "publishedAtRegex": "var rq = '([^']+)'",
         "summarySelector": ".list_title",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www.cypc.com.cn/uiFramework/js/pdfjs/web/viewer.html?file=",
           "https://www.cypc.com.cn/cypc/"
@@ -1996,7 +2023,8 @@
         },
         "publisherUrlPrefixes": [
           "https://www.cypc.com.cn/cypc"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "yangtze-power",
@@ -2021,7 +2049,7 @@
         "publishedAtSelector": ".entry-meta",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": ".entry-title",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www.tencent.com/wp-content/uploads/",
           "https://static.www.tencent.com/"
@@ -2039,7 +2067,8 @@
             "poll results",
             "notice of annual general meeting"
           ]
-        }
+        },
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "tencent",
@@ -2076,7 +2105,8 @@
         },
         "publisherUrlPrefixes": [
           "https://www.microsoft.com/en-us/investor/earnings"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "microsoft",
@@ -2101,7 +2131,7 @@
         "publishedAtSelector": ".component-news-info .date-date",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": ".component-news-info .component-title",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www.alibabagroup.com/en-US/document-"
         ],
@@ -2111,7 +2141,8 @@
         },
         "publisherUrlPrefixes": [
           "https://www.alibabagroup.com/en-US"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "alibaba",
@@ -2132,7 +2163,7 @@
         "publishedAtSelector": ".whats_on_tdy_ball",
         "publishedAtUtcOffset": "+08:00",
         "summarySelector": ".whats_on_tdy_text_3",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www.hkexgroup.com/-/media/"
         ],
@@ -2142,7 +2173,8 @@
         },
         "publisherUrlPrefixes": [
           "https://www.hkexgroup.com/-/media/"
-        ]
+        ],
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "hkex",
@@ -2172,13 +2204,14 @@
         "urlTemplate": "{raw:file}",
         "publishedAtPath": "publishDate",
         "summaryTemplate": "宁德时代（SZSE:300750）官方定期报告：{raw:title}",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "disclosureRole": "issuer_ir",
         "publisherRole": "organization",
         "_aihot": {
           "initialBackfillLimit": 8
         },
-        "publishedAtUnit": "date_only"
+        "publishedAtUnit": "date_only",
+        "fetchPublicContent": true
       }
     },
     {
@@ -2210,7 +2243,8 @@
         "publisherRole": "organization",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "fetchPublicContent": true
       }
     },
     {
@@ -2243,7 +2277,8 @@
         "_aihot": {
           "initialBackfillLimit": 8,
           "initialBackfillMonths": 36
-        }
+        },
+        "fetchPublicContent": true
       }
     },
     {
@@ -2288,13 +2323,14 @@
         "urlTemplate": "{raw:fileUrl}",
         "publishedAtPath": "pubdate",
         "summaryTemplate": "招商银行（SSE:600036）官方IR：{raw:title}",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "disclosureRole": "issuer_ir",
         "publisherRole": "organization",
         "_aihot": {
           "initialBackfillLimit": 8
         },
-        "publishedAtUnit": "date_only"
+        "publishedAtUnit": "date_only",
+        "fetchPublicContent": true
       }
     },
     {
@@ -2322,12 +2358,13 @@
         "publishedAtPath": "publishedDate",
         "publishedAtUnit": "epoch_ms",
         "summaryTemplate": "工商银行（SSE:601398）官方IR：{raw:displayName}",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "disclosureRole": "issuer_ir",
         "publisherRole": "organization",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "fetchPublicContent": true
       }
     },
     {
@@ -2358,7 +2395,8 @@
         },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "fetchPublicContent": true
       }
     },
     {
@@ -2392,7 +2430,8 @@
         },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "fetchPublicContent": true
       }
     },
     {
@@ -2424,7 +2463,8 @@
           "initialBackfillLimit": 8
         },
         "summaryTemplate": "小米集团（HKEX:1810）官方业绩公告：{raw:title}",
-        "summaryIsBody": true
+        "summaryIsBody": false,
+        "fetchPublicContent": true
       }
     },
     {
@@ -2452,7 +2492,8 @@
         "_aihot": {
           "initialBackfillLimit": 8
         },
-        "publisherRole": "organization"
+        "publisherRole": "organization",
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "apple",
@@ -2503,7 +2544,7 @@
         "summaryPaths": [
           "Headline"
         ],
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://s2.q4cdn.com/299287126/files/doc_earnings/",
           "https://s2.q4cdn.com/299287126/files/doc_financials/"
@@ -2516,7 +2557,8 @@
         "_aihot": {
           "initialBackfillLimit": 8
         },
-        "publisherRole": "organization"
+        "publisherRole": "organization",
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "amazon",
@@ -2541,7 +2583,7 @@
         "summaryPaths": [
           "Headline"
         ],
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://s21.q4cdn.com/399680738/files/doc_news/Meta-Reports-",
           "https://s21.q4cdn.com/399680738/files/doc_news/Meta-Announces-Quarterly-",
@@ -2558,7 +2600,8 @@
         "_aihot": {
           "initialBackfillLimit": 8
         },
-        "publisherRole": "organization"
+        "publisherRole": "organization",
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "owner_entity_id": "meta",
@@ -2609,7 +2652,7 @@
         "publishedAtSelector": "dt",
         "publishedAtUtcOffset": "+00:00",
         "summarySelector": "dd",
-        "summaryIsBody": true,
+        "summaryIsBody": false,
         "allowUrlPrefixes": [
           "https://www.berkshirehathaway.com/news/"
         ],
@@ -2617,7 +2660,8 @@
         "publisherRole": "organization",
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "fetchPublicContent": true
       },
       "tier": "T1",
       "participation_mode": "editorial",

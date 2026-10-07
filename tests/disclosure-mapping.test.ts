@@ -74,10 +74,12 @@ test("ownership metadata identifies the associated watchlist company without inv
   const pack = JSON.parse(readFileSync(`${REPO_ROOT}/industry/sources.json`, "utf8")).sources;
   const settings = { ...pack.find((s: any) => s.id === "finance-disclosure-berkshire").config, url: base + "/ownership" };
   const [item] = await fetchJsonList(source(settings));
-  assert.match(item!.bodyText!, /官方关联查询公司：伯克希尔哈撒韦/);
-  assert.match(item!.bodyText!, /角色未核验/);
-  assert.ok(!item!.bodyText!.includes("发行人：伯克希尔哈撒韦"));
+  assert.match(item!.excerpt!, /官方关联查询公司：伯克希尔哈撒韦/);
+  assert.match(item!.excerpt!, /角色未核验/);
+  assert.ok(!item!.excerpt!.includes("发行人：伯克希尔哈撒韦"));
   assert.equal(item!.url, "https://www.sec.gov/Archives/edgar/data/1067983/0001193125-26-409451.txt");
+  assert.equal(item!.bodyText, null);
+  assert.equal(item!.bodyStatus, "pending");
 });
 
 test("one source merges complementary lists and keeps one copy of a shared document URL", async () => {

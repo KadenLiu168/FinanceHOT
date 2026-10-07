@@ -247,3 +247,7 @@ Content-Type: application/json
 - `sourceId` 不存在时会自动建一个 `external` 信源，默认不进公开页面：到后台把它的参与方式改成 `editorial` 才会出现在站上。
 - 在后台暂停信源后，推送接口返回 409，不再接收新文章；恢复信源后可以继续推送。
 - 条目的 `raw._aihot.backfill` 为 `true` 时按历史回灌处理（不进入“今天”、不推送）。
+
+## 官方公司披露的正文
+
+配置了 `disclosureRole: "statutory"` 或 `"issuer_ir"` 的来源可免费直接解析 HTML、PDF 与 SEC submission。列表 metadata 不应使用 `summaryIsBody: true`；保留摘要并设 `fetchPublicContent: true`，让原有队列读取详情。提取失败明确降级，不自动付费补齐。状态、证据、范围与验收方法见[官方公告正文与事实理解](disclosure-understanding.md)。内部读正文不改变 `site_fulltext` / `syndicate_fulltext` 许可。
