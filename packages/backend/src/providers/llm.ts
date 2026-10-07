@@ -3,7 +3,7 @@
 // environment variable or the admin's model page picks one of the named presets below.
 import type { z } from "zod";
 import { config, credential } from "../config.ts";
-import { sha256 } from "../lib/ids.ts";
+import { sha256, stableJson } from "../lib/ids.ts";
 import { assertAccepted, paidRequest, ProviderRejectedError, rejectReceivedResponse } from "./receipts.ts";
 
 export interface ModelSpec {
@@ -21,7 +21,9 @@ export interface ModelSpec {
 function extraFromEnv(value: string | undefined): Record<string, unknown> | undefined {
   if (!value) return undefined;
   try {
-    return JSON.parse(value) as Record<string, unknown>;
+    const parsed: unknown = JSON.parse(value);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("Expected an object");
+    return parsed as Record<string, unknown>;
   } catch {
     throw new Error("LLM_EXTRA_JSON must be a JSON object, e.g. {\"enable_thinking\": false}");
   }
@@ -87,6 +89,8 @@ export interface ChatJsonOptions<S extends z.ZodType> {
   model: string;
   purpose: string;
   subject: string;
+  /** Stable task identity shared by its chunks and review calls; defaults to subject. */
+  sessionKey?: string;
   promptVersion: string;
   system: string;
   user: string | ContentPart[];
@@ -164,6 +168,26 @@ export async function chatJson<S extends z.ZodType>(opts: ChatJsonOptions<S>): P
   const apiKey = credential("models", spec.apiKeyEnv);
   if (!baseUrl || !apiKey || !spec.model) throw new Error(`Model ${opts.model} is not configured (${spec.baseUrlEnv}, ${spec.apiKeyEnv}${spec.key === "default" ? ", LLM_MODEL" : ""})`);
 
+  const provider = spec.key === "default" ? process.env.LLM_PROVIDER ?? "openai-compatible" : "openai-compatible";
+  if (provider !== "openai-compatible" && provider !== "opencode-go") throw new Error("LLM_PROVIDER must be openai-compatible or opencode-go");
+  const extra = spec.extra ?? {};
+  let endpoint = `${baseUrl.replace(/\/+$/, "")}/chat/completions`;
+  if (provider === "opencode-go") {
+    try {
+      const url = new URL(baseUrl);
+      if (!["http:", "https:"].includes(url.protocol) || url.username || url.password || /[?#]/.test(url.href)) throw new Error("Invalid endpoint");
+      endpoint = `${url.href.replace(/\/+$/, "")}/chat/completions`;
+    } catch {
+      throw new Error("LLM_BASE_URL must be an HTTP(S) base URL without credentials, query or fragment for OpenCode Go");
+    }
+    if (spec.model !== "deepseek-v4.1-flash") throw new Error("OpenCode Go requires LLM_MODEL=deepseek-v4.1-flash");
+    if (spec.vision || (Array.isArray(opts.user) && opts.user.some((part) => part.type !== "text"))) throw new Error("OpenCode Go deepseek-v4.1-flash only supports text input (LLM_VISION=false)");
+    for (const field of ["model", "messages", "max_tokens", "max_completion_tokens", "response_format", "stream"]) {
+      if (field in extra) throw new Error(`LLM_EXTRA_JSON cannot override ${field} for OpenCode Go`);
+    }
+  }
+  const sessionId = provider === "opencode-go" ? sha256(stableJson([config.siteUrl, opts.sessionKey ?? opts.subject])) : null;
+
   const temperature = opts.temperature ?? 0.2;
   const maxTokens = Math.max(opts.maxTokens ?? 1500, 512) + (spec.key.endsWith("-think") ? 4000 : 0);
   const userText = typeof opts.user === "string" ? opts.user : JSON.stringify(opts.user);
@@ -178,7 +202,7 @@ export async function chatJson<S extends z.ZodType>(opts: ChatJsonOptions<S>): P
     temperature,
     max_tokens: maxTokens,
     ...(spec.jsonMode && opts.json !== false ? { response_format: { type: "json_object" } } : {}),
-    ...(spec.extra ?? {}),
+    ...extra,
   };
 
   const receipt = await paidRequest(
@@ -187,17 +211,26 @@ export async function chatJson<S extends z.ZodType>(opts: ChatJsonOptions<S>): P
       model: spec.model,
       purpose: opts.purpose,
       subject: opts.subject,
-      identity: { model: spec.model, promptVersion: opts.promptVersion, system: sha256(opts.system), user: sha256(userText), temperature, maxTokens, extra: spec.extra ?? null },
-      requestSummary: { promptVersion: opts.promptVersion, systemHash: sha256(opts.system), userHash: sha256(userText), userChars: userText.length, temperature, maxTokens },
+      identity: {
+        model: spec.model, promptVersion: opts.promptVersion, system: sha256(opts.system), user: sha256(userText), temperature, maxTokens, extra: spec.extra ?? null,
+        ...(provider === "opencode-go" ? { provider, endpoint, bodyHash: sha256(stableJson(body)), sessionId } : {}),
+      },
+      requestSummary: {
+        promptVersion: opts.promptVersion, systemHash: sha256(opts.system), userHash: sha256(userText), userChars: userText.length, temperature, maxTokens,
+        ...(provider === "opencode-go" ? { provider, sessionId } : {}),
+      },
       attemptTag: opts.attemptTag,
     },
     async () => {
       const started = Date.now();
       let res: Response;
       try {
-        res = await fetch(`${baseUrl.replace(/\/$/, "")}/chat/completions`, {
+        res = await fetch(endpoint, {
           method: "POST",
-          headers: { "content-type": "application/json", authorization: `Bearer ${apiKey}` },
+          headers: {
+            "content-type": "application/json", authorization: `Bearer ${apiKey}`,
+            ...(sessionId ? { "user-agent": "FinanceHOT/1.0", "x-opencode-session": sessionId } : {}),
+          },
           body: JSON.stringify(body),
           signal: AbortSignal.timeout(opts.timeoutMs ?? 120_000),
         });

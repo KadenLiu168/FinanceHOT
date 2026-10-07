@@ -74,7 +74,7 @@ async function translateBatch(articleId: string, revision: number, index: number
   const res = await chatJson({
     model,
     purpose: "translate_body",
-    subject: `article:${articleId}@${revision}#${index}`,
+    subject: `article:${articleId}@${revision}#${index}`, sessionKey: `article:${articleId}@${revision}`,
     promptVersion: TRANSLATE_PROMPT_VERSION,
     system,
     user: JSON.stringify({ segments: parts }),

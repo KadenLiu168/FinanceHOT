@@ -30,6 +30,48 @@ docker compose up -d --build
 
 `docker compose` 会起五个容器：`db`（PostgreSQL 17）、`setup`（每次启动先跑数据库迁移和种子数据，然后退出）、`api`、`worker`（抓取、模型处理、定时任务）、`web`（网页）。
 
+### OpenCode Go：DeepSeek V4.1 Flash
+
+当前支持 Go 套餐的文本模型 `deepseek-v4.1-flash`，通过现有 Chat Completions 流程调用：
+
+```dotenv
+LLM_PROVIDER=opencode-go
+LLM_BASE_URL=https://opencode.ai/zen/go/v1
+LLM_API_KEY=<OpenCode Go API Key>
+LLM_MODEL=deepseek-v4.1-flash
+LLM_EXTRA_JSON={"thinking":{"type":"disabled"}}
+LLM_JSON_MODE=false
+LLM_VISION=false
+```
+
+模型 ID 使用 `deepseek-v4.1-flash`，不要加 `opencode-go/` 前缀。JSON mode 关闭时，输出仍经过 JSON 提取及 schema 校验；标题摘要的文本解析保持原有流程。`thinking` 参数采用 DeepSeek 官方的关闭思考写法，是否被 Go 网关接受，以实际验证为准，不会自动去掉参数重试。额外参数必须是 JSON 对象，不能覆盖 `model`、`messages`、`max_tokens`、`max_completion_tokens`、`response_format` 或 `stream`。不支持图片输入，`LLM_VISION` 必须关闭。
+
+只替换默认模型时，已有后台或环境变量的模型选择仍然优先。如需所有步骤使用 Go，清除 `PREFILTER_MODEL`、`SCORE_MODEL`、`UNDERSTAND_MODEL`、`SUMMARIZE_MODEL`、`STRUCTURE_MODEL`、`GROUP_MODEL`、`GROUP_REVIEW_MODEL`、`DIGEST_MODEL`、`REPORT_MODEL`、`TRANSLATE_MODEL`、`MONITOR_MODEL` 的环境变量覆盖；在后台“模型与评测”将对应能力选择为 `default`。保留切换审计和既有内容，不直接删除 settings。
+
+请求发送真实的 `FinanceHOT/1.0` 客户端标识和任务级 `x-opencode-session`。同一文章 revision 的分析与翻译分段共用会话；归组初判和复核也共用任务会话。重启不会随机改变 ID，不同站点与任务隔离。Go 调用继续使用后台的 `llm` 预算熔断；这里的预算是请求次数限制，不代表套餐剩余 token 或余额。模型阀门关闭时不发送请求。
+
+上线前先部署代码并保持 `MODEL_CALLS_ENABLED=false`。真实验证需独立的空白测试库（名字以 `_test` 或 `_ci` 结尾，账号有建库权限），不要使用生产数据库。下面命令使用 `.env` 中的 Go 凭据，环境变量显式覆盖数据库及安全阀；验证会产生两次付费请求并保存测试回执，不启动 worker、采集或内容发布：
+
+```bash
+createdb financehot_opencode_test
+DATABASE_URL=postgres://127.0.0.1:5432/financehot_opencode_test \
+  node --env-file=.env scripts/migrate.ts
+DATABASE_URL=postgres://127.0.0.1:5432/financehot_opencode_test \
+  COLLECT_ENABLED=false MODEL_CALLS_ENABLED=true \
+  FEISHU_CONTENT_PUSH_ENABLED=false FEISHU_INTERNAL_ENABLED=false INDEXNOW_SUBMIT_ENABLED=false \
+  node --env-file=.env scripts/verify-opencode-go.ts
+```
+
+验证要求结构化 JSON、标题摘要文本、token usage、原始回执和会话标识均有效，成功输出 `status: PASS`，失败返回非零退出码。只有真实验证通过后才启用生产模型调用，重新创建 API 和 worker 加载配置：
+
+```bash
+docker compose up -d --build api worker
+```
+
+切换不会自动重判旧内容。Go 回执绑定网关、实际请求配置及任务会话；与旧模型回执隔离。回滚时恢复原有 `LLM_*` 配置，移除 `LLM_PROVIDER` 或设为 `openai-compatible`，并重新创建 API 和 worker；不删除回执、内容或预算记录，无需数据库迁移。
+
+OpenCode Go 官方面向典型 coding-agent 流量，FinanceHOT 的评分、摘要、翻译等用途是否被服务方接受，尚未确认。协议适配及本地测试不等于生产用途获准；真实调用应在用途获准后进行。详见 [Go 使用范围与接口](https://opencode.ai/docs/go/) 和 [DeepSeek thinking 参数](https://api-docs.deepseek.com/guides/thinking_mode/)。
+
 ### 在中国大陆的服务器上
 
 - 构建时 npm 走国内镜像：`docker compose build --build-arg NPM_REGISTRY=https://registry.npmmirror.com`，然后 `docker compose up -d`。
