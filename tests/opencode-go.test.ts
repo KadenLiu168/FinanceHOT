@@ -10,6 +10,8 @@ import { closeDb, sql } from "@aihot/backend/db";
 import { upsertMaterial } from "@aihot/backend/content/materials";
 import { analyzeArticle } from "@aihot/backend/editorial/analyze";
 import { stopBoss } from "@aihot/backend/jobs/queue";
+import { understandDisclosure } from "@aihot/backend/editorial/disclosure";
+import type { AnalyzeInputArticle } from "@aihot/backend/editorial/input";
 import { translateArticle } from "@aihot/backend/editorial/translate";
 import { groupArticle } from "@aihot/backend/events/group";
 import { publishArticle } from "@aihot/backend/publication/publish";
@@ -25,6 +27,7 @@ const seen: Array<{ body: Record<string, unknown>; headers: Record<string, strin
 let content = '{"ok":true}';
 let status = 200;
 let pipeline = false;
+let disclosure = false;
 let translation = false;
 let grouping = false;
 const usage = { prompt_tokens: 12, completion_tokens: 3, total_tokens: 15 };
@@ -43,6 +46,14 @@ for (const origin of ["https://opencode.ai", "https://other.invalid"]) {
       answer = JSON.stringify(user.includes("【报道 A】")
         ? { a: "回购", b: "回购", relation: "SAME_OCCURRENCE", difference: "", confidence: 1 }
         : { query: "公司回购", decisions: [...user.matchAll(/【候选 (C\d+)】/g)].map((m: RegExpMatchArray) => ({ id: m[1], relation: "SAME_OCCURRENCE", confidence: 1, note: "" })), selection: { addsValue: true, reason: "fixture news" } });
+    }
+    if (disclosure) {
+      const user = JSON.parse(body.messages.at(-1).content);
+      const quote = "Apple reports revenue 100 million for fiscal 2025.";
+      answer = JSON.stringify(user.claims ? { accepted: [0] } : {
+        announcementType: "annual results", itemType: "earnings",
+        claims: user.chunk.text.includes(quote) ? [{ kind: "metric", label: "revenue", value: "100", unit: "million", period: "2025", textZh: "收入100 million", quote }] : [],
+      });
     }
     if (pipeline) {
       const system = body.messages[0]?.role === "system" ? body.messages[0].content : "";
@@ -67,6 +78,7 @@ beforeEach(() => {
   content = '{"ok":true}';
   status = 200;
   pipeline = false;
+  disclosure = false;
   translation = false;
   grouping = false;
 });
@@ -241,6 +253,27 @@ test("the complete default article pipeline runs on Go with one stable session",
   assert.ok(calls.every((call) => call.body.model === "deepseek-v4.1-flash"));
   assert.equal(new Set(calls.map((call) => call.headers["x-opencode-session"])).size, 1);
   assert.ok(calls.every((call) => call.headers["x-opencode-session"]));
+});
+
+test("disclosure chunks and evidence review share the article revision session", async () => {
+  process.env.STRUCTURE_MODEL = "default";
+  const id = `go-disclosure-${tag()}`;
+  const sessionKey = `article:${id}@1`;
+  await ask(`analysis-${id}`, { sessionKey });
+  const expected = seen.at(-1)!.headers["x-opencode-session"];
+  const start = seen.length;
+  disclosure = true;
+  const facts = await understandDisclosure({ id, revision: 1, title: "Apple 2025 annual results", url: "https://official.example/results",
+    author: null, publishedAt: new Date("2025-10-31Z"), excerpt: null, xPost: null, media: [], bodyStatus: "ok",
+    bodyText: "neutral background paragraph. ".repeat(3000) + "Apple reports revenue 100 million for fiscal 2025.",
+    source: { name: "Apple IR", kind: "json_list", tier: "T1", firstParty: true, ownerEntityId: "apple", disclosureRole: "issuer_ir" },
+  } as AnalyzeInputArticle);
+  assert.ok(facts.chunks.length >= 2);
+  assert.equal(facts.claims.length, 1);
+  assert.equal(facts.coverage, "complete");
+  const calls = seen.slice(start);
+  assert.ok(calls.length > facts.chunks.length, "evidence review was called");
+  assert.ok(calls.every((call) => call.headers["x-opencode-session"] === expected));
 });
 
 test("translation batches share the same session as their article analysis", async () => {
